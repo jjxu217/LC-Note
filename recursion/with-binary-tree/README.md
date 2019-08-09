@@ -24,6 +24,43 @@ Iteration:
 
 [https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/discuss/65245/Iterative-Solutions-in-PythonC%2B%2B](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/discuss/65245/Iterative-Solutions-in-PythonC%2B%2B)
 
+### 变种1：Assume we have parents pointers 
+
+-&gt; **Use HashSet record the parents**
+
+### 变种**2:** Lowest Common Ancestor of k nodes
+
+```python
+class Solution(object):
+    def lowestCommonAncestorK(self, root, s: set():
+        if root == None or root in s:
+            return root
+        l = self.lowestCommonAncestor(root.left, s)
+        r = self.lowestCommonAncestor(root.right, s)
+        if l and r:
+            return root
+        return l or r
+```
+
+### 变种3：Lowest Common Ancestor of k-nary Tree
+
+```python
+class Solution(object):
+    def lowestCommonAncestor(self, root, p, q):
+        if root == None or root == p or root == q:
+            return root
+        cnt = 0
+        temp = None
+        for c in root.children:                #step1
+            node = self.lowestCommonAncestor(c, p, q)
+            if node:                         #step2
+                cnt += 1
+                if cnt == 2:
+                    return root
+                temp = node
+       return temp  #step3
+```
+
 ## 235. Lowest Common Ancestor of a Binary Search Tree
 
 ```python
