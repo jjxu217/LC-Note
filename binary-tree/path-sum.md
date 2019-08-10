@@ -233,6 +233,13 @@ class Solution:
         return self.res
 ```
 
+## Tree:
+
+2 class:
+
+1. 人字形path： 一般需要从下往上传integer value
+2. from root path \(直上直下\)： **carry a 直上直下 path prefix while traversing the tree**, record the path from root to current node
+
 ## 257. Binary Tree Paths
 
 Given a binary tree, return all root-to-leaf paths.
@@ -369,6 +376,12 @@ Input: [-10,9,20,null,null,15,7]
 Output: 42
 ```
 
+### Idea
+
+1. What do we expect from lchild/rchild: Max single path in my left subtree\(end at the left child node\), if this value is negative, we discard it Max single path in my right subtree\(end at the right child node\), if this value is negative, we discard it
+2. What do you want to do in the current layer? update global\_max = left + right + root.value if feasible
+3. What do you want to report to your parent?  it is usually the return type of the recursion function
+
 ```python
 class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
@@ -411,6 +424,10 @@ The root-to-leaf path 4->9->1 represents the number 491.
 The root-to-leaf path 4->0 represents the number 40.
 Therefore, sum = 495 + 491 + 40 = 1026.
 ```
+
+### Idea:
+
+\(叶节点到叶节点\): 最长的Path, current node 算path length， 向parent传一条边的length
 
 ```python
 class Solution:
