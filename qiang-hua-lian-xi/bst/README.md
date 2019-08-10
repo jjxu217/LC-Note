@@ -645,3 +645,98 @@ class Solution:
         dfs(root)
 ```
 
+## 530. Minimum Absolute Difference in BST
+
+Given a binary search tree with non-negative values, find the minimum [absolute difference](https://en.wikipedia.org/wiki/Absolute_difference) between values of any two nodes.
+
+**Example:**
+
+```text
+Input:
+
+   1
+    \
+     3
+    /
+   2
+
+Output:
+1
+
+Explanation:
+The minimum absolute difference is 1, which is the difference between 2 and 1 (or between 2 and 3).
+```
+
+```python
+class Solution:
+    def getMinimumDifference(self, root: TreeNode) -> int:
+        self.m = float('inf')
+        
+        def dfs(root):
+            if not root:
+                return (float('inf'), float('-inf'))
+            l, r = dfs(root.left), dfs(root.right)
+            self.m = min(self.m, root.val - l[1], r[0] - root.val)            
+            return (min(root.val, l[0]), max(root.val, r[1]))
+        
+        dfs(root)
+        return self.m
+    
+    #in-order traverse
+    def getMinimumDifference(self, root: TreeNode) -> int:
+        L = []
+        def dfs(node):
+            if node.left: dfs(node.left)
+            L.append(node.val)
+            if node.right: dfs(node.right)
+        dfs(root)
+        return min(abs(a - b) for a, b in zip(L, L[1:]))
+```
+
+## 501. Find Mode in Binary Search Tree
+
+Given a binary search tree \(BST\) with duplicates, find all the [mode\(s\)](https://en.wikipedia.org/wiki/Mode_%28statistics%29) \(the most frequently occurred element\) in the given BST.
+
+Assume a BST is defined as follows:
+
+* The left subtree of a node contains only nodes with keys **less than or equal to** the node's key.
+* The right subtree of a node contains only nodes with keys **greater than or equal to** the node's key.
+* Both the left and right subtrees must also be binary search trees.
+
+For example:  
+Given BST `[1,null,2,2]`,
+
+```text
+   1
+    \
+     2
+    /
+   2
+```
+
+return `[2]`.
+
+**Note:** If a tree has more than one mode, you can return them in any order.
+
+**Follow up:** Could you do that without using any extra space? \(Assume that the implicit stack space incurred due to recursion does not count\).
+
+```python
+class Solution:
+    def findMode(self, root: TreeNode) -> List[int]:
+        if not root:
+            return []
+        c = collections.Counter()
+        
+        def helper(root):
+            if not root:
+                return
+            helper(root.left)
+            c[root.val] += 1    
+            helper(root.right)
+            
+        helper(root)
+        max_ct = max(c.values())
+        return [k for k, v in c.items() if v == max_ct]
+    
+```
+
