@@ -161,7 +161,7 @@ One valid answer is [5,4,6,2,null,null,7], shown in the following BST.
 Another valid answer is [5,2,6,null,4,null,7].
 ```
 
-![](../.gitbook/assets/image%20%2812%29.png)
+![](../../.gitbook/assets/image%20%2812%29.png)
 
 ```python
 class Solution:
@@ -226,7 +226,7 @@ This tree is also valid:
           4
 ```
 
-![](../.gitbook/assets/image%20%289%29.png)
+![](../../.gitbook/assets/image%20%289%29.png)
 
 ```python
 class Solution:
@@ -501,4 +501,147 @@ The overall time complexity for insert/delete + search of kth smallest isO\(H+k\
 
 * Time complexity for insert/delete + search of kth smallest:O\(H+k\), where HH is a tree height. O\(logN+k\) in the average case,O\(N+k\) in the worst case.
 * Space complexity : O\(N\) to keep the linked list.
+
+## 938. Range Sum of BST
+
+Given a binary tree, find the largest subtree which is a Binary Search Tree \(BST\), where largest means subtree with largest number of nodes in it.
+
+**Note:**  
+A subtree must include all of its descendants.
+
+**Example:**
+
+```text
+Input: [10,5,15,1,8,null,7]
+
+   10 
+   / \ 
+  5  15 
+ / \   \ 
+1   8   7
+
+Output: 3
+Explanation: The Largest BST Subtree in this case is the highlighted one.
+             The return value is the subtree's size, which is 3.
+```
+
+```python
+class Solution:
+    #recursion
+    def rangeSumBST(self, root: TreeNode, L: int, R: int) -> int:
+        if not root:
+            return 0
+        s = 0
+        if L <= root.val <= R:
+            s += root.val 
+        if root.val > L:
+            s += self.rangeSumBST(root.left, L, R)
+        if root.val < R:
+            s += self.rangeSumBST(root.right, L, R)
+        return s
+        
+    #iteration    
+    def rangeSumBST(self, root: TreeNode, L: int, R: int) -> int:
+        res = 0
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node:
+                if L <= node.val <= R:
+                    res += node.val
+                if L < node.val:
+                    stack.append(node.left)
+                if node.val < R:
+                    stack.append(node.right)
+        return res
+```
+
+## 538. Convert BST to Greater Tree
+
+Given a Binary Search Tree \(BST\), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus sum of all keys greater than the original key in BST.
+
+**Example:**
+
+```text
+Input: The root of a Binary Search Tree like this:
+              5
+            /   \
+           2     13
+
+Output: The root of a Greater Tree like this:
+             18
+            /   \
+          20     13
+```
+
+### Idea:
+
+traverse reversed in-order, visit the node in descending order   
+self.prefix\_sum record the sum of all larger number
+
+```python
+class Solution:
+    def convertBST(self, root: TreeNode) -> TreeNode:
+        self.prefix_sum = 0
+        
+        def traverse(root):
+            if not root:
+                return 
+            traverse(root.right)
+            self.prefix_sum += root.val
+            root.val = self.prefix_sum
+            traverse(root.left)            
+         
+        traverse(root)
+        return root
+```
+
+## 333. Largest BST Subtree
+
+Given a binary tree, find the largest subtree which is a Binary Search Tree \(BST\), where largest means subtree with largest number of nodes in it.
+
+**Note:**  
+A subtree must include all of its descendants.
+
+**Example:**
+
+```text
+Input: [10,5,15,1,8,null,7]
+
+   10 
+   / \ 
+  5  15 
+ / \   \ 
+1   8   7
+
+Output: 3
+Explanation: The Largest BST Subtree in this case is the highlighted one.
+             The return value is the subtree's size, which is 3.
+```
+
+### Idea:
+
+Need 3 parameters from the child: **child size, child min range, child max range**
+
+```python
+class Solution:
+    def largestBSTSubtree(self, root: TreeNode) -> int:
+        self.l = 0
+        
+        def dfs(root): #return 3 value: (cur_size, min_range, max_range)
+            if not root:
+                return (0, float('inf'), float('-inf'))
+            l, r = dfs(root.left), dfs(root.right)        
+            
+            if l[0] >= 0 and r[0] >= 0 and l[2] < root.val < r[1]: 
+                #if both sub-tree are BST and curent is BST
+                cur_size = l[0] + r[0] + 1
+                self.l = max(self.l, cur_size)
+                return (cur_size, min(l[1], root.val), max(r[2], root.val))
+            else:
+                #if not BST, size as -1
+                return (-1, 0, 0)
+            
+        dfs(root)
+```
 
