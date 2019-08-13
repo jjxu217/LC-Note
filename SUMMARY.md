@@ -78,6 +78,7 @@
   * [771. Jewels and Stones](hashtable-and-string/771.-jewels-and-stones.md)
   * [Reverse String 344/541/151/186/557/345](hashtable-and-string/reverse-string-344-541-151-186-557-345.md)
   * [String Encode/Decode 443/394/](hashtable-and-string/string-encode-decode-443-394.md)
+  * [49. Group Anagrams](hashtable-and-string/49.-group-anagrams.md)
 * [Graph](graph/README.md)
   * [Dijkstra](graph/378.-kth-smallest-element-in-a-sorted-matrix.md)
   * [785. Is Graph Bipartite?](graph/785.-is-graph-bipartite.md)
