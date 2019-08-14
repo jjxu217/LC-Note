@@ -60,6 +60,8 @@
   * [14. Longest Common Prefix](array/14.-longest-common-prefix.md)
   * [88. Merge Sorted Array](array/88.-merge-sorted-array.md)
   * [977. Squares of a Sorted Array](array/977.-squares-of-a-sorted-array.md)
+  * [238. Product of Array Except Self](array/238.-product-of-array-except-self.md)
+  * [152. Maximum Product Subarray](array/152.-maximum-product-subarray.md)
   * [easy](array/easy/README.md)
     * [412. Fizz Buzz](array/easy/412.-fizz-buzz.md)
     * [561. Array Partition I](array/easy/561.-array-partition-i.md)
