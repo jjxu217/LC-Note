@@ -40,7 +40,7 @@ Explanation: There are two distinct solutions to the 4-queens puzzle as shown be
 
 ![](../../.gitbook/assets/image%20%287%29.png)
 
-![](../../.gitbook/assets/image%20%2817%29.png)
+![](../../.gitbook/assets/image%20%2818%29.png)
 
 ```python
 #51
