@@ -152,7 +152,7 @@ Input: [8,5,1,7,10,12]
 Output: [8,5,10,1,7,null,12]
 ```
 
-![](../../.gitbook/assets/image%20%2816%29.png)
+![](../../.gitbook/assets/image%20%2817%29.png)
 
 ```python
 class Solution:

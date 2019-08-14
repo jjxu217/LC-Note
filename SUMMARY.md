@@ -55,6 +55,7 @@
   * [155. Min Stack](stack/155.-min-stack.md)
   * [173. Binary Search Tree Iterator](stack/173.-binary-search-tree-iterator.md)
   * [20. Valid Parentheses](stack/20.-valid-parentheses.md)
+  * [84. Largest Rectangle in Histogram](stack/84.-largest-rectangle-in-histogram.md)
   * [921/856. Minimum Add to Make Parentheses Valid](stack/921-856.-minimum-add-to-make-parentheses-valid.md)
 * [Array](array/README.md)
   * [14. Longest Common Prefix](array/14.-longest-common-prefix.md)
