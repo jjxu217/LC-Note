@@ -82,6 +82,8 @@
   * [3/159/340 Longest Substring Without Repeating Characters](hashtable-and-string/3-159-340-longest-substring-without-repeating-characters.md)
   * [217/219/220 Contains Duplicate](hashtable-and-string/217-219-220-contains-duplicate.md)
   * [268. Missing Number](hashtable-and-string/268.-missing-number.md)
+  * [Roman-Integer convert](hashtable-and-string/roman-integer-convert.md)
+  * [125/680 Valid Palindrome](hashtable-and-string/125-680-valid-palindrome.md)
   * [819. Most Common Word](hashtable-and-string/819.-most-common-word.md)
   * [Two Sum 1/167/170/653](hashtable-and-string/two-sum-1-167-170-653.md)
   * [15/16/18/454 3Sum/3Sum Closest/4Sum](hashtable-and-string/15-16-18-454-3sum-3sum-closest-4sum.md)
