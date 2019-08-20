@@ -55,3 +55,7 @@ class Solution:
         nums[::2], nums[1::2] = nums[:half][::-1], nums[half:][::-1]
 ```
 
+{% embed url="https://leetcode.com/problems/wiggle-sort-ii/discuss/77684/Summary-of-the-various-solutions-to-Wiggle-Sort-for-your-reference" %}
+
+
+
