@@ -61,6 +61,7 @@
   * [921/856. Minimum Add to Make Parentheses Valid](stack/921-856.-minimum-add-to-make-parentheses-valid.md)
 * [Array](array/README.md)
   * [14. Longest Common Prefix](array/14.-longest-common-prefix.md)
+  * [560. Subarray Sum Equals K](array/560.-subarray-sum-equals-k.md)
   * [88. Merge Sorted Array](array/88.-merge-sorted-array.md)
   * [977. Squares of a Sorted Array](array/977.-squares-of-a-sorted-array.md)
   * [238. Product of Array Except Self](array/238.-product-of-array-except-self.md)
