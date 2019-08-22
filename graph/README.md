@@ -4,7 +4,7 @@
 
 经典算法：Dijkstra's Algorithm, Time = O\(\(v+e\) log v\)
 
-![](../.gitbook/assets/image.png)
+![](../.gitbook/assets/image%20%281%29.png)
 
 Usages: 点到面的算法\(一个点到图上任一点\), Time N  
 Data Structure: priority queue \(Min\_Heap\)

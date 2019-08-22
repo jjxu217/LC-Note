@@ -38,9 +38,9 @@ Explanation: There are two distinct solutions to the 4-queens puzzle as shown be
 
 ### Idea
 
-![](../../.gitbook/assets/image%20%288%29.png)
+![](../../.gitbook/assets/image%20%2810%29.png)
 
-![](../../.gitbook/assets/image%20%2820%29.png)
+![](../../.gitbook/assets/image%20%2823%29.png)
 
 ```python
 #51
