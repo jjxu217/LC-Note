@@ -79,6 +79,7 @@
   * [169/229. Majority Element](math-and-bit-manipulation/169-229.-majority-element.md)
   * [Bit Manipulation](math-and-bit-manipulation/bit-manipulation.md)
   * [Power of 2/3/4](math-and-bit-manipulation/power-of-2-3-4.md)
+  * [Mulipulation](math-and-bit-manipulation/mulipulation.md)
   * [204. Count Primes](math-and-bit-manipulation/204.-count-primes.md)
   * [A summary: how to use bit manipulation to solve problems easily and efficiently](math-and-bit-manipulation/a-summary-how-to-use-bit-manipulation-to-solve-problems-easily-and-efficiently.md)
 * [HashTable & String](hashtable-and-string/README.md)
