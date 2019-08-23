@@ -1,4 +1,4 @@
-# Mulipulation
+# String Manipulation
 
 ## 67 Add Binary
 
@@ -78,7 +78,39 @@ Input: num1 = "123", num2 = "456"
 Output: "56088"
 ```
 
-```text
+```python
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        #keep the product array reversed until the very end
+        res = [0] * (len(num1) + len(num2))
+        for i, e1 in enumerate(reversed(num1)):
+            for j, e2 in enumerate(reversed(num2)):
+                res[i + j] += int(e1) * int(e2)
+                res[i + j + 1] += res[i + j] // 10 #进位
+                res[i + j] = res[i + j] % 10
+                
+        while len(res) > 1 and res[-1] == 0: # remove leading zero
+            res.pop()
+        return ''.join(map(str, res[::-1]))
+```
 
+## 415. Add Strings
+
+Given two non-negative integers `num1` and `num2` represented as string, return the sum of `num1` and `num2`.
+
+```python
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+        res, carry = [], 0
+        num1, num2 = list(num1), list(num2)
+        while num1 or num2:
+            n1 = n2 = 0
+            if num1: n1 = int(num1.pop())
+            if num2: n2 = int(num2.pop())
+            carry, remain = divmod(n1+n2+carry, 10)
+            res.append(remain)
+        if carry:
+            res.append(carry)
+        return ''.join(map(str, res[::-1]))
 ```
 
