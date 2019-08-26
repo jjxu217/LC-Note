@@ -1,5 +1,44 @@
 # Sliding window
 
+## 76. Minimum Window Substring
+
+Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O\(n\).
+
+**Example:**
+
+```text
+Input: S = "ADOBECODEBANC", T = "ABC"
+Output: "BANC"
+```
+
+**Note:**
+
+* If there is no such window in S that covers all characters in T, return the empty string `""`.
+* If there is such window, you are guaranteed that there will always be only one unique minimum window in S.
+
+```python
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        need = collections.Counter(t)  #hashtable to store char frequency, 
+        missing = len(t)        #total number of chars we need
+        start = end = i = 0 
+        for j, char in enumerate(s, 1): #index j from 1
+            if need[char] > 0:
+                missing -= 1
+            need[char] -= 1
+            if missing == 0:             #match all chars
+                while i < j and need[s[i]] < 0:     #remove chars to find the real start
+                    need[s[i]] += 1
+                    i += 1                
+                if end == 0 or j - i < end - start: #update window
+                    start, end = i, j
+                #left point +1, remove the first needed char in the previous windows
+                missing = 1
+                need[s[i]] = 1                              
+                i += 1                
+        return s[start:end]    
+```
+
 ## 239. Sliding Window Maximum
 
 Given an array _nums_, there is a sliding window of size _k_ which is moving from the very left of the array to the very right. You can only see the _k_ numbers in the window. Each time the sliding window moves right by one position. Return the max sliding window.
@@ -87,8 +126,57 @@ Therefore, return the median sliding window as `[1,-1,-1,3,5,6]`.
 **Note:**  
 You may assume `k` is always valid, ie: `k` is always smaller than input array's size for non-empty array.
 
-```text
+### Sol1: sorted array, time = O\(nk\)
 
+```python
+class Solution:
+    def medianSlidingWindow(self, nums: List[int], k: int) -> List[float]:
+        window = sorted(nums[:k])
+        medians = [(window[k//2] + window[~(k//2)]) / 2]
+        for a, b in zip(nums, nums[k:]):
+            window.remove(a)
+            bisect.insort(window, b)
+            medians.append((window[k//2] + window[~(k//2)]) / 2)
+        return medians
+```
+
+### Sol: min-heap + max-heap, time=O\(nlogk\)
+
+#### 2-heap \(min, max\) based solution:
+
+* uses 2 heaps left-\(max\)heap `lh` and right-\(min\)heap `rh`. The key idea is the maintain the size invariance of the heaps as we add and remove elements. The top of both the heaps can be used to calculate the median.
+* We use `lazy-deletion` from the heap
+* using the first `k` elements construct a min heap `lh`. Then pop `k-k/2` and add it to the `rh`. Now the heap sized are set at `k/2` and `k-k/2`
+* Iterate over rest of the numbers and add it to the appropriate heap and maintain heap size invariance by moving the top number from one heap to another as needed.
+
+```python
+    def medianSlidingWindow(self, nums, k): 
+        lh,rh,medians = [],[],[]
+        # create the initial left and right heap
+        for i,n in enumerate(nums[:k]): 
+            heappush(lh, (-n,i))
+        for i in range(k-k//2):
+            heappush(rh, (-lh[0][0], lh[0][1]))
+            heappop(lh)
+        medians.append(rh[0][0] if k%2 else (rh[0][0] - lh[0][0])/2)
+        
+        for i,n in enumerate(nums[k:]):          
+            if n >= rh[0][0]:
+                heappush(rh,(n,i+k))        # rh +1
+                if nums[i] <= rh[0][0]:     # lh-1, unbalanced
+                    heappush(lh, (-rh[0][0], rh[0][1]))
+                    heappop(rh)
+                # else: pass                # rh-1, balanced
+            else:
+                heappush(lh,(-n,i+k))        # rh +1
+                if nums[i] >= rh[0][0]:     # rh-1, unbalanced
+                    heappush(rh, (-lh[0][0], lh[0][1]))
+                    heappop(lh)
+                # else: pass                # lh-1, balanced
+            while(lh and lh[0][1] <= i): heappop(lh)  # lazy-deletion
+            while(rh and rh[0][1] <= i): heappop(rh)  # lazy-deletion
+            medians.append(rh[0][0] if k%2 else (rh[0][0] - lh[0][0])/2)
+        return medians
 ```
 
 ## 360. Moving Average from Data Stream
