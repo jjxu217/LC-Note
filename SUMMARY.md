@@ -8,6 +8,7 @@
   * [75. Sort Colors](sort/75.-sort-colors.md)
   * [147. Insertion Sort List; 148. Sort List](sort/147.-insertion-sort-list-148.-sort-list.md)
   * [280/324 Wiggle Sort](sort/280-wiggle-sort.md)
+  * [791. Custom Sort String](sort/791.-custom-sort-string.md)
 * [Binary Search](binary-search/README.md)
   * [4. Median of Two Sorted Arrays](binary-search/4.-median-of-two-sorted-arrays.md)
   * [34. Find First and Last Position of Element in Sorted Array](binary-search/34.-find-first-and-last-position-of-element-in-sorted-array.md)
