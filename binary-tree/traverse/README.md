@@ -109,7 +109,7 @@ For in-order traversal:
             seen, node = stack.pop()
             if not node: continue
             if not seen:
-                stack.extend([(0, node.right), (1, node), (0, node.left), ]) 
+                stack.extend([(0, node.right), (1, node), (0, node.left)]) 
             else: 
                 res.append(node.val)
         return res
@@ -293,5 +293,75 @@ class Solution(object):
             res.append([node.val for node in level])            
             level = [kid for n in level for kid in (n.left, n.right) if kid]
         return res[::-1]
+```
+
+## 199. Binary Tree Right Side View
+
+Given a binary tree, imagine yourself standing on the _right_ side of it, return the values of the nodes you can see ordered from top to bottom.
+
+**Example:**
+
+```text
+Input: [1,2,3,null,5,null,4]
+Output: [1, 3, 4]
+Explanation:
+
+   1            <---
+ /   \
+2     3         <---
+ \     \
+  5     4       <---
+```
+
+### Sol: BFS level traverse
+
+```python
+#BFS: List conprehension
+def rightSideView(self, root: TreeNode) -> List[int]:
+    if not root: return []
+    res, level = [], [root]
+    while level:
+        res.append(level[-1].val)
+        level = [kid for n in level for kid in (n.left, n.right) if kid]
+    return res
+#queue
+def rightSideView(self, root: TreeNode) -> List[int]:
+    if not root: return []
+    q = collections.deque([root])   
+    res = []
+    while q:
+        res.append(q[-1].val)
+        width = len(q)
+        for i in range(width):
+            node = q.popleft()
+            if node.left:
+                q.append(node.left)
+            if node.right:
+                q.append(node.right)         
+    return res  
+```
+
+### Sol: DFS, build a dict with \(depth: val\)
+
+```python
+def rightSideView(self, root):
+    rightmost_value_at_depth = dict() # depth -> node.val
+    max_depth = -1
+
+    stack = [(root, 0)] #node and depth
+    while stack:
+        node, depth = stack.pop()
+        if node:
+            # maintain knowledge of the number of levels in the tree.
+            max_depth = max(max_depth, depth)
+
+            # only insert into dict if depth is not already present.                
+            if depth not in rightmost_value_at_depth:
+                rightmost_value_at_depth[depth] = node.val
+
+            stack.append((node.left, depth+1))
+            stack.append((node.right, depth+1))
+
+    return [rightmost_value_at_depth[depth] for depth in range(max_depth+1)]
 ```
 
