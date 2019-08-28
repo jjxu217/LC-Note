@@ -109,7 +109,7 @@ For in-order traversal:
             seen, node = stack.pop()
             if not node: continue
             if not seen:
-                stack.extend([(0, node.right), (1, node), (0, node.left)]) 
+                stack.extend([(0, node.right), (1, node), (0, node.left), ]) 
             else: 
                 res.append(node.val)
         return res
