@@ -80,6 +80,7 @@
     * [66/369 Plus One/Plus One Linked List](array/easy/66-369-plus-one-plus-one-linked-list.md)
     * [896. Monotonic Array](array/easy/896.-monotonic-array.md)
 * [Math & Bit Manipulation](math-and-bit-manipulation/README.md)
+  * [670. Maximum Swap](math-and-bit-manipulation/670.-maximum-swap.md)
   * [7. Reverse Integer](math-and-bit-manipulation/7.-reverse-integer.md)
   * [9. Palindrome Number](math-and-bit-manipulation/9.-palindrome-number.md)
   * [263/264/313 Ugly Number](math-and-bit-manipulation/263-264-313-ugly-number.md)
