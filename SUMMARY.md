@@ -54,6 +54,7 @@
 * [Design](design/README.md)
   * [211. Add and Search Word - Data structure design](design/211.-add-and-search-word-data-structure-design.md)
   * [155. Min Stack](design/155.-min-stack.md)
+  * [65. Valid Number](design/65.-valid-number.md)
 * [Queue](queue/README.md)
   * [Sliding window](queue/sliding-window.md)
 * [2 pointers](2-pointers/README.md)
