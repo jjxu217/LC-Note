@@ -125,3 +125,7 @@ class Trie:
         return helper(prefix, self.trie)
 ```
 
+## Apply to Word Search II
+
+{% page-ref page="../graph/dfs/79-212-word-search.md" %}
+
