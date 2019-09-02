@@ -126,7 +126,7 @@ Therefore, return the median sliding window as `[1,-1,-1,3,5,6]`.
 **Note:**  
 You may assume `k` is always valid, ie: `k` is always smaller than input array's size for non-empty array.
 
-### Sol1: sorted array, time = O\(nk\)
+### Sol1: maintain a sorted array length of k, keep remove first one and add new one\(with bisect.insort\), time = O\(nk\)
 
 ```python
 class Solution:
@@ -177,6 +177,38 @@ class Solution:
             while(rh and rh[0][1] <= i): heappop(rh)  # lazy-deletion
             medians.append(rh[0][0] if k%2 else (rh[0][0] - lh[0][0])/2)
         return medians
+```
+
+## 295. Find Median from Data Stream
+
+Median is the middle value in an ordered integer list. If the size of the list is even, there is no middle value. So the median is the mean of the two middle value.For example,
+
+`[2,3,4]`, the median is `3`
+
+`[2,3]`, the median is `(2 + 3) / 2 = 2.5`
+
+Design a data structure that supports the following two operations:
+
+* void addNum\(int num\) - Add a integer number from the data stream to the data structure.
+* double findMedian\(\) - Return the median of all elements so far.
+
+**Example:**
+
+```text
+addNum(1)
+addNum(2)
+findMedian() -> 1.5
+addNum(3) 
+findMedian() -> 2
+```
+
+**Follow up:**
+
+1. If all integer numbers from the stream are between 0 and 100, how would you optimize it?
+2. If 99% of all integer numbers from the stream are between 0 and 100, how would you optimize it?
+
+```text
+
 ```
 
 ## 360. Moving Average from Data Stream
