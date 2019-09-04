@@ -103,6 +103,7 @@
 * [HashTable & String](hashtable-and-string/README.md)
   * [3/159/340 Longest Substring Without Repeating Characters](hashtable-and-string/3-159-340-longest-substring-without-repeating-characters.md)
   * [217/219/220 Contains Duplicate](hashtable-and-string/217-219-220-contains-duplicate.md)
+  * [498. Diagonal Traverse](hashtable-and-string/498.-diagonal-traverse.md)
   * [678. Valid Parenthesis String](hashtable-and-string/678.-valid-parenthesis-string.md)
   * [268. Missing Number](hashtable-and-string/268.-missing-number.md)
   * [Roman-Integer convert/Integer to English Words](hashtable-and-string/roman-integer-convert.md)
