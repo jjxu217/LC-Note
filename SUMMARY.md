@@ -41,6 +41,7 @@
     * [Construct](binary-tree/serialization/construction.md)
 * [Recursion](recursion/README.md)
   * [With Binary Tree](recursion/with-binary-tree/README.md)
+    * [865. Smallest Subtree with all the Deepest Nodes](recursion/with-binary-tree/865.-smallest-subtree-with-all-the-deepest-nodes.md)
     * [501. Find Mode in Binary Search Tree](recursion/with-binary-tree/501.-find-mode-in-binary-search-tree.md)
   * [With Array](recursion/untitled-1/README.md)
     * [51/52 N-Queens](recursion/untitled-1/untitled.md)
