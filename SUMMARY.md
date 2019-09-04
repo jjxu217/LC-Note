@@ -66,6 +66,8 @@
 * [Stack](stack/README.md)
   * [单调栈](stack/dan-tiao-zhan.md)
   * [173. Binary Search Tree Iterator](stack/173.-binary-search-tree-iterator.md)
+  * [71. Simplify Path](stack/71.-simplify-path.md)
+  * [636. Exclusive Time of Functions](stack/636.-exclusive-time-of-functions.md)
   * [20. Valid Parentheses](stack/20.-valid-parentheses.md)
   * [84. Largest Rectangle in Histogram 85. Maximal Rectangle](stack/84.-largest-rectangle-in-histogram.md)
   * [921/856. Minimum Add to Make Parentheses Valid](stack/921-856.-minimum-add-to-make-parentheses-valid.md)
