@@ -258,3 +258,58 @@ def longestPalindromeSubseq(self, s: str) -> int:
         return dfs(s)
 ```
 
+## 214. Shortest Palindrome
+
+Given a string _**s**_, you are allowed to convert it to a palindrome by adding characters in front of it. Find and return the shortest palindrome you can find by performing this transformation.
+
+**Example 1:**
+
+```text
+Input: "aacecaaa"
+Output: "aaacecaaa"
+```
+
+**Example 2:**
+
+```text
+Input: "abcd"
+Output: "dcbabcd"
+```
+
+### sol: Two pointers and recursion
+
+use i to compare character from end of s and beginning of s. If it's equal, increment i by 1.   
+The first part s\[i:\] might be Palindrome. The second part s\[i:\] is not Palindrome, we reverse s\[i:\] and insert to the beginning. do recursion.  
+Time = O\(n^2\), worst case T\(n\)=T\(n−2\)+O\(n\)
+
+```python
+class Solution:
+    def shortestPalindrome(self, s: str) -> str:
+        if len(s) < 2: return s
+        i = 0
+        for j in reversed(range(len(s))):
+            if s[j] == s[i]:
+                i += 1
+        if i == len(s):
+            return s
+        return s[i:][::-1] + self.shortestPalindrome(s[:i]) + s[i:]
+```
+
+### sol: find longest palindrome start from the beginning, use reversed string
+
+Create the reverse of the original string s  
+Iterate over the variable i from 0 to size\(s\)−1:   
+If s\[0:n-i\] == rev\[i:\] return rev\[:i\] + s   
+time = O\(n^2\)
+
+```python
+    def shortestPalindrome(self, s: str) -> str:
+        if len(s) < 2: return s
+        n = len(s)
+        rev = s[::-1]
+        for i in range(n):
+            #find the longest Palindrome start from beginning
+            if s[:n-i] == rev[i:]: 
+                return rev[:i] + s
+```
+
