@@ -206,6 +206,7 @@ leaf node height is 1. If one node with one child, the height is the one child's
 
 ```python
 class Solution:
+#DFS
     def minDepth(self, root: TreeNode) -> int:
         if not root:
             return 0
@@ -215,6 +216,16 @@ class Solution:
         elif not l or not r:
             return 1 + (l or r)
         return min(l, r) + 1
+#BFS
+    def minDepth(self, root: TreeNode) -> int:
+        if not root: return 0
+        queue = collections.deque([(root, 1)])
+        while queue:
+            node, d = queue.popleft()
+            if not node.left and not node.right:
+                return d
+            if node.left: queue.append((node.left, d + 1))
+            if node.right: queue.append((node.right, d + 1))
 ```
 
 ## 100. Same Tree

@@ -66,9 +66,9 @@ You may assume _k_ is always valid, 1 ≤ k ≤ input array's size for non-empty
 **Follow up:**  
 Could you solve it in linear time?
 
-### Solution: use a decending deque
+### Solution: use a descending deque
 
-The algorithm is quite straigthforward :
+The algorithm is quite straightforward :
 
 * Iterate over the array. At each step :
   * Clean the deque :
