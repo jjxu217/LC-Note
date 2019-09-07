@@ -313,3 +313,64 @@ time = O\(n^2\)
                 return rev[:i] + s
 ```
 
+## 336. Palindrome Pairs
+
+Given a list of **unique** words, find all pairs of **distinct** indices `(i, j)` in the given list, so that the concatenation of the two words, i.e. `words[i] + words[j]` is a palindrome.
+
+**Example 1:**
+
+```text
+Input: ["abcd","dcba","lls","s","sssll"]
+Output: [[0,1],[1,0],[3,2],[2,4]] 
+Explanation: The palindromes are ["dcbaabcd","abcddcba","slls","llssssll"]
+```
+
+**Example 2:**
+
+```text
+Input: ["bat","tab","cat"]
+Output: [[0,1],[1,0]] 
+Explanation: The palindromes are ["battab","tabbat"]
+```
+
+### Sol: time=O\(n \* w^2\), n being length of the list, w being the average word length\)
+
+The basic idea is to check each word for prefixes \(and suffixes\) that are themselves palindromes. If you find a prefix that is a valid palindrome, then the suffix reversed can be paired with the word in order to make a palindrome. It's better explained with an example.
+
+```text
+words = ["bot", "t", "to"]
+```
+
+Starting with the string "bot". We start checking all prefixes. If `"", "b", "bo", "bot"` are themselves palindromes. The empty string and "b" are palindromes. We work with the corresponding suffixes \("bot", "ot"\) and check to see if their reverses \("tob", "to"\) are present in our initial word list. If so \(like the word to"to"\), we have found a valid pairing where the reversed suffix can be **prepended** to the current word in order to form "to" + "bot" = "tobot".
+
+You can do the same thing by checking all suffixes to see if they are palindromes. If so, then finding all reversed prefixes will give you the words that can be **appended** to the current word to form a palindrome.
+
+The process is then repeated for every word in the list. Note that when considering suffixes, we explicitly leave out the empty string to avoid counting duplicates. That is, if a palindrome can be created by appending an entire other word to the current word, then we will already consider such a palindrome when considering the empty string as prefix for the other word.
+
+```python
+class Solution:
+    def palindromePairs(self, words: List[str]) -> List[List[int]]:
+        def is_palindrome(check):
+            return check == check[::-1]
+        dic = {word:i for i, word in enumerate(words)}
+        res = []
+        for i, word in enumerate(words):
+            n = len(word)
+            for j in range(n + 1):
+                pref = word[:j]
+                suf = word[j:]
+                #case1: pref is pal, back + cur is pal
+                if is_palindrome(pref):
+                    back = suf[::-1]
+                    if back != word and back in dic:
+                        res.append([dic[back], i])
+                #casae2: suf is pal, cur + back is pal
+                #when j == n, pref==cur, suf=='',which will be checked by case1 of other word
+                if j != n and is_palindrome(suf):
+                    back = pref[::-1]
+                    if back != word and back in dic:
+                        res.append([i, dic[back]])
+        return res
+            
+```
+

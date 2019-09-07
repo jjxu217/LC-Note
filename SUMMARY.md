@@ -109,6 +109,8 @@
   * [29. Divide Two Integers](math-and-bit-manipulation/29.-divide-two-integers.md)
 * [HashTable & String](hashtable-and-string/README.md)
   * [217/219/220 Contains Duplicate](hashtable-and-string/217-219-220-contains-duplicate.md)
+  * [358. Rearrange String k Distance Apart](hashtable-and-string/358.-rearrange-string-k-distance-apart.md)
+  * [632. Smallest Range Covering Elements from K Lists](hashtable-and-string/632.-smallest-range-covering-elements-from-k-lists.md)
   * [498. Diagonal Traverse](hashtable-and-string/498.-diagonal-traverse.md)
   * [678. Valid Parenthesis String](hashtable-and-string/678.-valid-parenthesis-string.md)
   * [268. Missing Number](hashtable-and-string/268.-missing-number.md)
