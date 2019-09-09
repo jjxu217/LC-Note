@@ -144,6 +144,7 @@
     * [Sudoku](graph/dfs/sudoku.md)
     * [329. Longest Increasing Path in a Matrix](graph/dfs/329.-longest-increasing-path-in-a-matrix.md)
     * [17. Letter Combinations of a Phone Number](graph/dfs/17.-letter-combinations-of-a-phone-number.md)
+    * [698/416 Partition to K Equal Sum Subsets](graph/dfs/698-416-partition-to-k-equal-sum-subsets.md)
     * [282. Expression Add Operators](graph/dfs/282.-expression-add-operators.md)
     * [78. Subsets](graph/dfs/78.-subsets.md)
     * [46/47 Permutations & 60.Permutation Sequence](graph/dfs/46.-permutations-and-60.permutation-sequence.md)
