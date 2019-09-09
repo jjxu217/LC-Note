@@ -150,33 +150,34 @@ class Solution:
 * Iterate over rest of the numbers and add it to the appropriate heap and maintain heap size invariance by moving the top number from one heap to another as needed.
 
 ```python
-    def medianSlidingWindow(self, nums, k): 
-        lh,rh,medians = [],[],[]
-        # create the initial left and right heap
-        for i,n in enumerate(nums[:k]): 
-            heappush(lh, (-n,i))
-        for i in range(k-k//2):
-            heappush(rh, (-lh[0][0], lh[0][1]))
-            heappop(lh)
-        medians.append(rh[0][0] if k%2 else (rh[0][0] - lh[0][0])/2)
+class Solution:
+    def medianSlidingWindow(self, nums, k):
+        def move(h1, h2): #pop one ele from h1 and push to h2
+            x, i = heapq.heappop(h1)
+            heapq.heappush(h2, (-x, i))
         
-        for i,n in enumerate(nums[k:]):          
-            if n >= rh[0][0]:
-                heappush(rh,(n,i+k))        # rh +1
-                if nums[i] <= rh[0][0]:     # lh-1, unbalanced
-                    heappush(lh, (-rh[0][0], rh[0][1]))
-                    heappop(rh)
-                # else: pass                # rh-1, balanced
+        small, large = [], []
+        for i, n in enumerate(nums[:k]): 
+            heapq.heappush(small, (-n,i))
+        for _ in range(k - k // 2): 
+            move(small, large)
+        ans = [large[0][0] if k%2 else (large[0][0] - small[0][0])/2]
+        
+        for i, n in enumerate(nums[k:]):
+            if n >= large[0][0]:
+                heapq.heappush(large, (n, i+k)) # large + 1
+                if nums[i] <= large[0][0]:  # small - 1, unbalanced
+                    move(large, small)
+                #else: pass  # large - 1, balanced
             else:
-                heappush(lh,(-n,i+k))        # rh +1
-                if nums[i] >= rh[0][0]:     # rh-1, unbalanced
-                    heappush(rh, (-lh[0][0], lh[0][1]))
-                    heappop(lh)
-                # else: pass                # lh-1, balanced
-            while(lh and lh[0][1] <= i): heappop(lh)  # lazy-deletion
-            while(rh and rh[0][1] <= i): heappop(rh)  # lazy-deletion
-            medians.append(rh[0][0] if k%2 else (rh[0][0] - lh[0][0])/2)
-        return medians
+                heapq.heappush(small, (-n, i+k)) #small + 1
+                if nums[i] >= large[0][0]: #large - 1, unbalanced
+                    move(small, large)
+                #else: pass  # small - 1, balanced
+            while small and small[0][1] <= i: heapq.heappop(small) # lazy-deletion
+            while large and large[0][1] <= i: heapq.heappop(large)
+            ans.append(large[0][0] if k%2 else (large[0][0] - small[0][0])/2)
+        return ans
 ```
 
 ## 295. Find Median from Data Stream
@@ -207,8 +208,28 @@ findMedian() -> 2
 1. If all integer numbers from the stream are between 0 and 100, how would you optimize it?
 2. If 99% of all integer numbers from the stream are between 0 and 100, how would you optimize it?
 
-```text
+### Sol: min-max heap, time=log\(n\)
 
+```python
+from heapq import *
+
+class MedianFinder:
+    def __init__(self):
+        self.heaps = [], []
+
+    def addNum(self, num):
+        small, large = self.heaps
+        #push num to large, then pop large and push to small
+        heappush(small, -heappushpop(large, num))
+        #keep balance: remain len(large)=len(small) or len(large)=len(small)+!
+        if len(large) < len(small):
+            heappush(large, -heappop(small))
+
+    def findMedian(self):
+        small, large = self.heaps
+        if len(large) > len(small):
+            return large[0]
+        return (large[0] - small[0]) / 2.0
 ```
 
 ## 360. Moving Average from Data Stream
