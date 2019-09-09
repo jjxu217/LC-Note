@@ -153,6 +153,7 @@
     * [79/212 Word Search](graph/dfs/79-212-word-search.md)
   * [Breath-FS](graph/breath-fs/README.md)
     * [317. Shortest Distance from All Buildings](graph/breath-fs/317.-shortest-distance-from-all-buildings.md)
+    * [296. Best Meeting Point](graph/breath-fs/296.-best-meeting-point.md)
     * [994. Rotting Oranges](graph/breath-fs/994.-rotting-oranges.md)
     * [286. Walls and Gates](graph/breath-fs/286.-walls-and-gates.md)
     * [785. Is Graph Bipartite?](graph/breath-fs/785.-is-graph-bipartite.md)
