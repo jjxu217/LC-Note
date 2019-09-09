@@ -56,7 +56,7 @@
   * [92. Reverse Linked List II](linkedlist/92.-reverse-linked-list-ii.md)
 * [Design](design/README.md)
   * [348. Design Tic-Tac-Toe](design/348.-design-tic-tac-toe.md)
-  * [155. Min Stack](design/155.-min-stack.md)
+  * [155. Min Stack 716. Max Stack](design/155.-min-stack.md)
   * [65. Valid Number](design/65.-valid-number.md)
 * [Queue](queue/README.md)
   * [Sliding window](queue/sliding-window.md)
