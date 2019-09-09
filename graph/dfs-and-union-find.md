@@ -5,7 +5,7 @@ without rank
 class DSU:
     def __init__(self):
         self.p = list(range(1001))
-        
+    
     def find(self, x):
         if self.p[x] != x:
             self.p[x] = self.find(self.p[x])
@@ -315,5 +315,97 @@ class Solution:
                     queue += graph[j] #add neighbors
                     del graph[j]
         return res              
+```
+
+## 305. Number of Islands II
+
+A 2d grid map of `m` rows and `n` columns is initially filled with water. We may perform an addLand operation which turns the water at position \(row, col\) into a land. Given a list of positions to operate, **count the number of islands after each addLand operation**. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+**Example:**
+
+```text
+Input: m = 3, n = 3, positions = [[0,0], [0,1], [1,2], [2,1]]
+Output: [1,1,2,3]
+```
+
+**Explanation:**
+
+Initially, the 2d grid `grid` is filled with water. \(Assume 0 represents water and 1 represents land\).
+
+```text
+0 0 0
+0 0 0
+0 0 0
+```
+
+Operation \#1: addLand\(0, 0\) turns the water at grid\[0\]\[0\] into a land.
+
+```text
+1 0 0
+0 0 0   Number of islands = 1
+0 0 0
+```
+
+Operation \#2: addLand\(0, 1\) turns the water at grid\[0\]\[1\] into a land.
+
+```text
+1 1 0
+0 0 0   Number of islands = 1
+0 0 0
+```
+
+Operation \#3: addLand\(1, 2\) turns the water at grid\[1\]\[2\] into a land.
+
+```text
+1 1 0
+0 0 1   Number of islands = 2
+0 0 0
+```
+
+Operation \#4: addLand\(2, 1\) turns the water at grid\[2\]\[1\] into a land.
+
+```text
+1 1 0
+0 0 1   Number of islands = 3
+0 1 0
+```
+
+### Idea: use a dict for parent
+
+```python
+class DSU:
+    def __init__(self):
+        self.p = {}
+        self.count = 0
+        
+    def find(self, x):
+        if x != self.p[x]:
+            self.p[x] = self.find(self.p[x])
+        return self.p[x]   
+    
+    def union(self, x, y):
+        xr, yr = self.find(x), self.find(y)
+        if xr != yr:
+            self.count -= 1
+            self.p[yr] = xr
+            
+    def setParent(self, x):
+        if x not in self.p: 
+            self.p[x] = x
+            self.count += 1
+        
+class Solution:
+    def numIslands2(self, m: int, n: int, positions: List[List[int]]) -> List[int]:
+        dsu = DSU()
+        ans = []
+        for po in positions:
+            idx = po[0]*n+po[1]
+            dsu.setParent(idx)
+            for di in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+                x, y = po[0]+di[0], po[1]+di[1]
+                if 0 <= x < m and 0 <= y < n and x*n+y in dsu.p:
+                    dsu.union(idx, x*n+y)
+            ans.append(dsu.count)
+        return ans
 ```
 
