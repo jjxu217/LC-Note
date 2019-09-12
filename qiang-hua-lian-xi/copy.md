@@ -102,12 +102,12 @@ class Solution:
         copy = collections.defaultdict(lambda: Node(0, []))
         queue = collections.deque([node])
         while queue:
-            m = queue.popleft()
+            m = queue.popleft() #expand node
             #add the not-yet-generated node to queue
             for nb in m.neighbors: 
                 if nb not in copy:
-                    queue.append(nb)
-            copy[m].val = m.val
+                    queue.append(nb) #generate node
+            copy[m].val = m.val #set expanded node val
             for nb in m.neighbors:
                 copy[m].neighbors.append(copy[nb])
         return copy[node]
