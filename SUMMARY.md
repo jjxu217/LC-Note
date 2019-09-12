@@ -177,6 +177,7 @@
   * [62/63/64/980 Path](untitled/62-63-64-path.md)
   * [70/509/1137 Climbing Stairs/ Fibonacci Number/N-th Tribonacci Number](untitled/70.-climbing-stairs.md)
   * [198/213/337 House Robber](untitled/198.-house-robber.md)
+  * [1027. Longest Arithmetic Sequence](untitled/1027.-longest-arithmetic-sequence.md)
   * [55/45 Jump Game](untitled/55-45-jump-game.md)
   * [256/265/276 Paint House/Fence](untitled/256-265-276-paint-house-fence.md)
   * [303/304/307/308 Range Sum Query](untitled/303-304-307-308-range-sum-query.md)
