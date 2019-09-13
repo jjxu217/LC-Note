@@ -93,7 +93,7 @@ Node 3's value is 3, and it has two neighbors: Node 2 and 4.
 Node 4's value is 4, and it has two neighbors: Node 1 and 3.
 ```
 
-![](../.gitbook/assets/image%20%2820%29.png)
+![](../../.gitbook/assets/image%20%2820%29.png)
 
 ```python
 class Solution:
@@ -112,7 +112,7 @@ class Solution:
                 copy[m].neighbors.append(copy[nb])
         return copy[node]
     
-    #bfs
+    #dfs
     def cloneGraph(self, node: 'Node') -> 'Node':
         copy = collections.defaultdict(lambda: Node(0, []))
         

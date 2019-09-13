@@ -1,4 +1,4 @@
-# directed graph
+# 有向图
 
 ## 997. Find the Town Judge
 

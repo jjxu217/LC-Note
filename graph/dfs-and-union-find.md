@@ -266,8 +266,8 @@ class Solution:
     #union find
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
         dsu = DSU()
-        for edge in edges:
-            dsu.union(*edge)
+        for a, b in edges:
+            dsu.union(a, b)
         res = set()
         for i in range(n):
             res.add(dsu.find(i))
@@ -292,29 +292,31 @@ class Solution:
         res = 0
         for i in range(n):
             if visited[i] == 0:
-                dfs(i)
                 res += 1
+                dfs(i)           
         return res
     
-    #bfs
+    #bfs, 把queue 换成stack就是dfs
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
+        visited = [0] * n
         #build the graph
-        graph = {x:[] for x in range(n)}
+        graph = collections.defaultdict(list)
         for a, b in edges:
             graph[a].append(b)
             graph[b].append(a)
             
         res = 0
         for i in range(n):
-            if i not in graph:
-                continue
-            res += 1
-            queue = [i] #one group of component
-            for j in queue:
-                if j in graph:
-                    queue += graph[j] #add neighbors
-                    del graph[j]
-        return res              
+            if not visited[i]:
+                res += 1
+                queue = collections.deque([i]) #one group of component
+                while queue:
+                    cur = queue.popleft()
+                    if not visited[cur]:
+                        visited[cur] = 1
+                        queue += graph[cur] #add neighbors
+                        del graph[cur]
+        return res                
 ```
 
 ## 305. Number of Islands II
