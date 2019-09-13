@@ -71,7 +71,7 @@
   * [单调栈](stack/dan-tiao-zhan.md)
   * [173. Binary Search Tree Iterator](stack/173.-binary-search-tree-iterator.md)
   * [71. Simplify Path](stack/71.-simplify-path.md)
-  * [224/227/772 Basic Calculator 150 Evaluate Reverse Polish Notation](stack/224-227-772-basic-calculator.md)
+  * [224/227/772 Basic Calculator](stack/224-227-772-basic-calculator.md)
   * [636. Exclusive Time of Functions](stack/636.-exclusive-time-of-functions.md)
   * [20. Valid Parentheses](stack/20.-valid-parentheses.md)
   * [84. Largest Rectangle in Histogram 85. Maximal Rectangle](stack/84.-largest-rectangle-in-histogram.md)
