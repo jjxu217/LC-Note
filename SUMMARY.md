@@ -199,7 +199,6 @@
 * [Random & Sampling](random-and-sampling/README.md)
   * [529. Minesweeper](random-and-sampling/529.-minesweeper.md)
   * [398. Random Pick Index](random-and-sampling/398.-random-pick-index.md)
-* [强化练习](qiang-hua-lian-xi.md)
 * [Python syntax](python-syntax/README.md)
   * [Basic](python-syntax/basic.md)
   * [Pythonic](python-syntax/pythonic.md)
