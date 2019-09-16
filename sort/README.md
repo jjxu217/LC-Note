@@ -18,15 +18,15 @@ def quicksort(self, nums):
 ### In-Space
 
 ```python
-# This function takes last element as pivot, places 
-# the pivot element at its correct position in sorted 
-# array, and places all smaller (smaller than pivot) 
-# to left of pivot and all greater elements to right of pivot 
+#This function takes last element as pivot,
+#places all smaller (smaller than pivot) 
+#to left of pivot and all greater elements to right of pivot 
+#同向而行的 2 pointer, l左边的表示比pivot小的，右边的往右扫
 def partition(arr, low, high): 
 	i = low		 # index of smaller element 
 	pivot = arr[high]	 # pivot 
 
-	for j in range(low, high): 
+	for j in range(low, high): #j from low to high -1
 		# If current element is smaller than or equal to pivot 
 		if arr[j] <= pivot: 
 			# increment index of smaller element 
@@ -64,8 +64,7 @@ for i in range(n):
 
 ```python
 def mergeSort(arr): 
-    len(arr) <= 1: 
-        return
+    if len(arr) <= 1: return
     
     mid = len(arr) // 2 #Finding the mid of the array 
     L, R = arr[:mid], arr[mid:] # Dividing the array elements into 2 halves 
@@ -73,8 +72,8 @@ def mergeSort(arr):
     mergeSort(L) # Sorting the first half 
     mergeSort(R) # Sorting the second half 
 
-    i = j = k = 0
-    # Copy data to temp arrays L[] and R[] 
+    #merge
+    i = j = k = 0 #pointer for L/R/arr
     while i < len(L) and j < len(R): 
         if L[i] < R[j]: 
             arr[k] = L[i] 
