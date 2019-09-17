@@ -4,6 +4,8 @@ description: FB
 
 # 33. Search in Rotated Sorted Array
 
+## 33. Search in Rotated Sorted Array
+
 Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
 
 \(i.e., `[0,1,2,4,5,6,7]` might become `[4,5,6,7,0,1,2]`\).
@@ -63,7 +65,6 @@ class Solution:
             else:
                 right = mid - 1
         return -1
-    def search(self, nums: List[int], target: int) -> int:
 ```
 
 ### Solution2:
@@ -94,8 +95,6 @@ Note: **nums\[left\] &lt;= target &lt; nums\[mid\], nums\[mid\] &lt; target &lt;
                     right = mid - 1
         return -1
 ```
-
-
 
 ## 153 Find Minimum in Rotated Sorted Array[  ](https://leetcode.com/explore/learn/card/binary-search/126/template-ii/949/discuss)
 
@@ -131,8 +130,46 @@ class Solution:
             mid = left + (right - left) // 2
             if nums[mid] > nums[right]:
                 left = mid + 1 
-            else:             
-                right = mid  
+            else:                   
+                 right = mid 
         return nums[left]
+        
+    def findMin(self, nums: List[int]) -> int:
+        if not nums:
+            return -1
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = left + (right - left) // 2
+            if nums[mid] < nums[right]:
+                right = mid 
+            else:  #if  nums[mid] >= nums[right],  '=' to make it break the loop                
+                left = mid + 1  
+        return nums[mid]
+```
+
+## 154. Find Minimum in Rotated Sorted Array II
+
+The array may contain duplicates.
+
+**Example 2:**
+
+```text
+Input: [2,2,2,0,1]
+Output: 0
+```
+
+```python
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        lo, hi = 0, len(nums) - 1
+        while lo < hi:
+            mid = lo + (hi -lo) // 2
+            if nums[mid] > nums[hi]:
+                lo = mid + 1
+            elif nums[mid] < nums[hi]:
+                hi = mid 
+            else: #nums[mid] == nums[hi]
+                hi -=  1
+        return nums[lo]
 ```
 

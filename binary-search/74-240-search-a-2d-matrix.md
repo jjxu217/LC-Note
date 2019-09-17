@@ -1,6 +1,6 @@
 # 74/240 Search a 2D Matrix
 
-## Search a 2D Matrix
+## 74. Search a 2D Matrix
 
 Write an efficient algorithm that searches for a value in an _m_ x _n_ matrix. This matrix has the following properties:
 
@@ -50,10 +50,10 @@ class Solution:
                 r = mid - 1
             else: 
                 l = mid + 1
-        return FalseSearch a 2D Matrix
+        return False
 ```
 
-## Search a 2D Matrix II
+## 240. Search a 2D Matrix II
 
 Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
 
@@ -80,14 +80,14 @@ Given target = `20`, return `false`.
 
 ### Solution1: Search space reduction
 
+从右上角出发开始搜  
+1. 如果找到返回  
+2. 如果 比target大： `c -= 1`     
+3. 如果 比target小： `r += 1`
+
 ```python
 class Solution:
     def searchMatrix(self, matrix, target):
-        """
-        :type matrix: List[List[int]]
-        :type target: int
-        :rtype: bool
-        """
         if not matrix or not matrix[0]:
             return False
         m, n = len(matrix) , len(matrix[0]) 

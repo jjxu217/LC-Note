@@ -55,8 +55,6 @@ class Solution:
 
 ## 349. Intersection of Two Arrays
 
-
-
 Given two arrays, write a function to compute their intersection.
 
 **Example 1:**
@@ -78,7 +76,7 @@ Output: [9,4]
 * Each element in the result must be unique.
 * The result can be in any order.
 
-### Solution1:
+### Solution1: or two pointer
 
 ```python
 class Solution:
@@ -87,8 +85,6 @@ class Solution:
         set2 = set(nums2)      
         return list(set(nums1) & set(nums2))
 ```
-
-
 
 ### Solution2: Bisect
 
@@ -131,7 +127,7 @@ class Solution:
         res = []
         for num in nums2:
             if counts[num] > 0:
-                res += num,
+                res.append(num)
                 counts[num] -= 1
         return res
     
