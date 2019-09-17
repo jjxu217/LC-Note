@@ -1,4 +1,4 @@
-# 406、630 Greedy 2
+# 406/630 Greedy 2
 
 ## 406. Queue Reconstruction by Height
 

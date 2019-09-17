@@ -41,11 +41,15 @@ Input: nums = [1, 3, 2, 2, 3, 1]
 Output: One possible answer is [2, 3, 1, 3, 1, 2].
 ```
 
-**Note:**  
-You may assume all input has valid answer.
-
 **Follow Up:**  
 Can you do it in O\(n\) time and/or in-place with O\(1\) extra space?
+
+### Idea: 
+
+把数分成S/L 两个group, 偶数位放小的数，奇数位放大的数。把中间可能相同的数错开。
+
+1. sort the list
+2. 偶数位是前一半较小数从大到小排，奇数位是后一半较大数从大到小排
 
 ```python
 class Solution:

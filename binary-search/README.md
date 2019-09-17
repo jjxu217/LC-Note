@@ -1,7 +1,5 @@
 # Binary Search
 
-
-
 ### **How do we identify Binary Search?**
 
 As mentioned in earlier, Binary Search is an algorithm that _divides the search space in 2_ after every comparison. Binary Search should be considered every time you need to search for an index or element in a collection. If the collection is unordered, we can always sort it first before applying Binary Search.
@@ -13,8 +11,6 @@ Binary Search is generally composed of 3 main sections:
 1. _**Pre-processing**_ - Sort if collection is unsorted.
 2. _**Binary Search**_ - Using a loop or recursion to divide search space in half after each comparison.
 3. _**Post-processing**_ - Determine viable candidates in the remaining space.
-
-
 
 ### Binary Search Template Analysis
 
@@ -45,9 +41,9 @@ Each of these 3 provided templates provide a specific use case:
 **Template \#2** `(left < right)`:
 
 * An advanced way to implement Binary Search.
-* Search Condition needs to access element's immediate right neighbor
+* Search Condition needs to access element's **immediate right neighbor**
 * Use element's right neighbor to determine if condition is met and decide whether to go left or right
-* Gurantees Search Space is at least 2 in size at each step
+* Guarantees Search Space is at least 2 in size at each step
 * Post-processing required. Loop/Recursion ends when you have 1 element left. Need to assess if the remaining element meets the condition.
 
 **Template \#3** `(left + 1 < right):`
@@ -55,6 +51,6 @@ Each of these 3 provided templates provide a specific use case:
 * An alternative way to implement Binary Search
 * Search Condition needs to access element's immediate left and right neighbors
 * Use element's neighbors to determine if condition is met and decide whether to go left or right
-* Gurantees Search Space is at least 3 in size at each step
+* Guarantees Search Space is at least 3 in size at each step
 * Post-processing required. Loop/Recursion ends when you have 2 elements left. Need to assess if the remaining elements meet the condition.
 
