@@ -116,16 +116,6 @@ class Solution(object):
 
 ## 559. Maximum Depth of N-ary Tree
 
-Given a n-ary tree, find its maximum depth.
-
-The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
-
-For example, given a `3-ary` tree: 
-
-![](https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png)
-
-We should return its max depth, which is 3.
-
 ### Note:
 
 **Base case: If node is None, return 0; if node.children is None, which is leaf node, return 1.**
