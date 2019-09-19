@@ -476,11 +476,11 @@ class Solution:
 
 > What if the BST is modified \(insert/delete operations\) often and you need to find the kth smallest frequently? How would you optimize the kthSmallest routine?
 
-[Insert](https://leetcode.com/articles/insert-into-a-bst/) and [delete](https://leetcode.com/articles/delete-node-in-a-bst/) in a BST were discussed last week, the time complexity of these operations is \mathcal{O}\(H\)O\(H\), where HH is a height of binary tree, and H = \log NH=logN for the balanced tree.
+[Insert](https://leetcode.com/articles/insert-into-a-bst/) and [delete](https://leetcode.com/articles/delete-node-in-a-bst/) in a BST were discussed last week, the time complexity of these operations is O\(H\), where H is a height of binary tree, and H = logN for the balanced tree.
 
-Hence without any optimisation insert/delete + search of kth element has \mathcal{O}\(2H + k\)O\(2H+k\) complexity. How to optimise that?
+Hence without any optimization insert/delete + search of kth element hasO\(2H+k\) complexity. How to optimize that?
 
-That's a design question, basically we're asked to implement a structure which contains a BST inside and optimises the following operations :
+That's a design question, basically we're asked to implement a structure which contains a BST inside and optimizes the following operations :
 
 * Insert
 * Delete
@@ -495,7 +495,7 @@ Such a structure would provide:
 
 ![bla](https://leetcode.com/problems/kth-smallest-element-in-a-bst/Figures/230/linked_list2.png)
 
-The overall time complexity for insert/delete + search of kth smallest isO\(H+k\) instead of O\(2H+k\).
+The overall time complexity for insert/delete + search of kth smallest is O\(H+k\) instead of O\(2H+k\).
 
 **Complexity Analysis**
 
@@ -504,25 +504,22 @@ The overall time complexity for insert/delete + search of kth smallest isO\(H+k\
 
 ## 938. Range Sum of BST
 
-Given a binary tree, find the largest subtree which is a Binary Search Tree \(BST\), where largest means subtree with largest number of nodes in it.
+Given the `root` node of a binary search tree, return the sum of values of all nodes with value between `L` and `R` \(inclusive\).
 
-**Note:**  
-A subtree must include all of its descendants.
+The binary search tree is guaranteed to have unique values.
 
-**Example:**
+**Example 1:**
 
 ```text
-Input: [10,5,15,1,8,null,7]
+Input: root = [10,5,15,3,7,null,18], L = 7, R = 15
+Output: 32
+```
 
-   10 
-   / \ 
-  5  15 
- / \   \ 
-1   8   7
+**Example 2:**
 
-Output: 3
-Explanation: The Largest BST Subtree in this case is the highlighted one.
-             The return value is the subtree's size, which is 3.
+```text
+Input: root = [10,5,15,3,7,13,18,1,null,6], L = 6, R = 10
+Output: 23
 ```
 
 ```python
@@ -643,6 +640,7 @@ class Solution:
                 return (-1, 0, 0)
             
         dfs(root)
+        return self.l
 ```
 
 ## 530. Minimum Absolute Difference in BST
@@ -720,6 +718,8 @@ return `[2]`.
 
 **Follow up:** Could you do that without using any extra space? \(Assume that the implicit stack space incurred due to recursion does not count\).
 
+### Idea: in-order travers, use counter to count frequency
+
 ```python
 class Solution:
     def findMode(self, root: TreeNode) -> List[int]:
@@ -737,6 +737,9 @@ class Solution:
         helper(root)
         max_ct = max(c.values())
         return [k for k, v in c.items() if v == max_ct]
-    
 ```
+
+{% embed url="https://leetcode.com/problems/find-mode-in-binary-search-tree/discuss/98101/Proper-O\(1\)-space" %}
+
+
 
