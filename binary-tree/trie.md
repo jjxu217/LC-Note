@@ -341,6 +341,88 @@ WordFilter.f("a", "e") // returns 0
 WordFilter.f("b", "") // returns -1
 ```
 
+### Sol1: store all the prefix/suffix combination into dic
+
+Directly save the prefix and suffix combinations for a word, where the value is the weight. For a word such as `'bat'`, store all the prefix + suffix combinations in a dictionary, delimited by a non-alphabet character such as `'.'`. The delimiter is important so as to distinguish between prefix/suffix pairs that would have been concatenated to give the same result if without - `ab` + `c` and `a` + `bc` would both give `abc` if there wasn't a delimiter present.
+
+```text
+{
+  '.': 0,
+  '.t': 0,
+  '.at': 0,
+  '.bat': 0,
+  'b.': 0,
+  'b.t': 0,
+  'b.at': 0,
+  'b.bat': 0,
+  'ba.': 0,
+  'ba.t': 0,
+  'ba.at': 0,
+  'ba.bat': 0,
+  'bat.': 0,
+  'bat.t': 0,
+  'bat.at': 0,
+  'bat.bat': 0,
+}
+```
+
+```python
+class WordFilter(object):
+    def __init__(self, words):
+        self.dic = {}
+        for weight, word in enumerate(words):
+            for i in range(len(word)+1):
+                for j in range(len(word)+1):
+                    self.dic[word[:i]+"#"+word[j:]] = weight     
+
+    def f(self, prefix, suffix):
+        return self.dic.get(prefix+'#'+suffix, -1)
+```
+
+### Sol2: **Trie of Suffix Wrapped Words** 
+
+**Intuition and Algorithm**
+
+Consider the word `'apple'`. For each suffix of the word, we could insert that suffix, followed by `'#'`, followed by the word, all into the trie.
+
+For example, we will insert `'#apple', 'e#apple', 'le#apple', 'ple#apple', 'pple#apple', 'apple#apple'` into the trie. Then for a query like `prefix = "ap", suffix = "le"`, we can find it by querying our trie for `le#ap`.
+
+```python
+class TrieNode():
+    def __init__(self):
+        self.children = collections.defaultdict(TrieNode)
+        self.weight = 0
+        
+class Trie():
+    def __init__(self):
+        self.root = TrieNode()
+        
+    def addWord(self, word, weight):
+        node = self.root
+        for w in word:
+            node = node.children[w]
+            node.weight = weight
+            
+    def search(self, prefix, suffix):
+        node = self.root
+        for w in suffix + '#' + prefix:
+            if w not in node.children:
+                return -1
+            node = node.children[w]
+        return node.weight
+
+class WordFilter(object):
+    def __init__(self, words):
+        self.t = Trie()
+        for weight, word in enumerate(words):
+            for i in range(len(word)+1):
+                wrap = word[i:] + '#' + word
+                self.t.addWord(wrap, weight)
+            
+    def f(self, prefix, suffix):    
+        return self.t.search(prefix, suffix)
+```
+
 ## 1065. Index Pairs of a String
 
 Given a `text` string and `words` \(a list of strings\), return all index pairs `[i, j]` so that the substring `text[i]...text[j]` is in the list of `words`.
@@ -371,7 +453,6 @@ class Trie:
         for w in word:
             node = node.setdefault(w, {})
         node[None] = None      
-
     
 class Solution:
     def indexPairs(self, text: str, words: List[str]) -> List[List[int]]:
