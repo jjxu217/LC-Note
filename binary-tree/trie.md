@@ -264,9 +264,82 @@ There are no sentences that have prefix `"i a"`.
 **Explanation:**  
 The user finished the input, the sentence `"i a"` should be saved as a historical sentence in system. And the following input will be counted as a new search.
 
+```python
+class TrieNode():
+    def __init__(self):
+        self.children = collections.defaultdict(TrieNode)
+        self.isEnd = False
+        self.data = None
+        self.rank = 0
+        
+class Trie():
+    def __init__(self):
+        self.root = TrieNode()
+        
+    def addRecord(self, sentence, hot):
+        node = self.root
+        for c in sentence:
+            node = node.children[c]
+        node.isEnd = True
+        node.data = sentence
+        node.rank -= hot
+        
+    def dfs(self, node):
+        res = []
+        if node.isEnd:
+            res.append((node.rank, node.data))
+        for child in node.children.values():
+            res.extend(self.dfs(child))
+        return res
+        
+    def search(self, sentence):
+        node = self.root
+        for c in sentence:
+            if c not in node.children:
+                return []
+            node = node.children[c]
+        return self.dfs(node)
+        
+class AutocompleteSystem():
+    def __init__(self, sentences, times):
+        self.t = Trie()
+        self.keyword = ""
+        for i, sentence in enumerate(sentences):
+            self.t.addRecord(sentence, times[i])   
+    
+    def input(self, c):
+        results = []
+        if c != "#":
+            self.keyword += c
+            results = self.t.search(self.keyword)
+        else:
+            self.t.addRecord(self.keyword, 1)
+            self.keyword = ""
+        return [item[1] for item in sorted(results)[:3]]
+
+# Your AutocompleteSystem object will be instantiated and called as such:
+# obj = AutocompleteSystem(sentences, times)
+# param_1 = obj.input(c)
+```
+
 ## 212. Word Search II
 
 {% page-ref page="../graph/dfs/79-212-word-search.md" %}
+
+## 745. Prefix and Suffix Search
+
+Given many `words`, `words[i]` has weight `i`.
+
+Design a class `WordFilter` that supports one function, `WordFilter.f(String prefix, String suffix)`. It will return the word with given `prefix` and `suffix` with maximum weight. If no word exists, return -1.
+
+**Examples:**
+
+```text
+Input:
+WordFilter(["apple"])
+WordFilter.f("a", "e") // returns 0
+WordFilter.f("b", "") // returns -1
+```
 
 ## 1065. Index Pairs of a String
 
