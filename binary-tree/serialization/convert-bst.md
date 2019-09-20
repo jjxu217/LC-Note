@@ -194,11 +194,10 @@ class Solution:
             stack.append(node.right)
             stack.append(node.left)
             pre = node
-        return root
     
     #reversed in-order                
-   def __init__(self):
-    self.nxt = None
+    def __init__(self):
+        self.nxt = None
     
     def flatten(self, root):
         if not root:
@@ -206,8 +205,7 @@ class Solution:
         self.flatten(root.right)
         self.flatten(root.left)
     
-        root.right = self.nxt
-        root.left = None
-        self.nxt = root
+        root.right, root.left = self.nxt, None
+        self.nxt = root     
 ```
 

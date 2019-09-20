@@ -279,3 +279,36 @@ class MovingAverage:
         return self.cursum / len(self.queue)
 ```
 
+## 567. Permutation in String
+
+Given two strings **s1** and **s2**, write a function to return true if **s2** contains the permutation of **s1**. In other words, one of the first string's permutations is the **substring** of the second string.
+
+**Example 1:**
+
+```text
+Input: s1 = "ab" s2 = "eidbaooo"
+Output: True
+Explanation: s2 contains one permutation of s1 ("ba").
+```
+
+**Example 2:**
+
+```text
+Input:s1= "ab" s2 = "eidboaoo"
+Output: False
+```
+
+```python
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        c1, c2 = collections.Counter(s1), collections.Counter(s2[:len(s1) - 1])
+        for i in range(len(s1) - 1, len(s2)):
+            c2[s2[i]] += 1
+            if c2 == c1:
+                return True
+            c2[s2[i - len(s1) + 1]] -= 1
+            if c2[s2[i - len(s1) + 1]] == 0:
+                del c2[s2[i - len(s1) + 1]]
+        return False
+```
+

@@ -91,8 +91,9 @@ class Solution:
                         return True
                     #back-track
                     buck[i] += nums[idx]
-                #prune: buck[i]==target means putting nums[idx] in this empty bucket can't solve the game, putting nums[idx] on other empty buckets can't solve the game either.
-                if buck[i] ==  target: break  
+#prune: buck[i]==target means putting nums[idx] in this empty bucket can't solve the game, 
+#putting nums[idx] on other empty buckets can't solve the game either.
+                if buck[i] == target: break  
             return False
         return dfs(0)
 ```

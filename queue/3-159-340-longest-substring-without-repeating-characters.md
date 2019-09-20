@@ -137,19 +137,20 @@ The substring with start index = 1 is "ba", which is an anagram of "ab".
 The substring with start index = 2 is "ab", which is an anagram of "ab".
 ```
 
+### Sliding windows
+
 ```python
 class Solution:
-    def findAnagrams(self, s: str, p: str) -> List[int]:
-        pCounter = collections.Counter(p)
-        sCounter = collections.Counter(s[:len(p)-1])
+    def findAnagrams(self, s2: str, s1: str) -> List[int]:
         res = []
-        for i in range(len(s) - len(p) + 1):
-            sCounter[s[i + len(p) - 1]] += 1 # include a new char in the window
-            if sCounter == pCounter: # This step is O(1), since there are at most 26 English letters 
-                res.append(i)
-            sCounter[s[i]] -= 1 # decrease the count of oldest char in the window
-            if sCounter[s[i]] == 0:
-                del sCounter[s[i]]  # remove the count if it is 0
+        c1, c2 = collections.Counter(s1), collections.Counter(s2[:len(s1) - 1])
+        for i in range(len(s1) - 1, len(s2)):
+            c2[s2[i]] += 1
+            if c2 == c1:
+                res.append(i - len(s1) + 1) 
+            c2[s2[i - len(s1) + 1]] -= 1
+            if c2[s2[i - len(s1) + 1]] == 0:
+                del c2[s2[i - len(s1) + 1]]
         return res
 ```
 

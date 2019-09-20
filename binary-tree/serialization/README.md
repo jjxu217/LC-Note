@@ -24,7 +24,7 @@ as "[1,2,3,null,null,4,5]"
 
 **Note:** Do not use class member/global/static variables to store states. Your serialize and deserialize algorithms should be stateless.
 
-### Note:
+### Note: Post-oder traverse, use '\#' representing None
 
 if use recursion, post-order traverse it, and record the value. During deserialize,  post-order traverse can use pop\(\) to get the value, pre-order need pop\(0\).  
 Or use queue for BFS traverse.
@@ -109,10 +109,6 @@ Design an algorithm to serialize and deserialize a **binary search tree**. There
 class Codec:
 
     def serialize(self, root):
-        """Encodes a tree to a single string.      
-        :type root: TreeNode
-        :rtype: str
-        """
         def postorder(root):
             return postorder(root.left) + postorder(root.right) + [root.val] if root else []
         
@@ -120,10 +116,7 @@ class Codec:
             
 
     def deserialize(self, data):
-        """Decodes your encoded data to tree.    
-        :type data: str
-        :rtype: TreeNode
-        """
+      
         def helper(lower=float('-inf'), upper=float('inf')):
             if not data or data[-1] < lower or data[-1] > upper:
                 return None
@@ -135,7 +128,6 @@ class Codec:
         
         data = [int(x) for x in data.split(' ') if x]
         return helper()
-
 ```
 
 ## 428. Serialize and Deserialize N-ary Tree
@@ -149,6 +141,8 @@ For example, you may serialize the following `3-ary` tree
 ![](https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png)
 
 as `[1 [3[5 6] 2 4]]`. You do not necessarily need to follow this format, so please be creative and come up with different approaches yourself.
+
+### Sol: preorder traverse, append '\#' when no more children
 
 ```python
 class Codec:
