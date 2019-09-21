@@ -1,4 +1,4 @@
-# 3/159/340 Longest Substring Without Repeating Characters 438. Find All Anagrams in a String
+# 3/159/340 Longest Substring Without Repeating Characters 30. Substring with Concatenation of All Wor
 
 ## 3. Longest Substring Without Repeating Characters
 
@@ -97,60 +97,6 @@ class Solution:
                 del dic[s[del_idx]]
                 l = del_idx + 1
             res = max(res, i - l + 1)
-        return res
-```
-
-## 438. Find All Anagrams in a String
-
-Given a string **s** and a **non-empty** string **p**, find all the start indices of **p**'s anagrams in **s**.
-
-Strings consists of lowercase English letters only and the length of both strings **s** and **p** will not be larger than 20,100.
-
-The order of output does not matter.
-
-**Example 1:**
-
-```text
-Input:
-s: "cbaebabacd" p: "abc"
-
-Output:
-[0, 6]
-
-Explanation:
-The substring with start index = 0 is "cba", which is an anagram of "abc".
-The substring with start index = 6 is "bac", which is an anagram of "abc".
-```
-
-**Example 2:**
-
-```text
-Input:
-s: "abab" p: "ab"
-
-Output:
-[0, 1, 2]
-
-Explanation:
-The substring with start index = 0 is "ab", which is an anagram of "ab".
-The substring with start index = 1 is "ba", which is an anagram of "ab".
-The substring with start index = 2 is "ab", which is an anagram of "ab".
-```
-
-### Sliding windows
-
-```python
-class Solution:
-    def findAnagrams(self, s2: str, s1: str) -> List[int]:
-        res = []
-        c1, c2 = collections.Counter(s1), collections.Counter(s2[:len(s1) - 1])
-        for i in range(len(s1) - 1, len(s2)):
-            c2[s2[i]] += 1
-            if c2 == c1:
-                res.append(i - len(s1) + 1) 
-            c2[s2[i - len(s1) + 1]] -= 1
-            if c2[s2[i - len(s1) + 1]] == 0:
-                del c2[s2[i - len(s1) + 1]]
         return res
 ```
 

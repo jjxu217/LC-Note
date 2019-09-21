@@ -19,7 +19,7 @@ Output: "BANC"
 ```python
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        need = collections.Counter(t)  #hashtable to store char frequency, 
+        need = collections.Counter(t)  #hashtable to store char frequency
         missing = len(t)        #total number of chars we need
         start = end = i = 0 
         for j, char in enumerate(s, 1): #index j from 1
@@ -33,9 +33,9 @@ class Solution:
                 if end == 0 or j - i < end - start: #update window
                     start, end = i, j
                 #left point +1, remove the first needed char in the previous windows
+                i += 1     
                 missing = 1
-                need[s[i]] = 1                              
-                i += 1                
+                need[s[i]] = 1                                               
         return s[start:end]    
 ```
 
@@ -66,7 +66,7 @@ You may assume _k_ is always valid, 1 ≤ k ≤ input array's size for non-empty
 **Follow up:**  
 Could you solve it in linear time?
 
-### Solution: use a descending deque
+### Solution: use a descending deque, record the idx
 
 The algorithm is quite straightforward :
 
@@ -84,8 +84,9 @@ class Solution:
         d = collections.deque()
         res = []
         for i, n in enumerate(nums):
-            #clean the deque: remove index outside sliding windows, remove smaller element
-            if d[0] == i - k:
+            #clean the deque: remove index outside sliding windows, 
+            # remove smaller element from the right side
+            if d and d[0] == i - k:
                 d.popleft()
             while d and n > nums[d[-1]]:
                 d.pop()
@@ -161,7 +162,7 @@ class Solution:
             heapq.heappush(small, (-n,i))
         for _ in range(k - k // 2): 
             move(small, large)
-        ans = [large[0][0] if k%2 else (large[0][0] - small[0][0])/2]
+        ans = [large[0][0] if k % 2 else (large[0][0] - small[0][0])/2]
         
         for i, n in enumerate(nums[k:]):
             if n >= large[0][0]:
@@ -211,25 +212,21 @@ findMedian() -> 2
 ### Sol: min-max heap, time=log\(n\)
 
 ```python
-from heapq import *
-
 class MedianFinder:
     def __init__(self):
         self.heaps = [], []
 
     def addNum(self, num):
         small, large = self.heaps
-        #push num to large, then pop large and push to small
-        heappush(small, -heappushpop(large, num))
-        #keep balance: remain len(large)=len(small) or len(large)=len(small)+!
-        if len(large) < len(small):
-            heappush(large, -heappop(small))
+        #push -num to small, then pop small and push to large
+        heappush(large, -heappushpop(small, -num))
+        #keep balance: remain len(large)=len(small) or len(large)=len(small)+1
+        if len(large) > len(small) + 1:
+            heappush(small, -heappop(large))
 
     def findMedian(self):
         small, large = self.heaps
-        if len(large) > len(small):
-            return large[0]
-        return (large[0] - small[0]) / 2.0
+        return large[0] if len(large) > len(small) else (large[0] - small[0]) / 2.0    
 ```
 
 ## 360. Moving Average from Data Stream
@@ -310,5 +307,59 @@ class Solution:
             if c2[s2[i - len(s1) + 1]] == 0:
                 del c2[s2[i - len(s1) + 1]]
         return False
+```
+
+## 438. Find All Anagrams in a String
+
+Given a string **s** and a **non-empty** string **p**, find all the start indices of **p**'s anagrams in **s**.
+
+Strings consists of lowercase English letters only and the length of both strings **s** and **p** will not be larger than 20,100.
+
+The order of output does not matter.
+
+**Example 1:**
+
+```text
+Input:
+s: "cbaebabacd" p: "abc"
+
+Output:
+[0, 6]
+
+Explanation:
+The substring with start index = 0 is "cba", which is an anagram of "abc".
+The substring with start index = 6 is "bac", which is an anagram of "abc".
+```
+
+**Example 2:**
+
+```text
+Input:
+s: "abab" p: "ab"
+
+Output:
+[0, 1, 2]
+
+Explanation:
+The substring with start index = 0 is "ab", which is an anagram of "ab".
+The substring with start index = 1 is "ba", which is an anagram of "ab".
+The substring with start index = 2 is "ab", which is an anagram of "ab".
+```
+
+### Sliding windows
+
+```python
+class Solution:
+    def findAnagrams(self, s2: str, s1: str) -> List[int]:
+        res = []
+        c1, c2 = collections.Counter(s1), collections.Counter(s2[:len(s1) - 1])
+        for i in range(len(s1) - 1, len(s2)):
+            c2[s2[i]] += 1
+            if c2 == c1:
+                res.append(i - len(s1) + 1) 
+            c2[s2[i - len(s1) + 1]] -= 1
+            if c2[s2[i - len(s1) + 1]] == 0:
+                del c2[s2[i - len(s1) + 1]]
+        return res
 ```
 
