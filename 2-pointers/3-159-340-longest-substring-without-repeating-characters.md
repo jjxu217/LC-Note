@@ -1,4 +1,4 @@
-# 3/159/340 Longest Substring Without Repeating Characters 30. Substring with Concatenation of All Wor
+# 窗口类 3/159/340/395 Longest Substring Without Repeating Characters
 
 ## 3. Longest Substring Without Repeating Characters
 
@@ -139,64 +139,5 @@ Output:
 The longest substring is "ababb", as 'a' is repeated 2 times and 'b' is repeated 3 times.
 ```
 
-## 30. Substring with Concatenation of All Words
-
-You are given a string, **s**, and a list of words, **words**, that are all of the same length. Find all starting indices of substring\(s\) in **s** that is a concatenation of each word in **words** exactly once and without any intervening characters.
-
-**Example 1:**
-
-```text
-Input:
-  s = "barfoothefoobarman",
-  words = ["foo","bar"]
-Output: [0,9]
-Explanation: Substrings starting at index 0 and 9 are "barfoor" and "foobar" respectively.
-The output order does not matter, returning [9,0] is fine too.
-```
-
-**Example 2:**
-
-```text
-Input:
-  s = "wordgoodgoodgoodbestword",
-  words = ["word","good","best","word"]
-Output: []
-```
-
-```python
-class Solution(object):
-    def findSubstring(self, s, words):
-        if not words or not words[0]: return []
-        c = collections.Counter(words)
-        m, n = len(words), len(words[0])
-        res = []
-        
-        #Loop over word length
-        for k in range(n):
-            left = k
-            subd = collections.Counter()
-            cnt = 0
-            #Loop over the string
-            for j in range(k, len(s) - n + 1, n):
-                word = s[j:j+n]
-                #check if it is a valid word
-                if word in c:
-                    subd[word] += 1
-                    cnt += 1
-                    #if we got more cur word than needed
-                    #move left pointer to the right of the last cur word, remove extra word for dict                 
-                    while subd[word] > c[word]:
-                        subd[s[left:left+n]] -= 1
-                        left += n
-                        cnt -= 1
-                    #Count will be equal to m only when we all the words are read the exact number of times needed
-                    if cnt == m:
-                        res.append(left)
-                #If is not a valid word then just skip over cur word
-                else:
-                    left = j + n
-                    subd = collections.Counter()
-                    cnt = 0
-        return res
-```
+## 
 
