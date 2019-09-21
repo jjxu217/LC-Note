@@ -29,9 +29,7 @@ Explanation: The answer is "wke", with the length of 3.
              Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 ```
 
-### Sol: sliding window
-
-Use a **dic** to record the used char and the position, use **l** to record the left side of non-repeat char.
+### Sol: sliding window: Use a **dic** to record the used char and the position, use **l** to record the left side of non-repeat char.
 
 ```python
 class Solution:
@@ -65,6 +63,8 @@ Input: "ccaabbb"
 Output: 5
 Explanation: t is "aabbb" which its length is 5.
 ```
+
+### Using a dict {char: idx}, record left side. If len\(dic\) == 3, update left side, and dict.
 
 ```python
 class Solution:
@@ -100,6 +100,45 @@ class Solution:
         return res
 ```
 
+```python
+class Solution:
+    #for each char in s, if char repeat less than k time, 
+    #split s by that char, and recursive find the result, choose the max
+    def longestSubstring(self, s: str, k: int) -> int:
+        for c in set(s):
+            if s.count(c) < k:
+                return max(self.longestSubstring(t, k) for t in s.split(c))
+        return len(s)
+```
+
+## 395. Longest Substring with At Least K Repeating Characters
+
+Find the length of the longest substring **T** of a given string \(consists of lowercase letters only\) such that every character in **T** appears no less than k times.
+
+**Example 1:**
+
+```text
+Input:
+s = "aaabb", k = 3
+
+Output:
+3
+
+The longest substring is "aaa", as 'a' is repeated 3 times.
+```
+
+**Example 2:**
+
+```text
+Input:
+s = "ababbc", k = 2
+
+Output:
+5
+
+The longest substring is "ababb", as 'a' is repeated 2 times and 'b' is repeated 3 times.
+```
+
 ## 30. Substring with Concatenation of All Words
 
 You are given a string, **s**, and a list of words, **words**, that are all of the same length. Find all starting indices of substring\(s\) in **s** that is a concatenation of each word in **words** exactly once and without any intervening characters.
@@ -127,7 +166,7 @@ Output: []
 ```python
 class Solution(object):
     def findSubstring(self, s, words):
-        if not words or not words[0]: return[]
+        if not words or not words[0]: return []
         c = collections.Counter(words)
         m, n = len(words), len(words[0])
         res = []

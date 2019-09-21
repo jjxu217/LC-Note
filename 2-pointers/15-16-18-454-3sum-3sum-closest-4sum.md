@@ -1,4 +1,4 @@
-# 15/16/18/454 3Sum/3Sum Closest/4Sum
+# 对撞类 15/16/259/18/454 3Sum/3Sum Closest Smaller/4Sum
 
 ## 15. 3Sum
 
@@ -31,9 +31,9 @@ class Solution:
         res = []
         i, n = 0, len(nums)
         for i in range(n - 2):
-            if i > 0 and nums[i] == nums[i-1]:
+            if i > 0 and nums[i] == nums[i-1]: #de-duplicate
                 continue
-            j, k = i + 1, n - 1
+            j, k = i + 1, n - 1 #two pointers
             while j < k:
                 s = nums[i] + nums[j] + nums[k]
                 if s < 0:
@@ -42,7 +42,7 @@ class Solution:
                     k -= 1
                 else:
                     res.append([nums[i], nums[j], nums[k]])
-                    while j < k and nums[j] == nums[j + 1]:
+                    while j < k and nums[j] == nums[j + 1]: #de-duplicate
                         j += 1
                     while j < k and nums[k] == nums[k - 1]:
                         k -= 1
@@ -87,6 +87,41 @@ class Solution:
                     k -= 1
                 else:
                     return s            
+        return res
+```
+
+## 259. 3Sum Smaller
+
+Given an array of n integers nums and a target, find the number of index triplets `i, j, k` with `0 <= i < j < k < n` that satisfy the condition `nums[i] + nums[j] + nums[k] < target`.
+
+**Example:**
+
+```text
+Input: nums = [-2,0,1,3], and target = 2
+Output: 2 
+Explanation: Because there are two triplets which sums are less than 2:
+             [-2,0,1]
+             [-2,0,3]
+```
+
+**Follow up:** Could you solve it in O\(n2\) runtime?
+
+**利用 sum &lt; target 时，i 和 left 不动，介于 left 和 right \(包括 right\) 之间的所有元素 sum 也一定小于 target 的单调性。**
+
+```python
+    def threeSumSmaller(self, nums: List[int], target: int) -> int:
+        nums.sort()
+        res = 0
+        i, n = 0, len(nums)
+        for i in range(n - 2):
+            j, k = i + 1, n - 1 #two pointers
+            while j < k:
+                s = nums[i] + nums[j] + nums[k]
+                if s < target:
+                    res += k - j
+                    j += 1
+                else:
+                    k -= 1               
         return res
 ```
 
