@@ -161,7 +161,7 @@ One valid answer is [5,4,6,2,null,null,7], shown in the following BST.
 Another valid answer is [5,2,6,null,4,null,7].
 ```
 
-![](../.gitbook/assets/image%20%2821%29.png)
+![](../.gitbook/assets/image%20%2822%29.png)
 
 ```python
 class Solution:
@@ -226,7 +226,7 @@ This tree is also valid:
           4
 ```
 
-![](../.gitbook/assets/image%20%2818%29.png)
+![](../.gitbook/assets/image%20%2819%29.png)
 
 ```python
 class Solution:

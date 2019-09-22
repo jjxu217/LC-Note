@@ -22,9 +22,9 @@ Output: return the root of the binary tree [4,5,2,#,#,3,1]
    3   1  
 ```
 
-![](../.gitbook/assets/image%20%2812%29.png)
+![](../.gitbook/assets/image%20%2813%29.png)
 
-![](../.gitbook/assets/image%20%2826%29.png)
+![](../.gitbook/assets/image%20%2827%29.png)
 
 ```python
 class Solution:
