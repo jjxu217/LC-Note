@@ -54,3 +54,31 @@ Each of these 3 provided templates provide a specific use case:
 * Guarantees Search Space is at least 3 in size at each step
 * Post-processing required. Loop/Recursion ends when you have 2 elements left. Need to assess if the remaining elements meet the condition.
 
+## bisect\_left
+
+```python
+        def bisect_left(a, x):
+            lo, hi = 0, len(a)
+            while lo < hi:
+                mid = (lo + hi) // 2
+                if a[mid] < x:
+                    lo = mid + 1
+                else:
+                    hi = mid
+            return lo
+```
+
+## bisect\_right
+
+```python
+        def bisect_right(a, x):
+            lo, hi = 0, len(a)
+            while lo < hi:
+                mid = (lo + hi) // 2
+                if a[mid] <= x:
+                    lo = mid + 1
+                else:
+                    hi = mid
+            return lo 
+```
+

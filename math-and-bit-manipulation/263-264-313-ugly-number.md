@@ -52,7 +52,6 @@ class Solution:
     def nthUglyNumber(self, n: int) -> int:
         ugly_set = set([1])
         ugly_heap = [1]
-        heapq.heapify(ugly_heap)
         while n > 0:
             cur = heapq.heappop(ugly_heap)
             n -= 1  
@@ -113,16 +112,15 @@ class Solution:
     import heapq
     def nthSuperUglyNumber(self, n: int, primes: List[int]) -> int:    
         aux = [1]
-        heapq.heapify(aux)
         dup = set([1])
         a = 0
-        while n > 1:
+        while n > 0:
             cur = heapq.heappop(aux)
             n -= 1
             for p in primes:
                 if p * cur not in dup:
                     heapq.heappush(aux, p*cur)
                     dup.add(p*cur)            
-        return heapq.heappop(aux)
+        return cur
 ```
 

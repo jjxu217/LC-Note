@@ -10,7 +10,7 @@
   * [791. Custom Sort String](sort/791.-custom-sort-string.md)
 * [Binary Search](binary-search/README.md)
   * [4. Median of Two Sorted Arrays](binary-search/4.-median-of-two-sorted-arrays.md)
-  * [34. Find First and Last Position of Element in Sorted Array](binary-search/34.-find-first-and-last-position-of-element-in-sorted-array.md)
+  * [34. Find First and Last Position of Element in Sorted Array 1150. Check If a Number Is Majority Elem](binary-search/34.-find-first-and-last-position-of-element-in-sorted-array.md)
   * [33. Search in Rotated Sorted Array](binary-search/untitled.md)
   * [69. Sqrt\(x\) 50.Pow\(x, n\)](binary-search/69.-sqrt-x.md)
   * [162. Find Peak Element](binary-search/162.-find-peak-element.md)
