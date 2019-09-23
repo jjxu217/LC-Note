@@ -21,31 +21,27 @@ At the heart of bit manipulation are the bit-wise operators & \(and\), \| \(or\)
 * Set bit A \|= 1 &lt;&lt; bit
 * Clear bit A &= ~\(1 &lt;&lt; bit\)
 * Test bit \(A & 1 &lt;&lt; bit\) != 0
-* Extract last bit A&-A or A&~\(A-1\) or x^\(x&\(x-1\)\)
-* Remove last bit A&\(A-1\)
+* Extract last ’1‘ bit A&-A or A&~\(A-1\) or x^\(x&\(x-1\)\)
+* Remove last ‘1’ bit A&\(A-1\)
 * Get all 1-bits ~0
 
 **Examples**
 
 Count the number of ones in the binary representation of the given number
 
-```text
-int count_one(int n) {
-    while(n) {
-        n = n&(n-1);
-        count++;
-    }
-    return count;
-}
+```python
+def count_one(n)： 
+    count = 0
+    while n
+        n = n & (n-1)
+        count += 1
+    return count
 ```
 
 Is power of four \(actually map-checking, iterative and recursive methods can do the same\)
 
-```text
-bool isPowerOfFour(int n) {
-    return !(n&(n-1)) && (n&0x55555555);
-    //check the 1-bit location;
-}
+```python
+ return n>0 and n&(n-1)==0 and len(bin(n)[3:])%2==0
 ```
 
 **Power of two:**
@@ -62,29 +58,47 @@ class Solution:
 
 Use `^` to remove even exactly same numbers and save the odd, or save the distinct bits and remove the same.
 
-**Sum of Two Integers**
+## **Sum of Two Integers**
 
-Use `^` and `&` to add two integers
+For this, problem, for example, we have a = 1, b = 3,  
+****In bit representation, a = 0001, b = 0011,
 
-```text
-int getSum(int a, int b) {
-    return b==0? a:getSum(a^b, (a&b)<<1); //be careful about the terminating condition;
-}
+1. we can use "and"\("&"\) operation between a and b to find a **`carry`**. `carry = a & b`, then carry = 0001 _Why carry is a&b: If a and b are both 1 at the same digit, it creates one carry. Because you can only use 0 and 1 in binary, if you add 1+1 together, it will roll that over to the next digit, and the value will be 0 at this digit. if they are both 0 or only one is 1, it doesn't need to carry._
+2. we can use "xor" \("^"\) operation between a and b to find the different bit, and assign it to a, `a = a^b`   _Use ^ operation between a and b to find the different bit, ^ operator is kind of adding a and b together \(a+b\) but ignore the digit that a and b are both 1, because we already took care of this in step1._
+3. we shift carry one position left and assign it to b, b = 0010. `b = carry << 1` Iterate until there is no carry \(or b == 0\)
+
+```python
+#iteration
+def getSum(a, b):
+	if not a or not b:
+		return a or b
+	while b != 0:
+		carry = a & b
+		a = a ^ b
+		b = carry << 1
+	return a
+	
+def getSum(a, b):
+    return getSum(a^b, (a&b)<<1) if b else a
+    
+    
+# Iterative a - b = a + (-b)
+def getSubtract(a, b) {
+	b = (~b) + 1
+	return getSum(a, b)
 ```
 
-**Missing Number**
+## **Missing Number**
 
 Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array. For example, Given nums = \[0, 1, 3\] return 2. \(Of course, you can do this by math.\)
 
-```text
-int missingNumber(vector<int>& nums) {
-    int ret = 0;
-    for(int i = 0; i < nums.size(); ++i) {
-        ret ^= i;
-        ret ^= nums[i];
-    }
-    return ret^=nums.size();
-}
+```python
+def missingNumber(nums) {
+    ret = 0;
+    for i in range(len(nums)):
+        ret ^= i
+        ret ^= nums[i]
+    return ret^=len(nums)
 ```
 
 **\| tricks**

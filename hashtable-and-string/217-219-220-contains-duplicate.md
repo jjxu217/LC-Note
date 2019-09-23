@@ -88,9 +88,9 @@ Input: nums = [1,0,1,1], k = 1, t = 2
 Output: true
 ```
 
-### Solution: BucketSort\(\)
+### Solution: BucketSort\(\)， 
 
-Maintain k buckets with width of \(t+1\).  
+Maintain at most k buckets with width of \(t+1\). bucket = {idx, num}  
 If there are two item with difference &lt;= t, either the two in the same bucket or the two in neighbor buckets
 
 ```python

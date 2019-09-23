@@ -12,7 +12,7 @@ class Solution:
         if n <= 0:
         	return False
         while n % k == 0:        	
-        	n = n / k
+        	n = n // k
         return n == 1 
 ```
 

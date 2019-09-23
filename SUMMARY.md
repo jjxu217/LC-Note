@@ -116,7 +116,7 @@
   * [String Manipulation](math-and-bit-manipulation/mulipulation.md)
   * [204. Count Primes](math-and-bit-manipulation/204.-count-primes.md)
   * [A summary: how to use bit manipulation to solve problems easily and efficiently](math-and-bit-manipulation/a-summary-how-to-use-bit-manipulation-to-solve-problems-easily-and-efficiently.md)
-  * [29. Divide Two Integers](math-and-bit-manipulation/29.-divide-two-integers.md)
+  * [二进制做 +-\*/](math-and-bit-manipulation/29.-divide-two-integers.md)
 * [HashTable & String](hashtable-and-string/README.md)
   * [217/219/220 Contains Duplicate](hashtable-and-string/217-219-220-contains-duplicate.md)
   * [358. Rearrange String k Distance Apart](hashtable-and-string/358.-rearrange-string-k-distance-apart.md)
