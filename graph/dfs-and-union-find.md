@@ -164,7 +164,7 @@ Explanation: The given undirected graph will be like this:
     4 - 3
 ```
 
-### Sol1: Union find, time=O\(\) with union-rank, N is the number of vertices \(and also the number of edges\) in the graph
+### Sol1: Union find, time=O\(N\) with union-rank, N is the number of vertices \(and also the number of edges\) in the graph
 
 ```python
 class Solution(object):
