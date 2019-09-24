@@ -53,7 +53,8 @@ class Solution:
         map = {'I':1, 'V':5, 'X':10, 'L':50, 'C':100, 'D':500, 'M':1000}
         num, pre = 0, 1000
         for cur in [map[j] for j in s]:
-            num, pre = num + cur - 2*pre if cur > pre else num + cur, cur
+            num += cur - 2 * pre if cur > pre else cur
+            pre = cur
         return num
 ```
 
@@ -166,8 +167,8 @@ class Solution:
             if n < 1000:
                 return [to19[n//100-1]] + ['Hundred'] + words(n%100)
             for p, w in enumerate(('Thousand', 'Million', 'Billion'), 1):
-                if n < 1000**(p+1):
-                    return words(n//1000**p) + [w] + words(n%1000**p)
+                if n < 1000 ** (p+1):
+                    return words(n // 1000**p) + [w] + words(n % 1000**p)
         return ' '.join(words(num)) or 'Zero'
 ```
 
