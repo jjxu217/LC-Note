@@ -1,4 +1,4 @@
-# DFS & Union Find
+# Union Find
 
 ```python
 without rank
