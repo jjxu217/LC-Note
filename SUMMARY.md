@@ -172,7 +172,6 @@
 * [Heap](heap/README.md)
   * [23. Merge k Sorted Lists](heap/23.-merge-k-sorted-lists.md)
   * [358. Rearrange String k Distance Apart](heap/358.-rearrange-string-k-distance-apart.md)
-  * [Best-first-search](heap/best-first-search.md)
 * [Dynamic Programming](untitled/README.md)
   * [53/134/135/517 Greedy](untitled/53.-maximum-subarray.md)
   * [406/630 Greedy 2](untitled/406-greedy-2.md)

@@ -37,7 +37,7 @@ Use case:
 3. We need to **find out quickly** whether an entry is in the cache or not HashMap{key=request, value=pointer to the ListNode}
 4. We need to **adjust the priority efficiently** of each entry in the cache DoublyLinkedList
 
-![](../.gitbook/assets/image%20%286%29.png)
+![](../.gitbook/assets/image%20%287%29.png)
 
 ```python
 class DLinkedNode(): 
