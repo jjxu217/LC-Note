@@ -114,18 +114,6 @@ class Solution:
                 j += 1
         return dp[0]
                 
-    def jump(self, nums: List[int]) -> int:
-        n = len(nums)
-        if n <= 1: return 0
-        step, curEnd, nxtEnd = 1, nums[0], nums[0]
-        for i in range(1, n):
-            if curEnd >= n - 1:
-                return step
-            nxtEnd = max(nxtEnd, i + nums[i])
-            if i == curEnd:
-                curEnd = nxtEnd
-                step += 1
-        
 ```
 
 参考[这里](https://leetcode.wang/leetCode-45-Jump-Game-II.html)，leetCode 讨论里，大部分都是这个思路，贪婪算法，我们每次在可跳范围内选择可以使得跳的更远的位置。

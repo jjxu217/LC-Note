@@ -286,5 +286,18 @@ class Solution(object):
                 for num in nums:
                     self.memo[target, length] += self.combinationSum4WithLength(nums, target - num, length - 1)
         return self.memo[target, length]
+        
+#DP
+class Solution:
+    def combinationSum4WithLength(self, nums: List[int], target: int, length) -> int:
+        nums.sort()
+        dp = [[0] * (target + 1) for i in range(length))
+        dp[0][0] = 1
+        for i in range(1, target + 1):
+            for j in range(1, length):
+                for num in nums:
+                    if num > i: break
+                    dp[i][j] += dp[i - num][j - 1]
+        return sum(dp[-1]) 
 ```
 
