@@ -29,7 +29,7 @@ Output: false
 Explanation: The array cannot be partitioned into equal sum subsets.
 ```
 
-### Sol: DFS or 0/1 knapsack
+### Sol: BFS or 0/1 knapsack
 
 ```python
 class Solution:
