@@ -1,7 +1,5 @@
 # Sudoku
 
-{% embed url="https://leetcode.com/problems/sudoku-solver/" %}
-
 ## 37. Sudoku Solver
 
 Write a program to solve a Sudoku puzzle by filling the empty cells.
@@ -100,7 +98,7 @@ class Solution:
         for i, row in enumerate(board):
             for j, c in enumerate(row):
                 if c != '.':
-                    seen += [('r', j, c), ('c', i, c), (i//3,j//3,c)]
+                    seen += [('c', j, c), ('r', i, c), (i//3,j//3,c)]
         return len(seen) == len(set(seen))
 ```
 

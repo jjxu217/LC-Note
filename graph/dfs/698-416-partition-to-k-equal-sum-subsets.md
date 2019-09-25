@@ -33,7 +33,7 @@ Explanation: The array cannot be partitioned into equal sum subsets.
 
 ```python
 class Solution:
-    #dfs
+    #bfs
     def canPartition(self, nums: List[int]) -> bool:
         if sum(nums) % 2 == 0:
             target = sum(nums) // 2

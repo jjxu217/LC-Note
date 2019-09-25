@@ -42,9 +42,8 @@ class Solution:
         dsu = DSU(n)
         for a, b in edges:
             #如果a,b已经union了，说明有环，return false
-            if dsu.find(a) == dsu.find(b):
+            if not dsu.union(a, b):
                 return False
-            dsu.union(a, b)
         return all(dsu.find(0) == dsu.find(i) for i in range(n)) #all elements are connected
 ```
 
