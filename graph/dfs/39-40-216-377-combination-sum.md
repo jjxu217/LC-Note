@@ -54,7 +54,7 @@ class Solution:
             self.dfs(idx + 1, path + [candidates[idx]] * i, remain - candidates[idx] * i, candidates)           
 ```
 
-### Sol2: DFS, each level represents which candidate number to select. Use index to record current number position, only use the number after current 
+### Sol2: DFS, each level represents which candidate number to select. Use index to record current number position, only use the number after current, each level has len\(candidate\) child 
 
 ```python
  #each level represents which candidate number to select, use idx to de-duplicate
