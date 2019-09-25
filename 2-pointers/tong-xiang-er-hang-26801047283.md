@@ -1,6 +1,6 @@
 # 同向而行 26/80/1047/283
 
-![](../.gitbook/assets/image%20%2830%29.png)
+![](../.gitbook/assets/image%20%2846%29.png)
 
 ## 26. Remove Duplicates from Sorted Array
 
