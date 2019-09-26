@@ -117,7 +117,7 @@ class Solution:
         return res
 ```
 
-## 279. Integer to English Words
+## 273. Integer to English Words
 
 Convert a non-negative integer to its english words representation. Given input is guaranteed to be less than 231 - 1.
 
@@ -160,8 +160,10 @@ class Solution:
            'Thirteen Fourteen Fifteen Sixteen Seventeen Eighteen Nineteen'.split()
         tens = 'Twenty Thirty Forty Fifty Sixty Seventy Eighty Ninety'.split()
         def words(n):
-            if n < 20:
-                return to19[n-1:n]
+            if num == 0:
+                return []
+            if num < 20:
+                return [to19[num-1]]
             if n < 100:
                 return [tens[n//10-2]] + words(n%10)
             if n < 1000:
