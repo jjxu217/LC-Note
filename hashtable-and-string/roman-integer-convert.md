@@ -151,7 +151,7 @@ Output: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Th
 
 ### Sol: 从小到大判断，用recursion处理千以上的
 
-In python, arr\[-1:0\] will return empty list
+In python, arr\[-1:0\] will return empty list; return list, `join` at the end
 
 ```python
 class Solution:

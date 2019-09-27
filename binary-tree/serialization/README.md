@@ -33,30 +33,32 @@ Or use queue for BFS traverse.
 class Codec:
     #post-order recursion
     def serialize(self, root):
+        res = []
+        
         def helper(root):
             if not root:
-                vals.append('#')
-            else:       
-                helper(root.left)
-                helper(root.right)     
-                vals.append(str(root.val))
-        
-        vals = []
+                res.append('#')
+                return
+            helper(root.left)
+            helper(root.right)
+            res.append(str(root.val))
+            
         helper(root)
-        return ' '.join(vals)        
+        return ' '.join(res)    
 
     def deserialize(self, data):   
-        def helper(data):
-            if data[-1] == '#':
-                data.pop()
-                return None
-            root = TreeNode(int(data.pop()))
-            root.right = helper(data)
-            root.left = helper(data)         
-            return root
-        
         data = data.split()
-        return helper(data)
+       
+        def helper():      
+            val = data.pop()
+            if val == '#':
+                return None
+            node = TreeNode(int(val))
+            node.right = helper()
+            node.left = helper()
+            return node      
+        
+        return helper()
     
     #BFS
     def serialize(self, root):
