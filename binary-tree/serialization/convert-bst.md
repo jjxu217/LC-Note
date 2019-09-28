@@ -124,7 +124,7 @@ class Solution:
         head = None
         
         def inorder(root):
-            nonlocal head, pre
+            nonlocal head, pre 
             if not root: return
             inorder(root.left)
             if not head: #if first node, set as head

@@ -16,27 +16,30 @@ Output: "BANC"
 * If there is no such window in S that covers all characters in T, return the empty string `""`.
 * If there is such window, you are guaranteed that there will always be only one unique minimum window in S.
 
+### use a counter to record the string needed. set extra char in need as negative value; update left point when find all chars, record the result; and then remove leftmost needed char to find next result
+
 ```python
-class Solution:
+class Solution:   
     def minWindow(self, s: str, t: str) -> str:
         need = collections.Counter(t)  #hashtable to store char frequency
         missing = len(t)        #total number of chars we need
-        start = end = i = 0 
-        for j, char in enumerate(s, 1): #index j from 1
+        start = i = 0 
+        end = float('inf')
+        for j, char in enumerate(s): 
             if need[char] > 0:
                 missing -= 1
             need[char] -= 1
             if missing == 0:             #match all chars
-                while i < j and need[s[i]] < 0:     #remove chars to find the real start
+                while need[s[i]] < 0:     #remove chars to find the real start
                     need[s[i]] += 1
                     i += 1                
-                if end == 0 or j - i < end - start: #update window
+                if j - i < end - start: #update window
                     start, end = i, j
-                #left point +1, remove the first needed char in the previous windows
-                i += 1     
+                #left point +1, remove the first needed char in the previous windows   
                 missing = 1
-                need[s[i]] = 1                                               
-        return s[start:end]    
+                need[s[i]] = 1   
+                i += 1  
+        return s[start:end+1] if end != float('inf') else '' 
 ```
 
 ## 239. Sliding Window Maximum

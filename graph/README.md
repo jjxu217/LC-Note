@@ -19,10 +19,10 @@ Data Structure: priority queue \(Min\_Heap\)
 ### Properties:
 
 1. One node can be expanded once and only once
-2. one node can be generated more than once\(\)
+2. one node can be generated more than once
 3. **all the cost of the nodes that are expanded are monotonically non-decreasing**\(所有从priority queue里面pop出来的元素的值是单调非递减 \)
 4. time complexity, for a graph with e&gt;&gt;v and e ~ v^2 time is O\(\(v+e\) log v\)
-5. when a node is popped out for expansion, its value is fixed which is equal to the shortest distance from the start node
+5. when a node is popped out for expansion, **its value is fixed which is equal to the shortest distance from the start node**
 
 ## Find the k-th smallest number in the f\(x,y,z\)=3^x \* 5^y \* 7\*z （int x,y,x &gt; 0）
 
