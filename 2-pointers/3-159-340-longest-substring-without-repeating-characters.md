@@ -85,6 +85,8 @@ class Solution:
 
 Given a string, find the length of the longest substring T that contains at most k distinct characters.
 
+**Use a dic to record {char: newest idx}, right pointer `i` iterate string s. When the length of dic is `k + 1`,  Find the smallest idx in dic, delete that idx in `dic` to make it contains less or equal to k distinct chars. Update the left pointer to the deleted idx + 1 `l = del_idx + 1`**
+
 ```python
 class Solution:
     def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
@@ -98,17 +100,6 @@ class Solution:
                 l = del_idx + 1
             res = max(res, i - l + 1)
         return res
-```
-
-```python
-class Solution:
-    #for each char in s, if char repeat less than k time, 
-    #split s by that char, and recursive find the result, choose the max
-    def longestSubstring(self, s: str, k: int) -> int:
-        for c in set(s):
-            if s.count(c) < k:
-                return max(self.longestSubstring(t, k) for t in s.split(c))
-        return len(s)
 ```
 
 ## 395. Longest Substring with At Least K Repeating Characters
@@ -137,6 +128,19 @@ Output:
 5
 
 The longest substring is "ababb", as 'a' is repeated 2 times and 'b' is repeated 3 times.
+```
+
+### count char in s, if the number of char is less than k, split s with that char, search recursively.
+
+```python
+class Solution:
+    #for each char in s, if char repeat less than k time, 
+    #split s by that char, and recursive find the result, choose the max
+    def longestSubstring(self, s: str, k: int) -> int:
+        for c in set(s):
+            if s.count(c) < k:
+                return max(self.longestSubstring(t, k) for t in s.split(c))
+        return len(s)
 ```
 
 ## 

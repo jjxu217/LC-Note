@@ -66,7 +66,7 @@
   * [689. Maximum Sum of 3 Non-Overlapping Subarrays](queue/untitled-2.md)
 * [2 pointers](2-pointers/README.md)
   * [对撞类 15/16/259/18/454 3Sum/3Sum Closest Smaller/4Sum](2-pointers/15-16-18-454-3sum-3sum-closest-4sum.md)
-  * [对撞类 42. Trapping Rain Water/ 11. Container With Most Water](2-pointers/42.-trapping-rain-waterhard.md)
+  * [对撞类 42/407 Trapping Rain Water/ 11. Container With Most Water](2-pointers/42.-trapping-rain-waterhard.md)
   * [对撞类，partition： 75. Sort Colors](2-pointers/dui-zhuang-lei-partition-75.-sort-colors.md)
   * [窗口类 3/159/340/395 Longest Substring Without Repeating Characters](2-pointers/3-159-340-longest-substring-without-repeating-characters.md)
   * [Sliding window](2-pointers/sliding-window.md)

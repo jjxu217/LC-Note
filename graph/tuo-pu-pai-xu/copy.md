@@ -97,22 +97,37 @@ Node 4's value is 4, and it has two neighbors: Node 1 and 3.
 
 ```python
 class Solution:
+    #dfs
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        mapping = collections.defaultdict(lambda : Node(0, []))
+        stack = [node]
+        
+        while stack:
+            cur = stack.pop() #expand node
+            mapping[cur].val = cur.val #set value
+            for nei in cur.neighbors:
+                #generate nei, add to stack
+                if nei not in mapping:
+                    stack.append(nei)
+                mapping[cur].neighbors.append(mapping[nei])  #set nei              
+        return mapping[node]
+        
     #bfs
     def cloneGraph(self, node: 'Node') -> 'Node':
         copy = collections.defaultdict(lambda: Node(0, []))
         queue = collections.deque([node])
         while queue:
             m = queue.popleft() #expand node
-            #add the not-yet-generated node to queue
+            copy[m].val = m.val #set expanded node val        
             for nb in m.neighbors: 
+                #add the not-yet-generated node to queue
                 if nb not in copy:
                     queue.append(nb) #generate node
-            copy[m].val = m.val #set expanded node val
-            for nb in m.neighbors:
+                #set nei
                 copy[m].neighbors.append(copy[nb])
         return copy[node]
-    
-    #dfs
+        
+    #dfs recursion
     def cloneGraph(self, node: 'Node') -> 'Node':
         copy = collections.defaultdict(lambda: Node(0, []))
         

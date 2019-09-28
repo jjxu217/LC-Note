@@ -133,6 +133,7 @@ class WordDictionary:
                 return None in node         
             char, word = word[0], word[1:]
             if char == '.':
+                #注意要判断kid 不为None   
                 return any(find(word, kid) for kid in node.values() if kid)     
             return char in node and find(word, node[char])
             
@@ -164,7 +165,7 @@ class WordDictionary(object):
             char, word = word[0], word[1:]
             if char == '.':
                 return any(find(word, kid) for kid in node.children.values())
-            return char in node.children.keys() and find(word, node.children[char])
+            return char in node.children and find(word, node.children[char])
     
         return find(word, self.root)
 ```
