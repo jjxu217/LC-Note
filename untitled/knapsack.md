@@ -11,7 +11,7 @@ Induction rule:
 
 ![](../.gitbook/assets/image%20%2812%29.png)
 
-![](../.gitbook/assets/image%20%2837%29.png)
+![](../.gitbook/assets/image%20%2838%29.png)
 
 ![](../.gitbook/assets/image%20%289%29.png)
 
@@ -40,11 +40,11 @@ def getMAxTotalWeight(weights:[], W: int):
 
 Total number of unique ways to exactly fill the knapsack
 
-![](../.gitbook/assets/image%20%2828%29.png)
+![](../.gitbook/assets/image%20%2829%29.png)
 
 ### Q1b Naive 0/1 knapsack, get minimum number of item
 
-![](../.gitbook/assets/image%20%2839%29.png)
+![](../.gitbook/assets/image%20%2840%29.png)
 
 ## Q2 Classic 0/1 kanpscak problem:
 
@@ -72,7 +72,7 @@ Sol2:
 
 ![](../.gitbook/assets/image%20%2817%29.png)
 
-![](../.gitbook/assets/image%20%2827%29.png)
+![](../.gitbook/assets/image%20%2828%29.png)
 
 We can use a single 1-d array
 
@@ -82,9 +82,9 @@ We can use a single 1-d array
 
 ![](../.gitbook/assets/image%20%2811%29.png)
 
-![](../.gitbook/assets/image%20%2832%29.png)
+![](../.gitbook/assets/image%20%2833%29.png)
 
 One special case:
 
-![](../.gitbook/assets/image%20%2838%29.png)
+![](../.gitbook/assets/image%20%2839%29.png)
 
