@@ -178,7 +178,7 @@
   * [358. Rearrange String k Distance Apart](heap/358.-rearrange-string-k-distance-apart.md)
 * [Dynamic Programming](untitled/README.md)
   * [53/134/135/517 Greedy](untitled/53.-maximum-subarray.md)
-  * [406/630 Greedy 2](untitled/406-greedy-2.md)
+  * [406/630/1007 Greedy 2](untitled/406-greedy-2.md)
   * [139/140/472 Word Break](untitled/139-140-472-word-break.md)
   * [935. Knight Dialer](untitled/935.-knight-dialer.md)
   * [62/63/64/980 Path](untitled/62-63-64-path.md)

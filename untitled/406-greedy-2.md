@@ -1,4 +1,4 @@
-# 406/630 Greedy 2
+# 406/630/1007 Greedy 2
 
 ## 406. Queue Reconstruction by Height
 
@@ -116,6 +116,7 @@ class Solution:
                 elif A[i] != x:
                     rotations_a += 1
                 elif B[i] != x:
+                    rotations_b += 1
             return min(rotations_a, rotations_b)
     
         n = len(A)
