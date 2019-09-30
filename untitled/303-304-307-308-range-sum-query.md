@@ -211,6 +211,5 @@ class NumMatrix(object):
                 j -= (j & -j)
             i -= (i & -i)
         return res
-
 ```
 
