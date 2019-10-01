@@ -142,7 +142,7 @@
   * [621. Task Scheduler](hashtable-and-string/621.-task-scheduler.md)
   * [149. Max Points on a Line](hashtable-and-string/149.-max-points-on-a-line.md)
   * [463. Island Perimeter](hashtable-and-string/463.-island-perimeter.md)
-  * [734 Sentence Similarity](hashtable-and-string/734-sentence-similarity.md)
+  * [734/737 Sentence Similarity](hashtable-and-string/734-sentence-similarity.md)
 * [Graph](graph/README.md)
   * [Dijkstra](graph/378.-kth-smallest-element-in-a-sorted-matrix.md)
   * [Union Find](graph/dfs-and-union-find.md)
