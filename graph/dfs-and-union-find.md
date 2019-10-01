@@ -1,7 +1,7 @@
 # Union Find
 
 ```python
-without rank
+#without rank: Nlog(N)
 class DSU:
     def __init__(self):
         self.p = list(range(1001))
@@ -17,6 +17,22 @@ class DSU:
             return False
         self.p[xr] = yr
         return True
+#dict 
+class DSU():
+    def __init__(self):
+        self.p = {}
+        
+    def find(self,x):
+        self.p.setdefault(x, x)
+        if x != self.p[x]:
+            self.p[x] = self.find(self.p[x])
+        return self.p[x]
+    
+    def union(self, x, y):
+        self.p.setdefault(x, x)
+        self.p.setdefault(y, y)
+        xr, yr = self.find(x), self.find(y)
+        self.p[xr] = yr
 
 #with rank
 class DSU(object):
@@ -229,6 +245,54 @@ class Solution:
             idx = dsu.find(i)
             circles.add(idx)
         return len(circles)
+```
+
+## 947. Most Stones Removed with Same Row or Column
+
+On a 2D plane, we place stones at some integer coordinate points.  Each coordinate point may have at most one stone.
+
+Now, a _move_ consists of removing a stone that shares a column or row with another stone on the grid.
+
+What is the largest possible number of moves we can make?
+
+**Example 1:**
+
+```text
+Input: stones = [[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]]
+Output: 5
+```
+
+**Example 2:**
+
+```text
+Input: stones = [[0,0],[0,2],[1,1],[2,0],[2,2]]
+Output: 3
+```
+
+**Example 3:**
+
+```text
+Input: stones = [[0,0]]
+Output: 0
+```
+
+### **数岛屿问题**
+
+如果两个石头在同行或者同列，两个石头就是连接的。连在一起的石头，可以组成一个连通图。每一个连通图至少会剩下1个石头。  
+所以我们希望存在一种思路，每个连通图都只剩下1个石头。  
+这样这题就转化成了数岛屿的问题。
+
+### **优化行列处理**
+
+实际上我们对行列的搜索，没有任何本质区别。只不过是因为同一个index，可能是行也可能是列，所以我们做了区分。实际上，只要我们能区分行列的index，代码就可以缩减一半了。行的index我们还可以用0～N - 1，列的index我们使用N～2N-1就可以了
+
+```python
+class Solution:
+    def removeStones(self, stones: List[List[int]]) -> int:
+        dsu = DSU()
+        for i, j in stones:
+            dsu.union(i, j + 10000)
+        return len(stones) - len({dsu.find(x) for x,y in stones})
 ```
 
 ## 323. Number of Connected Components in an Undirected Graph
