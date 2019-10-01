@@ -101,7 +101,7 @@ class NumMatrix:
 
 ![](https://mnmunknown.gitbooks.io/algorithm-notes/fenwick_tree_pic.jpg)
 
-![](../.gitbook/assets/image%20%2813%29.png)
+![](../.gitbook/assets/image%20%2814%29.png)
 
 > * **fenwick tree 可以用 array 存，纯靠 bit manipulation 操作。**
 > * **tree 有一个 dummy root，所以对于单维度大小为 n 的输入，实际数组会在每一个维度 +1 的 padding.**

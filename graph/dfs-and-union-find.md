@@ -249,8 +249,53 @@ Explanation: The given directed graph will be like this:
      4 <- 3
 ```
 
-```text
+### **General Idea**
 
+As the problem states, there is one and only one edge that violates the definition of **tree**. Therefore, there are three possible cases:  
+a. There is no cycle in the graph, but there exist two edges pointing to the same node;  
+b. There is a cycle, but there do not exist two edges pointing to the same node;  
+c. There is a cycle, and there exist two edges pointing to the same node.
+
+1. 这条边从任意节点出发，指向非祖先链上任意一个节点。
+
+   ![image](https://assets.leetcode.com/users/rampaging9/image_1555730504.png)
+
+   这种情况下，树不合法的原因也是出现了一个有两个入度的节点，**但两个入度都在环上**。可以观察到，这两个入度都能删掉，所以按照题目要求删掉排序在后面的那条
+
+2. 这条边从任意一个节点出发，指向树根。
+
+   ![image](https://assets.leetcode.com/users/rampaging9/image_1555729612.png)
+
+   这种情况下，树不合法的原因是，树没了根，因为所有点的入度都为1。显而易见的是在环上的任意一条边都可以删除，删除之后就可以得到一个合法的根树。  
+   **即这条橙色的多余的边，只是我们上面提到的存在的可能性的某一种，如你所见，其实环上的每一条边都可以是“多余边”，请理解这句话**，既然每一条都可以删除，那按照题目要求删掉环中最后出现的那条边就好。
+
+3. 这条边从任意节点出发，指向祖先链上任意一个非根节点。 ![image](https://assets.leetcode.com/users/rampaging9/image_1555729798.png) 这种情况下，树不合法的原因是出现了一个有两个入度的节点，**并且其中一个入度来自环中的一条边**。可以观察到，这两个入度里，只能删除来自环里的那条边
+
+**Steps**
+
+1. First, go through the edges and **detect if any node has two parents.** If exist, then`case 1 or case 3`, record them as `cand1` and `cand2.` **one of them must be the answer**.  If not exist, then `case 2`, then `cand1, cand2` will be `None` and there must be a cycle in the graph.
+2. 视作无向图，做union-find, 检查是否有cycle. \(Ignore the existence of `cand2` when going through the edges, i.e., `if [node1, node2] == cand2: continue`\) a. If no cycle, then we know **`cand2` must exist and it is the result**. `case1 or cand2 是 case3 红线` b. If a cycle and `cand1, cand2` are not found, then the **edge that incurs the cycle** \(the current edge when we go through the edges\) is the bad edge. c. If there is a cycle and `cand1, cand2` are found, then `cand1` must be already in the cycle and it is the bad edge. `cand1 是case3 红线`
+
+**Some Logic**  
+Here is the reason why `cand2` is ignored in the union find process. When it is ignored, if a cycle is detected in the union find process, we know the cycle has nothing to do with `cand2`. Therefore, the answer must be `cand1` if `cand1` exists, or the edge incur the cycle if `cand1` does not exist. If no cycle is detected, then either `cand1` or `cand2` is the bad edge. But since `cand2` appears later than `cand1` in the list, we should return `cand2`.
+
+```python
+class Solution:
+    def findRedundantDirectedConnection(self, edges: List[List[int]]) -> List[int]:
+        cand1, cand2, point_to = None, None, {}
+        for a, b in edges:
+            if b in point_to:
+                cand1, cand2 = point_to[b], [a, b]
+                break
+            point_to[b] = [a, b]
+            
+        dsu = DSU()
+        for a, b in edges:
+            if [a, b] == cand2: continue
+            if not dsu.union(a, b):
+                if cand1: return cand1
+                else: return [a, b]
+        return cand2
 ```
 
 ## 547. Friend Circles
