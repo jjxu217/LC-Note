@@ -26,6 +26,7 @@
   * [658. Find K Closest Elements](binary-search/658.-find-k-closest-elements.md)
 * [Binary Tree](binary-tree/README.md)
   * [Trie](binary-tree/trie.md)
+  * [Google: 1032. Stream of Characters](binary-tree/google-1032.-stream-of-characters.md)
   * [Traverse](binary-tree/traverse/README.md)
     * [Level Order Traversal\(BFS\)](binary-tree/traverse/level-order-traversal-bfs.md)
     * [314. Binary Tree Vertical Order Traversal 987. Vertical Order Traversal of a Binary Tree](binary-tree/traverse/314.-binary-tree-vertical-order-traversal.md)
