@@ -205,6 +205,7 @@
     * [312. Burst Balloons 664. Strange Printer](untitled/2d-dp/664.-strange-printer.md)
 * [Random & Sampling](random-and-sampling/README.md)
   * [529. Minesweeper](random-and-sampling/529.-minesweeper.md)
+  * [843. Guess the Word](random-and-sampling/843.-guess-the-word.md)
   * [398. Random Pick Index](random-and-sampling/398.-random-pick-index.md)
 * [Python syntax](python-syntax/README.md)
   * [Basic](python-syntax/basic.md)

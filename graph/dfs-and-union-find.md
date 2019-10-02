@@ -560,3 +560,35 @@ class Solution:
         return ans
 ```
 
+## 839. Similar String Groups
+
+Two strings `X` and `Y` are similar if we can swap two letters \(in different positions\) of `X`, so that it equals `Y`.
+
+For example, `"tars"` and `"rats"` are similar \(swapping at positions `0` and `2`\), and `"rats"` and `"arts"` are similar, but `"star"` is not similar to `"tars"`, `"rats"`, or `"arts"`.
+
+Together, these form two connected groups by similarity: `{"tars", "rats", "arts"}` and `{"star"}`.  Notice that `"tars"` and `"arts"` are in the same group even though they are not similar.  Formally, each group is such that a word is in the group if and only if it is similar to at least one other word in the group.
+
+We are given a list `A` of strings.  Every string in `A` is an anagram of every other string in `A`.  How many groups are there?
+
+**Example 1:**
+
+```text
+Input: ["tars","rats","arts","star"]
+Output: 2
+```
+
+```python
+class Solution:
+    def numSimilarGroups(self, a):
+        n = len(a)
+        dsu = DSU(n)
+        for i in range(n):
+            for j in range(i + 1, n):
+                if self.similar(a[i], a[j]):
+                    dsu.union(i, j)
+        return sum([1 for i in range(n) if i == dsu.p[i]])
+    
+    def similar(self, a, b):
+        return len(list(filter(lambda i: a[i] != b[i], range(len(a))))) in (0, 2)
+```
+
