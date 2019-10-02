@@ -2,13 +2,23 @@
 
 {% embed url="https://www.geeksforgeeks.org/bisect-algorithm-functions-in-python/" %}
 
+```python
+s = [1,3,3,3,5]
+
+>>bisect.bisect_right(s, 3)
+4
+
+>>bisect.bisect_left(s, 3)
+1
+```
+
 ### bisect.bisect\_left\(_list_, _item_\[, _lo_\[, _hi_\]\]\)
 
 This function returns the **position** in the **sorted** list, where the number passed in argument can be placed so as to **maintain the resultant list in sorted order**. If the element is already present in the list, the **left most position** where element has to be inserted is returned. **This function takes 4 arguments, list which has to be worked with, number to insert, starting position in list to consider, ending position which has to be considered**.
 
 ### bisect.bisect\_right\(_list_, _item_\[, _lo_\[, _hi_\]\]\) = bisect.bisect\(\)
 
-Find the right most position.
+If item exist, return the right pos of the rightmost item. 
 
 ### bisect.insort\_left\(_list_, _item_\[, _lo_\[, _hi_\]\]\)
 
