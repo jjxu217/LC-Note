@@ -173,7 +173,7 @@
     * [39/40/216/377 Combination Sum](graph/dfs/39-40-216-377-combination-sum.md)
     * [254. Factor Combinations](graph/dfs/254.-factor-combinations.md)
     * [518. Coin Change 2](graph/dfs/518.-coin-change-2.md)
-    * [200. Number of Islands 419. Battleships in a Board 694/711 Number of Distinct Islands](graph/dfs/200.-number-of-islands.md)
+    * [200/419/694/711/695 Number of Islands](graph/dfs/200.-number-of-islands.md)
     * [22. Generate Parentheses](graph/dfs/22.-generate-parentheses.md)
     * [489. Robot Room Cleaner](graph/dfs/489.-robot-room-cleaner.md)
     * [79/212 Word Search](graph/dfs/79-212-word-search.md)
