@@ -200,6 +200,8 @@
   * [198/213/337 House Robber](untitled/198.-house-robber.md)
   * [1027. Longest Arithmetic Sequence](untitled/1027.-longest-arithmetic-sequence.md)
   * [55/45 Jump Game](untitled/55-45-jump-game.md)
+  * [975. Odd Even Jump](untitled/975.-odd-even-jump.md)
+  * [403. Frog Jump](untitled/403.-frog-jump.md)
   * [256/265/276 Paint House/Fence](untitled/256-265-276-paint-house-fence.md)
   * [303/304/307/308 Range Sum Query](untitled/303-304-307-308-range-sum-query.md)
   * [121/122/123/188/309/714 Best Time to Buy and Sell Stock](untitled/121.-best-time-to-buy-and-sell-stock.md)
