@@ -96,6 +96,7 @@
   * [88. Merge Sorted Array](array/88.-merge-sorted-array.md)
   * [341/339/364 Nested List](array/341.-flatten-nested-list-iterator.md)
   * [246/247/248 Strobogrammatic Number](array/246-247-248-strobogrammatic-number.md)
+  * [1056/1088 Confusing Number](array/1056-1088-confusing-number.md)
   * [311. Sparse Matrix Multiplication](array/311.-sparse-matrix-multiplication.md)
   * [977. Squares of a Sorted Array](array/977.-squares-of-a-sorted-array.md)
   * [243/244/245 Shortest Word Distance](array/243-244-245-shortest-word-distance.md)

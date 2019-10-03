@@ -11,7 +11,7 @@ Induction rule:
 
 ![](../.gitbook/assets/image%20%2813%29.png)
 
-![](../.gitbook/assets/image%20%2839%29.png)
+![](../.gitbook/assets/image%20%2840%29.png)
 
 ![](../.gitbook/assets/image%20%2810%29.png)
 
@@ -44,7 +44,7 @@ Total number of unique ways to exactly fill the knapsack
 
 ### Q1b Naive 0/1 knapsack, get minimum number of item
 
-![](../.gitbook/assets/image%20%2841%29.png)
+![](../.gitbook/assets/image%20%2842%29.png)
 
 ## Q2 Classic 0/1 kanpscak problem:
 
@@ -86,5 +86,5 @@ We can use a single 1-d array
 
 One special case:
 
-![](../.gitbook/assets/image%20%2840%29.png)
+![](../.gitbook/assets/image%20%2841%29.png)
 
