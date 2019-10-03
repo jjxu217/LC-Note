@@ -37,6 +37,7 @@
   * [543. Diameter of Binary Tree](binary-tree/543.-diameter-of-binary-tree.md)
   * [112/113/437/666/257/687/124/129 Path Sum](binary-tree/path-sum.md)
   * [156 Binary Tree Upside Down](binary-tree/156-binary-tree-upside-down.md)
+  * [572. Subtree of Another Tree](binary-tree/572.-subtree-of-another-tree.md)
   * [Serialization](binary-tree/serialization/README.md)
     * [Convert BST](binary-tree/serialization/convert-bst.md)
     * [Construct](binary-tree/serialization/construction.md)
