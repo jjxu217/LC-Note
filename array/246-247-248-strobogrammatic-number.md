@@ -87,6 +87,13 @@ class Solution:
             pre, midCandidate = self.findStrobogrammatic(n-2), evenMidCandidate
         premid = (n - 1) // 2
         return [p[:premid] + c + p[premid:] for c in midCandidate for p in pre]
+        
+    def findStrobogrammatic(self, n):
+        nums = n%2 * list('018') or ['']
+        while n > 1:
+            n -= 2
+            nums = [a + num + b for a, b in '00 11 88 69 96'.split()[n<2:] for num in nums]
+        return nums
 ```
 
 ## 248. Strobogrammatic Number III
