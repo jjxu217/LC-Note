@@ -32,8 +32,7 @@ Output: -1
 
 ### Solution1:
 
-Find the minimum value position, then find the target in half of the array.  
-
+Find the minimum value position, then find the target in half of the array.    
 The condition and update rule is important. **If right = mid, then left = mid  + 1**
 
 ```python
