@@ -50,14 +50,28 @@ Input: [[7,10],[2,4]]
 Output: 1
 ```
 
-**NOTE:** input types have been changed on April 15, 2019. Please reset to default code definition to get new method signature.
-
 ### Solution
 
 **step1: sort the meeting time, according to begin time O\(nlogn\)  
 step2:  maintain a MinHeap, according to end time  
            if one meeting end before current meeting begin, free that room, pop the first ele in heap  
            add current ending time to the heap**
+
+```python
+class Solution:
+    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        intervals.sort(key=lambda x: x[0])
+        #inuse: min-heap record ending time; cnt当前使用的room数
+        inuse = []
+        res = 0
+        for x in intervals:
+            #清空已经end的会议
+            while inuse and inuse[0] <= x[0]:
+                heapq.heappop(inuse)
+            heapq.heappush(inuse, x[1])
+            res = max(res, len(inuse))
+        return res
+```
 
 ```python
 class Solution:
@@ -75,23 +89,6 @@ class Solution:
             # If an old room is allocated, then also we have to add to the heap with updated end time.
             heapq.heappush(inuse, x[1])           
         return len(inuse)
-```
-
-```python
-import heapq
-class Solution:
-    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        intervals.sort(key=lambda x: x[0])
-        inuse = []
-        res = cnt = 0
-        for x in intervals:
-            while inuse and inuse[0][0] <= x[0]:
-                heapq.heappop(inuse)
-                cnt -= 1
-            heapq.heappush(inuse, [x[1], x[0]])
-            cnt += 1
-            res = max(res, cnt)
-        return res
 ```
 
 ## 56. Merge Intervals
