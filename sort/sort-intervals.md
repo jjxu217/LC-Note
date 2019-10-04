@@ -25,7 +25,7 @@ Output: true
 ```python
 class Solution:
     def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
-        intervals.sort(key=lambda x: x[0])
+        intervals.sort()
         for i in range(1, len(intervals)):
             if intervals[i][0] < intervals[i-1][1]:
                 return False
@@ -119,10 +119,10 @@ Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 ```python
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        intervals.sort(key=lambda x: x[0])
+        intervals.sort()
         stack = []
         for x in intervals:
-            if not stack or stack[-1][1] < x[0]:
+            if stack == [] or stack[-1][1] < x[0]:
                 stack.append(x)
             else:
                 stack[-1][1] = max(stack[-1][1], x[1])
