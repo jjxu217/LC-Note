@@ -119,10 +119,10 @@ search("b..") -> true
 ```python
 class WordDictionary:
     def __init__(self):
-        self.trie = {}
+        self.root = {}
 
     def addWord(self, word: str) -> None:
-        node = self.trie
+        node = self.root
         for w in word:
             node = node.setdefault(w, {})
         node[None] = None
@@ -137,7 +137,7 @@ class WordDictionary:
                 return any(find(word, kid) for kid in node.values() if kid)     
             return char in node and find(word, node[char])
             
-        return find(word, self.trie)
+        return find(word, self.root)
 ```
 
 ### sol: use TrieNode
@@ -190,10 +190,10 @@ trie.search("app");     // returns true
 ```python
 class Trie:
     def __init__(self):
-        self.trie = {}       
+        self.root = {}       
 
     def insert(self, word: str) -> None:
-        node = self.trie
+        node = self.root
         for w in word:
             node = node.setdefault(w, {})
         node[None] = None      
@@ -205,7 +205,7 @@ class Trie:
             char, word = word[0], word[1:]
             return char in node and find(word, node[char])
             
-        return find(word, self.trie)
+        return find(word, self.root)
 
     def startsWith(self, prefix: str) -> bool:
         def helper(prefix, node):
@@ -214,7 +214,7 @@ class Trie:
             char, prefix = prefix[0], prefix[1:]
             return char in node and helper(prefix, node[char])
         
-        return helper(prefix, self.trie)
+        return helper(prefix, self.root)
 ```
 
 ## 642. Design Search Autocomplete System
@@ -309,14 +309,14 @@ class AutocompleteSystem():
             self.t.addRecord(sentence, times[i])   
     
     def input(self, c):
-        results = []
+        res = []
         if c != "#":
             self.keyword += c
-            results = self.t.search(self.keyword)
+            res = self.t.search(self.keyword)
         else:
             self.t.addRecord(self.keyword, 1)
             self.keyword = ""
-        return [item[1] for item in sorted(results)[:3]]
+        return [item[1] for item in sorted(res)[:3]]
 
 # Your AutocompleteSystem object will be instantiated and called as such:
 # obj = AutocompleteSystem(sentences, times)
