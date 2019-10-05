@@ -10,6 +10,7 @@
 
 ```python
 class Solution(object):
+#recursion
     def lowestCommonAncestor(self, root, p, q):
         if root == None or root == p or root == q:
             return root
@@ -18,11 +19,28 @@ class Solution(object):
         if l and r:
             return root
         return l or r
+
+#iteration        
+    def lowestCommonAncestor(self, root, p, q):
+        stack = [root]
+        parent = {root: None}
+        while p not in parent or q not in parent:
+            node = stack.pop()
+            if node.left:
+                parent[node.left] = node
+                stack.append(node.left)
+            if node.right:
+                parent[node.right] = node
+                stack.append(node.right)
+                
+        ancestors = set()
+        while p:
+            ancestors.add(p)
+            p = parent[p]
+        while q not in ancestors:
+            q = parent[q]
+        return q
 ```
-
-Iteration:
-
-[https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/discuss/65245/Iterative-Solutions-in-PythonC%2B%2B](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/discuss/65245/Iterative-Solutions-in-PythonC%2B%2B)
 
 ### 变种1：Assume we have parents pointers 
 

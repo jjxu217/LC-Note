@@ -35,15 +35,15 @@ class Codec:
     def serialize(self, root):
         res = []
         
-        def helper(root):
+        def postorder(root):
             if not root:
                 res.append('#')
                 return
-            helper(root.left)
-            helper(root.right)
+            postorder(root.left)
+            postorder(root.right)
             res.append(str(root.val))
             
-        helper(root)
+        postorder(root)
         return ' '.join(res)    
 
     def deserialize(self, data):   
@@ -109,16 +109,19 @@ Design an algorithm to serialize and deserialize a **binary search tree**. There
 
 ```python
 class Codec:
-
     def serialize(self, root):
+        res = []
         def postorder(root):
-            return postorder(root.left) + postorder(root.right) + [root.val] if root else []
-        
-        return ' '.join(map(str, postorder(root)))
+            if not root:
+                return
+            postorder(root.left)
+            postorder(root.right)
+            res.append(str(root.val))
             
+        postorder(root)
+        return ' '.join(res)       
 
-    def deserialize(self, data):
-      
+    def deserialize(self, data):      
         def helper(lower=float('-inf'), upper=float('inf')):
             if not data or data[-1] < lower or data[-1] > upper:
                 return None
@@ -128,7 +131,7 @@ class Codec:
             root.left = helper(lower, val)
             return root
         
-        data = [int(x) for x in data.split(' ') if x]
+        data = [int(x) for x in data.split()]
         return helper()
 ```
 

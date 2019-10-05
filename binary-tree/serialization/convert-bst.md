@@ -22,6 +22,7 @@ One possible answer is: [0,-3,9,-10,null,5], which represents the following heig
 
 ```python
 class Solution:
+#since python slicing take O(n), time=O(n logn), space=O(n)
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
         if len(nums) == 0:
             return None
@@ -31,7 +32,7 @@ class Solution:
         root.right = self.sortedArrayToBST(nums[mid+1:])
         return root
     
-    #in-place
+#in-place, time = O(n), space = (log n)
     def sortedArrayToBST(self, nums):
         def convert(left, right):
             if left > right:
@@ -175,14 +176,14 @@ The flattened tree should look like:
 
 ### Solution:
 
-1. Iteration: use stack
-2. recursion: reversed in-order traverse
+1. Iteration: use stack, pre-order traverse,先头后尾
+2. recursion: reversed pre-order traverse，先尾后头
 
 ```python
 class Solution:
     def flatten(self, root: TreeNode) -> None:
         if not root:
-            return root
+            return None
         pre = root
         stack = [root.right, root.left]
         while stack:
@@ -195,7 +196,7 @@ class Solution:
             stack.append(node.left)
             pre = node
     
-    #reversed in-order                
+    #reversed pre-order                
     def __init__(self):
         self.nxt = None
     

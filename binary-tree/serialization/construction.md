@@ -24,10 +24,21 @@ Return the following binary tree:
    15   7
 ```
 
+### Sol:
+
+**Recursion, in-place**:   
+start from first preorder ele, build a dict {val: idx in inorder}  
+pre-order traverse to build the tree
+
 ```python
 class Solution:
     #in-place, HashMap to find val
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+     # start from first preorder element
+        pre_idx = 0
+     # build a hashmap value -> its index
+        idx_map = {val:idx for idx, val in enumerate(inorder)} 
+        
         def helper(in_left=0, in_right=len(inorder)):
             nonlocal pre_idx
             if in_left >= in_right: 
@@ -41,12 +52,9 @@ class Solution:
             root.right = helper(idx+1, in_right)
             return root
             
-        # start from first preorder element
-        pre_idx = 0
-        # build a hashmap value -> its index
-        idx_map = {val:idx for idx, val in enumerate(inorder)} 
         return helper()
-        
+
+#slicing        
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
         if not inorder:
             return None
@@ -101,7 +109,7 @@ Return the following binary tree:
    15   7
 ```
 
-### Note: in-order is better
+### Note: in-place is better
 
 ```python
 class Solution:
