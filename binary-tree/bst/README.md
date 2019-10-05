@@ -1,4 +1,4 @@
-# BST
+# BST basic
 
 ## 98. Validate Binary Search Tree
 
@@ -164,97 +164,6 @@ class Solution:
         return root 
 ```
 
-## 
-
-## 96. Unique Binary Search Trees
-
-Given _n_, how many structurally unique **BST's** \(binary search trees\) that store values 1 ... _n_?
-
-**Example:**
-
-```text
-Input: 3
-Output: 5
-Explanation:
-Given n = 3, there are a total of 5 unique BST's:
-
-   1         3     3      2      1
-    \       /     /      / \      \
-     3     2     1      1   3      2
-    /     /       \                 \
-   2     1         2                 3
-```
-
-### Solution: DP
-
-Define  
-1. G\(n\): the number of unique BST for a sequence of length `n`.  
-2. F\(i, n\): the number of unique BST, where the number `i` is served as the root of BST \(1≤i≤n\).
-
-Base Case: G\(0\) = G\(1\) = 1  
-Induction Rule: 
-
-$$
-G(n) = \sum_{i=1}^n F(i, n);  F(i, n) = G(i-1)G(n-i) \\
-=> G(n) =  \sum_{i=1}^n  G(i-1)G(n-i)
-$$
-
-```python
-class Solution:
-    def numTrees(self, n: int) -> int:
-        dp = [1] * (n + 1)
-        for i in range(2, n + 1):
-            dp[i] = sum(dp[i - j] * dp[j - 1] for j in range(1, i + 1))
-        return dp[-1]
-```
-
-## 95. Unique Binary Search Trees II
-
-Given an integer _n_, generate all structurally unique **BST's** \(binary search trees\) that store values 1 ... _n_.
-
-**Example:**
-
-```text
-Input: 3
-Output:
-[
-  [1,null,3,2],
-  [3,2,null,1],
-  [3,1,null,null,2],
-  [2,1,3],
-  [1,null,2,null,3]
-]
-```
-
-```python
-class Solution:
-    def generateTrees(self, n: int) -> List[TreeNode]:
-        def node(val, left, right):
-            node = TreeNode(val)
-            node.left = left
-            node.right = right
-            return node
-        def trees(first, last):
-            return [node(root, left, right)
-                    for root in range(first, last+1)
-                    for left in trees(first, root-1)
-                    for right in trees(root+1, last)] or [None]
-        return trees(1, n) if n >= 1 else []
-        
-        
-    def generateTrees(self, n: int) -> List[TreeNode]:
-        def generate(first, last):
-            trees = []
-            for root in range(first, last+1):
-                for left in generate(first, root-1):
-                    for right in generate(root+1, last):
-                        node = TreeNode(root)
-                        node.left, node.right = left, right
-                        trees.append(node)
-            return trees or [None]
-        return generate(1, n) if n >= 1 else []
-```
-
 ## 230. Kth Smallest Element in a BST
 
 Given a binary search tree, write a function `kthSmallest` to find the **k**th smallest element in it.
@@ -278,19 +187,33 @@ Output: 1
 What if the BST is modified \(insert/delete operations\) often and you need to find the kth smallest frequently? How would you optimize the kthSmallest routine?
 
 ```python
+#O(N)
 class Solution:
     def kthSmallest(self, root: TreeNode, k: int) -> int:
         def inorder(r):
             return inorder(r.left) + [r.val] + inorder(r.right) if r else []
         
         return inorder(root)[k - 1]
+        
+#time = O(H + k)       
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        stack = []
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                root = stack.pop()
+                k -= 1
+                if not k: return root.val
+                root = root.right
 ```
 
 **Follow up**
 
 > What if the BST is modified \(insert/delete operations\) often and you need to find the kth smallest frequently? How would you optimize the kthSmallest routine?
 
-[Insert](https://leetcode.com/articles/insert-into-a-bst/) and [delete](https://leetcode.com/articles/delete-node-in-a-bst/) in a BST were discussed last week, the time complexity of these operations is O\(H\), where H is a height of binary tree, and H = logN for the balanced tree.
+[Insert](https://leetcode.com/articles/insert-into-a-bst/) and [delete](https://leetcode.com/articles/delete-node-in-a-bst/) in a BST were discussed before, the time complexity of these operations is O\(H\), where H is a height of binary tree, and H = logN for the balanced tree.
 
 Hence without any optimization insert/delete + search of kth element hasO\(2H+k\) complexity. How to optimize that?
 
@@ -313,7 +236,7 @@ The overall time complexity for insert/delete + search of kth smallest is O\(H+k
 
 **Complexity Analysis**
 
-* Time complexity for insert/delete + search of kth smallest:O\(H+k\), where HH is a tree height. O\(logN+k\) in the average case,O\(N+k\) in the worst case.
+* Time complexity for insert/delete + search of kth smallest:O\(H+k\), where H is a tree height. O\(logN+k\) in the average case,O\(N+k\) in the worst case.
 * Space complexity : O\(N\) to keep the linked list.
 
 ## 938. Range Sum of BST
@@ -385,10 +308,7 @@ Output: The root of a Greater Tree like this:
           20     13
 ```
 
-### Idea:
-
-traverse reversed in-order, visit the node in descending order   
-self.prefix\_sum record the sum of all larger number
+### Idea: traverse reversed in-order, visit the node in descending order  self.prefix\_sum record the sum of all larger number
 
 ```python
 class Solution:
@@ -505,7 +425,7 @@ class Solution:
         return min(abs(a - b) for a, b in zip(L, L[1:]))
 ```
 
-## 501. Find Mode in Binary Search Tree
+## 501. Find Mode in BST
 
 Given a binary search tree \(BST\) with duplicates, find all the [mode\(s\)](https://en.wikipedia.org/wiki/Mode_%28statistics%29) \(the most frequently occurred element\) in the given BST.
 
@@ -554,6 +474,4 @@ class Solution:
 ```
 
 {% embed url="https://leetcode.com/problems/find-mode-in-binary-search-tree/discuss/98101/Proper-O\(1\)-space" %}
-
-
 

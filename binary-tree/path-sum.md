@@ -96,12 +96,9 @@ Return 3. The paths that sum to 8 are:
 3. -3 -> 11
 ```
 
-### Idea: 
+### Idea: Construct a prefix sum, when pre-order traverse the tree, keep look back the previous prefix sum.
 
-Construct a prefix sum, when traverse the tree, keep look back the previous prefix sum.
-
-If use list to record the prefix sum, we can find the path, but the time to look up is O\(n\)
-
+If use list to record the prefix sum, we can find the path, but the time to look up is O\(n\)  
 If we use a dict to record the prefix, the time to look up is O\(1\)
 
 ```python
@@ -122,7 +119,7 @@ class Solution:
         
         return helper(root, [0], summ)
  
-#use dict to record the prefix sum and frequency, so the    
+#preorder traverse, use dict to record the prefix sum and frequency, so the    
     def pathSum(self, root: TreeNode,summ: int) -> int:
         self.res = 0
         
@@ -147,8 +144,7 @@ class Solution:
 
 ## 666. Path Sum IV
 
-If the depth of a tree is smaller than `5`, then this tree can be represented by a list of three-digits integers.
-
+If the depth of a tree is smaller than `5`, then this tree can be represented by a list of three-digits integers.  
 For each integer in this list:
 
 1. The hundreds digit represents the depth `D` of this node, `1 <= D <= 4.`
@@ -227,8 +223,6 @@ class Solution:
 ## 257. Binary Tree Paths
 
 Given a binary tree, return all root-to-leaf paths.
-
-**Note:** A leaf is a node with no children.
 
 **Example:**
 
@@ -423,6 +417,7 @@ class Solution:
                 return 0
             elif not root.left and not root.right:
                 self.res += 10 * summ + root.val
+                return 
             dfs(root.left, 10 * summ + root.val)
             dfs(root.right, 10 * summ + root.val)
             
@@ -473,8 +468,7 @@ class Solution:
             else: 
                 dfs(root.left, path)
                 dfs(root.right, path)
-            path.pop()
-         
+            path.pop()         
             
         dfs(root, [])        
         # convert the num path from root to leaf to string
