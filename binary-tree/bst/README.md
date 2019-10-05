@@ -31,100 +31,6 @@ class Solution:
             and self.isValidBST(root.right, root.val, high)
 ```
 
-## **270.** Closest Binary Search Tree Value
-
-Given a non-empty binary search tree and a target value, find the value in the BST that is closest to the target.
-
-**Note:**
-
-* Given target value is a floating point.
-* You are guaranteed to have only one unique value in the BST that is closest to the target.
-
-**Example:**
-
-```text
-Input: root = [4,2,5,1,3], target = 3.714286
-
-    4
-   / \
-  2   5
- / \
-1   3
-
-Output: 4
-```
-
-```python
-class Solution:
-    def closestValue(self, root: TreeNode, target: float) -> int:
-        self.res = root.val
-        
-        def helper(root):
-            if not root:
-                return
-            if abs(root.val - target) < abs(self.res - target):
-                self.res = root.val
-            if root.val > target:
-                helper(root.left)
-            elif root.val < target:
-                helper(root.right)
-                
-        helper(root)
-        return self.res
-```
-
-## 700. Search in a Binary Search Tree
-
-Given the root node of a binary search tree \(BST\) and a value. You need to find the node in the BST that the node's value equals the given value. Return the subtree rooted with that node. If such node doesn't exist, you should return NULL.
-
-For example, 
-
-```text
-Given the tree:
-        4
-       / \
-      2   7
-     / \
-    1   3
-
-And the value to search: 2
-```
-
-You should return this subtree:
-
-```text
-      2     
-     / \   
-    1   3
-```
-
-In the example above, if we want to search the value `5`, since there is no node with value `5`, we should return `NULL`.
-
-Note that an empty tree is represented by `NULL`, therefore you would see the expected output \(serialized tree format\) as `[]`, not `null`.
-
-```python
-class Solution:
-    #recursion
-    def searchBST(self, root: TreeNode, val: int) -> TreeNode:
-        if not root or root.val == val:
-            return root
-        elif root.val > val:
-            return self.searchBST(root.left, val)
-        else:
-            return self.searchBST(root.right, val)
-            
-        
-    def searchBST(self, root: TreeNode, val: int) -> TreeNode:
-        while root:
-            if root.val == val:
-                return root
-            elif root.val < val:
-                root = root.right
-            else:
-                root = root.left
-        return None
-```
-
 ## 450. Delete Node in a BST
 
 Given a root node reference of a BST and a key, delete the node with the given key in the BST. Return the root node reference \(possibly updated\) of the BST.
@@ -161,7 +67,7 @@ One valid answer is [5,4,6,2,null,null,7], shown in the following BST.
 Another valid answer is [5,2,6,null,4,null,7].
 ```
 
-![](../.gitbook/assets/image%20%2839%29.png)
+![](../../.gitbook/assets/image%20%2839%29.png)
 
 ```python
 class Solution:
@@ -226,7 +132,7 @@ This tree is also valid:
           4
 ```
 
-![](../.gitbook/assets/image%20%2835%29.png)
+![](../../.gitbook/assets/image%20%2835%29.png)
 
 ```python
 class Solution:
@@ -258,99 +164,7 @@ class Solution:
         return root 
 ```
 
-## 285. Inorder Successor in BST
-
-Given a binary search tree and a node in it, find the in-order successor of that node in the BST.
-
-The successor of a node `p` is the node with the smallest key greater than `p.val`.
-
-**Example 1:**![](https://assets.leetcode.com/uploads/2019/01/23/285_example_1.PNG)
-
-```text
-Input: root = [2,1,3], p = 1
-Output: 2
-Explanation: 1's in-order successor node is 2. Note that both p and the return value is of TreeNode type.
-```
-
-**Example 2:**![](https://assets.leetcode.com/uploads/2019/01/23/285_example_2.PNG)
-
-```text
-Input: root = [5,3,6,2,4,null,null,1], p = 6
-Output: null
-Explanation: There is no in-order successor of the current node, so the answer is null.
-```
-
-### **Idea:**
-
-**Case1: root.val &gt; p.val**: update cur, go left child  
-**Case2: root.val &lt; p.val:** don't update cur, go right child  
-**Case3: root.val == p.val:** find the successor from sub-tree\(p.right\), else return cur
-
-```python
-class Solution:
-    def inorderSuccessor(self, root: 'TreeNode', p: 'TreeNode') -> 'TreeNode':
-        cur = None #previous large one
-        while root:
-            if root.val > p.val:
-                cur = root
-                root = root.left
-            elif root.val < p.val:
-                root = root.right
-            else: #root == p
-                if not root.right: #if p has not right child, return cur
-                    return cur
-                root = root.right #else, return the successor
-                while root.left:
-                    root = root.left
-                return root
-```
-
-## 510. Inorder Successor in BST II
-
-Given a binary search tree and a node in it, find the in-order successor of that node in the BST.
-
-The successor of a node `p` is the node with the smallest key greater than `p.val`.
-
-You will have direct access to the node but not to the root of the tree. Each node will have a reference to its parent node.
-
-**Example 1:**![](https://assets.leetcode.com/uploads/2019/01/23/285_example_1.PNG)
-
-```text
-Input: 
-root = {"$id":"1","left":{"$id":"2","left":null,"parent":{"$ref":"1"},"right":null,"val":1},"parent":null,"right":{"$id":"3","left":null,"parent":{"$ref":"1"},"right":null,"val":3},"val":2}
-p = 1
-Output: 2
-Explanation: 1's in-order successor node is 2. Note that both p and the return value is of Node type.
-```
-
-**Example 2:**![](https://assets.leetcode.com/uploads/2019/01/23/285_example_2.PNG)
-
-```text
-Input: 
-root = {"$id":"1","left":{"$id":"2","left":{"$id":"3","left":{"$id":"4","left":null,"parent":{"$ref":"3"},"right":null,"val":1},"parent":{"$ref":"2"},"right":null,"val":2},"parent":{"$ref":"1"},"right":{"$id":"5","left":null,"parent":{"$ref":"2"},"right":null,"val":4},"val":3},"parent":null,"right":{"$id":"6","left":null,"parent":{"$ref":"1"},"right":null,"val":6},"val":5}
-p = 6
-Output: null
-Explanation: There is no in-order successor of the current node, so the answer is null.
-```
-
-### Idea:
-
-* if node.right, find the most left node in the right subtree of the node;
-* otherwise, find a parent upward that contains the node in its left subtree \(and thus the node is the most right one in the subtree\).
-
-```python
-class Solution:
-    def inorderSuccessor(self, node: 'Node') -> 'Node':
-        if node.right:
-            node = node.right
-            while node.left:
-                node = node.left
-            return node
-        
-         while node.parent and node.parent.val < node.val:
-            node = node.parent
-        return node.parent
-```
+## 
 
 ## 96. Unique Binary Search Trees
 
