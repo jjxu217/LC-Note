@@ -79,56 +79,7 @@ class Solution(object):
        return temp  #step3
 ```
 
-## 1123. [Lowest Common Ancestor of Deepest Leaves](https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/)
-
-Given a rooted binary tree, return the lowest common ancestor of its deepest leaves.
-
-Recall that:
-
-* The node of a binary tree is a _leaf_ if and only if it has no children
-* The _depth_ of the root of the tree is 0, and if the depth of a node is `d`, the depth of each of its children is `d+1`.
-* The _lowest common ancestor_ of a set `S` of nodes is the node `A` with the largest depth such that every node in S is in the subtree with root `A`.
-
-**Example 1:**
-
-```text
-Input: root = [1,2,3]
-Output: [1,2,3]
-Explanation: 
-The deepest leaves are the nodes with values 2 and 3.
-The lowest common ancestor of these leaves is the node with value 1.
-The answer returned is a TreeNode object (not an array) with serialization "[1,2,3]".
-```
-
-**Example 2:**
-
-```text
-Input: root = [1,2,3,4]
-Output: [4]
-```
-
-**Example 3:**
-
-```text
-Input: root = [1,2,3,4,5]
-Output: [2,4,5]
-```
-
-```python
-def lcaDeepestLeaves(self, root: TreeNode) -> TreeNode:
-        def helper(root):
-            if not root:
-                return (root, 0)
-            l, r = helper(root.left), helper(root.right)
-            if l[1] > r[1]:
-                return (l[0], l[1] + 1)
-            elif l[1] < r[1]:
-                return (r[0], r[1] + 1)
-            else:
-                return (root, l[1] + 1)
-            
-        return helper(root)[0]
-```
+## 
 
 ## 235. Lowest Common Ancestor of a Binary Search Tree
 
@@ -185,21 +136,14 @@ class Solution(object):
 
 ## 559. Maximum Depth of N-ary Tree
 
-### Note:
-
-**Base case: If node is None, return 0; if node.children is None, which is leaf node, return 1.**
+### **Base case:  If node is None, return 0;  if node.children is None, which is leaf node, return 1.**
 
 ```python
 class Solution:
     def maxDepth(self, root: 'Node') -> int:
-        if not root:
-            return 0
-        if not root.children:
-            return 1
-        maxD = 0
-        for c in root.children:
-            maxD = max(maxD, self.maxDepth(c))
-        return maxD + 1
+        if not root: return 0
+        if not root.children: return 1
+        return max(self.maxDepth(c) for c in root.children) + 1
 ```
 
 ## 110. Balanced Binary Tree
@@ -224,10 +168,11 @@ Given the following tree `[3,9,20,null,null,15,7]`:
 
 Return true.
 
+#### Sol: If balanced: return depth; else return -1
+
 ```python
 class Solution:
-    def isBalanced(self, root: TreeNode) -> bool:
-        
+    def isBalanced(self, root: TreeNode) -> bool:      
         def helper(root):
             if not root:
                 return 0
@@ -289,9 +234,7 @@ class Solution:
 
 ## 250. Count Univalue Subtrees
 
-Given a binary tree, count the number of uni-value subtrees.
-
-A Uni-value subtree means all nodes of the subtree have the same value.
+Given a binary tree, count the number of uni-value subtrees. A Uni-value subtree means all nodes of the subtree have the same value.
 
 **Example :**
 

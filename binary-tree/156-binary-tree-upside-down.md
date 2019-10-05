@@ -24,7 +24,7 @@ Output: return the root of the binary tree [4,5,2,#,#,3,1]
 
 ![](../.gitbook/assets/image%20%2823%29.png)
 
-![](../.gitbook/assets/image%20%2847%29.png)
+![](../.gitbook/assets/image%20%2848%29.png)
 
 ```python
 class Solution:

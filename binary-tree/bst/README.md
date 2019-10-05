@@ -67,7 +67,7 @@ One valid answer is [5,4,6,2,null,null,7], shown in the following BST.
 Another valid answer is [5,2,6,null,4,null,7].
 ```
 
-![](../../.gitbook/assets/image%20%2839%29.png)
+![](../../.gitbook/assets/image%20%2840%29.png)
 
 ```python
 class Solution:
@@ -424,54 +424,4 @@ class Solution:
         dfs(root)
         return min(abs(a - b) for a, b in zip(L, L[1:]))
 ```
-
-## 501. Find Mode in BST
-
-Given a binary search tree \(BST\) with duplicates, find all the [mode\(s\)](https://en.wikipedia.org/wiki/Mode_%28statistics%29) \(the most frequently occurred element\) in the given BST.
-
-Assume a BST is defined as follows:
-
-* The left subtree of a node contains only nodes with keys **less than or equal to** the node's key.
-* The right subtree of a node contains only nodes with keys **greater than or equal to** the node's key.
-* Both the left and right subtrees must also be binary search trees.
-
-For example:  
-Given BST `[1,null,2,2]`,
-
-```text
-   1
-    \
-     2
-    /
-   2
-```
-
-return `[2]`.
-
-**Note:** If a tree has more than one mode, you can return them in any order.
-
-**Follow up:** Could you do that without using any extra space? \(Assume that the implicit stack space incurred due to recursion does not count\).
-
-### Idea: in-order travers, use counter to count frequency
-
-```python
-class Solution:
-    def findMode(self, root: TreeNode) -> List[int]:
-        if not root:
-            return []
-        c = collections.Counter()
-        
-        def helper(root):
-            if not root:
-                return
-            helper(root.left)
-            c[root.val] += 1    
-            helper(root.right)
-            
-        helper(root)
-        max_ct = max(c.values())
-        return [k for k, v in c.items() if v == max_ct]
-```
-
-{% embed url="https://leetcode.com/problems/find-mode-in-binary-search-tree/discuss/98101/Proper-O\(1\)-space" %}
 

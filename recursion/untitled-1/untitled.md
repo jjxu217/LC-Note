@@ -40,7 +40,7 @@ Explanation: There are two distinct solutions to the 4-queens puzzle as shown be
 
 ![](../../.gitbook/assets/image%20%2821%29.png)
 
-![](../../.gitbook/assets/image%20%2850%29.png)
+![](../../.gitbook/assets/image%20%2852%29.png)
 
 ```python
 #51
@@ -88,7 +88,6 @@ class Solution:
                     break
             if valid:
                 layout[cur] = i
-                self.dfs(layout, cur + 1, n)
-                
+                self.dfs(layout, cur + 1, n)             
 ```
 
