@@ -499,6 +499,17 @@ Explanation:
 Both "apply" and "apple" can be built from other words in the dictionary. However, "apple" is lexicographically smaller than "apply".
 ```
 
+### Sort the words, check one by one
+
+```python
+def longestWord(self, words):
+        valid = set([""])       
+        for word in sorted(words, key=lambda x: len(x)):
+           if word[:-1] in valid:
+                valid.add(word)								
+        return max(sorted(valid), key=lambda x: len(x))
+```
+
 ### Trie + DFS
 
 ```python
@@ -530,15 +541,6 @@ class Solution:
         for word in words:
             t.insert(word)
         return t.dfs()          
-```
-
-```python
-def longestWord(self, words):
-        valid = set([""])       
-        for word in sorted(words, key=lambda x: len(x)):
-           if word[:-1] in valid:
-                valid.add(word)								
-        return max(sorted(valid), key=lambda x: len(x))
 ```
 
 ## 

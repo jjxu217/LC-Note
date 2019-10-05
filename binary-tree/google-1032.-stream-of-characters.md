@@ -42,7 +42,6 @@ class Trie():
         node[None] = None
         
 class StreamChecker:
-
     def __init__(self, words: List[str]):
         self.t = Trie()
         self.cand = [self.t.trie]
