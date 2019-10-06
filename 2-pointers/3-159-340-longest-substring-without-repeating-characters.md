@@ -29,7 +29,9 @@ Explanation: The answer is "wke", with the length of 3.
              Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 ```
 
-### Sol: sliding window: Use a **dic** to record the used char and the position, use **l** to record the left side of non-repeat char.
+### Sol: sliding window: 
+
+Use a **dic** {used char: idx}. Iterate all char in s: if current char in dic, check the left bound `l = max(l, dic[ch] + 1)`,update res `res = max(res, i - l + 1)`
 
 ```python
 class Solution:
@@ -64,7 +66,9 @@ Output: 5
 Explanation: t is "aabbb" which its length is 5.
 ```
 
-### Using a dict {char: idx}, record left side. If len\(dic\) == 3, update left side, and dict.
+### Using a dict {char: idx}, record right most idx so far. 
+
+If len\(dic\) == 3, update left side, and dict, delete the left most char. `del_idx = min(dic.values()); del dic[s[del_idx]]`
 
 ```python
 class Solution:

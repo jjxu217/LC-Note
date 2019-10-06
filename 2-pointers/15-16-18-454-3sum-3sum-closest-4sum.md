@@ -186,6 +186,8 @@ class Solution:
 
 ## N-Sum
 
+Recursively reduce N sum until 2 sum
+
 ```python
 def fourSum(self, nums, target):
     def findNsum(l, r, target, N, result, results):
@@ -213,7 +215,7 @@ def fourSum(self, nums, target):
 
     nums.sort()
     results = []
-    findNsum(0, len(nums)-1, target, 4, [], results)
+    findNsum(0, len(nums)-1, target, N, [], results)
     return results
 ```
 
