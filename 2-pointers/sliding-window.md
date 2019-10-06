@@ -102,8 +102,7 @@ class Solution:
 
 ## 480. Sliding Window Median
 
-Median is the middle value in an ordered integer list. If the size of the list is even, there is no middle value. So the median is the mean of the two middle value.Examples:  
-
+Median is the middle value in an ordered integer list. If the size of the list is even, there is no middle value. So the median is the mean of the two middle value.Examples:
 
 `[2,3,4]` , the median is `3`
 
