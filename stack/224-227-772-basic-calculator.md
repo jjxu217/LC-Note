@@ -56,7 +56,7 @@ class Solution:
                     num += stack.pop() 
                 sign = stack.pop()
                 update(sign, num)
-                num, sign = 0, s[i]     
+                num, sign = 0, '+'    
             
         update(sign, num)
         return sum(stack)
@@ -156,6 +156,9 @@ class Solution:
         for i in range(len(s)):
             if s[i].isdigit():
                 num = num * 10 + int(s[i])
+            elif s[i] in '+-*/':
+                update(sign, num)
+                num, sign = 0, s[i]
             elif s[i] == '(':
                 #append the sign before '(', reset sign/num to evaluate inside '()'
                 stack.append(sign)
@@ -168,10 +171,7 @@ class Solution:
                     num += stack.pop() 
                 sign = stack.pop()
                 update(sign, num)
-                num, sign = 0, s[i]
-            elif s[i] in '+-*/':
-                update(sign, num)
-                num, sign = 0, s[i]
+                num, sign = 0, '+'          
             
         update(sign, num)
         return sum(stack)

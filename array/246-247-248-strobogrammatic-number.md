@@ -79,7 +79,7 @@ class Solution:
         oddMidCandidate = ["0", "1", "8"]
         if n == 1:
             return oddMidCandidate
-        if n == 2:
+        elif n == 2:
             return evenMidCandidate[:-1]
         if n % 2:
             pre, midCandidate = self.findStrobogrammatic(n-1), oddMidCandidate
