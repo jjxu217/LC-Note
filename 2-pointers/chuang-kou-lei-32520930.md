@@ -31,8 +31,8 @@ class Solution:
     #Time = O(n log n): prefix sum + bisect
     def minSubArrayLen(self, target, nums):
         result = len(nums) + 1
-        for idx, n in enumerate(nums[1:], 1):
-            nums[idx] = nums[idx - 1] + n
+        for i in range(1, len(nums)):
+            nums[i] += nums[i - 1]
         left = 0
         for right, n in enumerate(nums):
             if n >= target:
@@ -81,7 +81,7 @@ Can you do it in O\(n\) time?
 ```python
 class Solution:
     def maxSubArrayLen(self, nums: List[int], k: int) -> int:
-        dic = {0: -1}      #key is acc value, and value is the index
+        dic = {0: -1}      #key=acc_sum value, and value=index
         res = 0
         for i in range(len(nums)):
             if i > 0:

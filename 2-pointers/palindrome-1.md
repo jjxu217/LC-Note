@@ -136,16 +136,16 @@ when the iteration for l/ r are over, the longest substring is s\[l+1, r\], note
 ```python
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        global_l = global_r =  length = 0
+        global_l = global_r =  l = 0
         for i in range(2 * len(s) - 1):
             l = i // 2
             r = l + i % 2 #string are even or odd, like "abba", "aba"
             while l >= 0 and r < len(s) and s[l] == s[r]
                 l -= 1
                 r += 1
-            if r - l  - 1 > length:
+            if r - l  - 1 > l:
                 global_l, global_r = l, r
-                length = r - l  - 1
+                l = r - l  - 1
         return s[global_l + 1: global_r]
 ```
 

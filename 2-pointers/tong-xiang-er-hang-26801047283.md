@@ -35,7 +35,7 @@ class Solution:
 
 Given a sorted array _nums_, remove the duplicates [**in-place**](https://en.wikipedia.org/wiki/In-place_algorithm) such that duplicates appeared at most _k_ and return the new length.
 
-### Note: !!! compare number at and fast and  slow - k : **nums\[fast\] != nums\[slow - k\]**
+### Note: !!! compare number at fast slow - k : **nums\[fast\] != nums\[slow - k\]**
 
 ```python
 class Solution:
