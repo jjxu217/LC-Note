@@ -49,6 +49,29 @@ True
 {2: 4, 4: 16, 6: 36}
 ```
 
+## OrderDict\(\)
+
+### `order.popitem(`_`last=True`_`)`
+
+`last=True表示最后一个； last=False表示第一个`
+
+```python
+>>> # regular unsorted dictionary
+>>> d = {'banana': 3, 'apple': 4, 'pear': 1, 'orange': 2}
+
+>>> # dictionary sorted by key
+>>> OrderedDict(sorted(d.items(), key=lambda t: t[0]))
+OrderedDict([('apple', 4), ('banana', 3), ('orange', 2), ('pear', 1)])
+
+>>> # dictionary sorted by value
+>>> OrderedDict(sorted(d.items(), key=lambda t: t[1]))
+OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
+
+>>> # dictionary sorted by length of the key string
+>>> OrderedDict(sorted(d.items(), key=lambda t: len(t[0])))
+OrderedDict([('pear', 1), ('apple', 4), ('orange', 2), ('banana', 3)])
+```
+
 ## set
 
 ### discard\(\)

@@ -92,6 +92,7 @@ Given a string, find the length of the longest substring T that contains at most
 **Use a dic to record {char: newest idx}, right pointer `i` iterate string s. When the length of dic is `k + 1`,  Find the smallest idx in dic, delete that idx in `dic` to make it contains less or equal to k distinct chars. Update the left pointer to the deleted idx + 1 `l = del_idx + 1`**
 
 ```python
+#Time = O(k * n)
 class Solution:
     def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
         l = res = 0
@@ -101,6 +102,23 @@ class Solution:
             if len(dic) == k + 1:
                 del_idx = min(dic.values())
                 del dic[s[del_idx]]
+                l = del_idx + 1
+            res = max(res, i - l + 1)
+        return res
+```
+
+### Or use OrderDict\(\), similar to LRU cache, time = O\(n\)
+
+```python
+def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
+        l = res = 0
+        dic = collections.OrderedDict()
+        for i, char in enumerate(s):
+            if char in dic:
+                del dic[char]
+            dic[char] = i
+            if len(dic) == k + 1:
+                _, del_idx = dic.popitem(last = False)
                 l = del_idx + 1
             res = max(res, i - l + 1)
         return res
