@@ -1,7 +1,10 @@
 # Table of contents
 
 * [Plan](README.md)
-* [Google 面经](google-mian-jing.md)
+* [Google 面经](google-mian-jing/README.md)
+  * [Google](google-mian-jing/google.md)
+  * [1047/1209. Remove All Adjacent Duplicates In String](google-mian-jing/1047-1209.-remove-all-adjacent-duplicates-in-string.md)
+  * [943. Find the Shortest Superstring](google-mian-jing/943.-find-the-shortest-superstring.md)
 * [Sort](sort/README.md)
   * [K Largest/Smallest](sort/973.-k-closest-points-to-origin.md)
   * [Sort Intervals](sort/sort-intervals.md)
