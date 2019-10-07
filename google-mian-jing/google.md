@@ -1,4 +1,4 @@
-# Google
+# DP array
 
 ## 841. Keys and Rooms
 
