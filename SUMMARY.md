@@ -151,7 +151,7 @@
   * [463. Island Perimeter](hashtable-and-string/463.-island-perimeter.md)
   * [734/737 Sentence Similarity](hashtable-and-string/734-sentence-similarity.md)
   * [1153. String Transforms Into Another String](hashtable-and-string/1153.-string-transforms-into-another-string.md)
-  * [792. Number of Matching Subsequences 1055. Shortest Way to Form String](hashtable-and-string/792.-number-of-matching-subsequences.md)
+  * [Google 792. Number of Matching Subsequences 1055. Shortest Way to Form String](hashtable-and-string/792.-number-of-matching-subsequences.md)
 * [Graph](graph/README.md)
   * [Dijkstra](graph/378.-kth-smallest-element-in-a-sorted-matrix.md)
   * [Union Find](graph/dfs-and-union-find.md)

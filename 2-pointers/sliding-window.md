@@ -266,7 +266,7 @@ class MovingAverage:
     
    #use deque 
     def __init__(self, size):
-        self.queue = collections.deque(maxlen=size)
+        self.queue = collections.deque()
         self.wsize = size
         self.cursum = 0
         
