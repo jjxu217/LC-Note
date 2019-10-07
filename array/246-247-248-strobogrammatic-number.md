@@ -114,10 +114,11 @@ Explanation: 69, 88, and 96 are three strobogrammatic numbers.
 class Solution:
     def strobogrammaticInRange(self, low: str, high: str) -> int:
         q, cnt, low, high, ln = ["", "0", "1", "8"], 0, int(low), int(high), len(high)
+        dic = {"0":"0", "1":"1", "6":"9", "8":"8", "9":"6"}
         while q:
             s = q.pop()
             if s and s[0] != "0" and low <= int(s) <= high: cnt += 1
-            q += [l + s + r for l, r in (("8", "8"), ("6", "9"), ("9", "6"), ("1", "1"), ("0", "0")) if len(s) <= ln - 2] 
+            q += [l + s + r for l, r in dic.items() if len(s) <= ln - 2] 
         return cnt if low != 0 else cnt + 1
 ```
 
