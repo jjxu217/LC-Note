@@ -1,5 +1,7 @@
 # 1056/1088 Confusing Number
 
+## 1056. Confusing Number
+
 Given a number `N`, return `true` if and only if it is a _confusing number_, which satisfies the following condition:
 
 We can rotate digits by 180 degrees to form new digits. When 0, 1, 6, 8, 9 are rotated 180 degrees, they become 0, 1, 9, 8, 6 respectively. When 2, 3, 4, 5 and 7 are rotated 180 degrees, they become invalid. A _confusing number_ is a number that when rotated 180 degrees becomes a **different** number with each digit valid.
@@ -77,5 +79,72 @@ Input: 100
 Output: 19
 Explanation: 
 The confusing numbers are [6,9,10,16,18,19,60,61,66,68,80,81,86,89,90,91,98,99,100].
+```
+
+### Sol：confusing number = total number formed with "01689" - Strobogrammatic Number.
+
+We can use knowledge of combination to calculate the number of confusing number with fix number of bits.  Use **confusing number = total number formed with "01689" - Strobogrammatic Number.**
+
+* **bit2 == 1**: 2 个\('6', '9'\)
+* **bits == 2** : count =  4\(1,6,8,9\) \* 5 - 4 \* 1\(rotate of 1st bit\) = 16
+* **bits == 3**: count = 4\(1,6,8,9\) \* 5 \* 5 -  4  \* 3\(0,1,8\) \* 1 
+* * **bits % 2 == 0** , count = 
+
+  $$
+  4 * 5 ^ {bits - 1} - 4 * 5^{bits // 2 - 1}
+  $$
+
+* **bits % 2 == 1**, count = 
+
+  $$
+  4 * 5 ^ {bits - 1} - 4 * 3 * 5^{bits // 2 - 1}
+  $$
+
+And then we use **DFS** to find all numbers **formed with "01689"** and **less than given number** and **with the same number of bits with the given number**.
+
+```python
+class Solution:
+    # Use combination to calculate number of confusing number with fix number of digits
+    def confusingNumberFixBits(self, bits):
+        if bits == 1:
+            return 2
+        if bits == 2:
+            return 16
+        if bits % 2 == 0:
+            return 4*5**(bits-1) - 4*5**(int(bits/2)-1)       
+        return 4*5**(bits-1) - 4*3*5**(int(bits/2)-1)
+    
+    # Check if a string is a confusing number
+    def isConfusing(self, string):
+        rotated = [self.maps[c] for c in string[::-1]]
+        return ''.join(rotated) != string
+    
+    def confusingNumberII(self, N):
+        S = str(N)
+        l = len(S)
+        count = 0
+        for i in range(1, l):
+            count += self.confusingNumberFixBits(i)
+            
+        self.maps = {"0":"0","1":"1","6":"9","8":"8","9":"6"}
+    
+        # Use DFS to obtain all possible numbers (1) constructed by "01689"; (2) less than N; (3) has the same number of digits with N
+        def dfs(string):
+            nonlocal l, count, S
+            if len(string) == l:
+                if string <= S and self.isConfusing(string):
+                    count += 1
+                return
+            
+            index = len(string)
+            if string > S[:index]:
+                return
+            
+            for c in self.maps:
+                if not (index == 0 and c == "0"):
+                    dfs(string+c)
+        
+        dfs("")
+        return count
 ```
 
