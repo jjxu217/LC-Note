@@ -11,6 +11,7 @@
   * [465. Optimal Account Balancing](google-mian-jing/465.-optimal-account-balancing.md)
   * [Remove Extra Edge](google-mian-jing/remove-extra-edge.md)
   * [Chocolate Sweetness](google-mian-jing/chocolate-sweetness.md)
+  * [idea](google-mian-jing/idea.md)
 * [Sort](sort/README.md)
   * [K Largest/Smallest](sort/973.-k-closest-points-to-origin.md)
   * [Sort Intervals](sort/sort-intervals.md)
