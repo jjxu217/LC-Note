@@ -1,0 +1,78 @@
+# Remove Extra Edge
+
+Given a binary tree, where an arbitary node has 2 parents i.e two nodes in the tree have the same child. Identify the defective node and remove an extra edge to fix the tree.
+
+**Example:**
+
+```text
+Input:
+	   1
+	  / \
+	 2   3
+	/ \ /
+   4   5
+
+Output:
+
+     1			       1
+    / \			      / \
+   2   3    or	     2   3
+  / \ 			    /   /
+ 4   5		       4   5
+
+Explanation: We can remove either 3-5 or 2-5.
+```
+
+```python
+def removeEdgeBT(root):
+	def dfs(root):
+		if not root or root in seen: return None
+		seen.add(root)
+		root.left = dfs(root.left)
+		root.right = dfs(root.right)
+		return root
+		
+	seen = set()
+	return dfs(root)
+```
+
+**Follow-up 1:**  
+What if the tree is a BST?
+
+```python
+def removeEdgeBST(root):
+	def dfs(root, lower, upper):
+		if not root or root.val <= lower or root.val >= upper: return None
+		root.left = dfs(root.left, lower, root.val)
+		root.right = dfs(root.right, root.val, upper)
+		return root
+		
+	return dfs(root, float('-inf'), float('inf'))
+```
+
+**Follow-up 2:**  
+What if the tree is an N-ary tree?
+
+```python
+def removeEdgeNT(root):
+	def dfs(root):
+		if not root or root in seen: return None
+		seen.add(root)
+		idx = None
+		for i, kid in enumerate(root.children):
+			if kid in seen:
+				idx = i
+				break
+			dfs(kid)
+		if idx != None:
+			root.children.pop(idx)
+		return root
+		
+	seen = set()
+	return dfs(root)
+```
+
+## See also Redundant connection
+
+{% page-ref page="../graph/dfs-and-union-find.md" %}
+

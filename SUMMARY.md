@@ -9,6 +9,8 @@
   * [943. Find the Shortest Superstring](google-mian-jing/943.-find-the-shortest-superstring.md)
   * [815. Bus Routes](google-mian-jing/815.-bus-routes.md)
   * [465. Optimal Account Balancing](google-mian-jing/465.-optimal-account-balancing.md)
+  * [Remove Extra Edge](google-mian-jing/remove-extra-edge.md)
+  * [Chocolate Sweetness](google-mian-jing/chocolate-sweetness.md)
 * [Sort](sort/README.md)
   * [K Largest/Smallest](sort/973.-k-closest-points-to-origin.md)
   * [Sort Intervals](sort/sort-intervals.md)
