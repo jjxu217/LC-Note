@@ -270,5 +270,5 @@ def commonDifference(root):
 ## 2个string palindrome
 
 给两个string，相同长度，问能不能在同一个地方切一刀，然后两个string的各半边组成一个palindrome。 比如aabac和xyzaa，可以在aab\|ac和xyz\|aa这里切，然后aab和aa可以组成palindrome。要求是必须切在相同的位置，而且要第一个左边和第二个右边，或者第二个左边和第一个右边组成palindrome。  
-followup是给出所有位置。我上来有点懵，小哥给了提示才用了two pointer做的
+followup是给出所有位置，小哥给了提示才用了two pointer做的
 
