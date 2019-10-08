@@ -18,6 +18,8 @@ such that you would get maximum out of the minimum sweetness level. So, you shou
 Your other two friends will take the sweetest chunk, so they will take 12 and 10. The maximum sweetness level you could get is 9.
 ```
 
+### bisect: O\(n \* log \(sum - min\)\)
+
 ```python
 def chocolateSweetness(A, K):
     def isValid(x):
