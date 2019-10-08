@@ -22,6 +22,10 @@ follow up2: 输出最短路径: BFS
 
 follow up3：matrix中的的非零元素代表difficulty， 找出difficulty总和最小的路径。Dijkstra
 
+## 机器人抢金币
+
+在一个矩形房间里，有障碍和通道用1和0表示。有两个机器人和一个金币。如果机器人足够聪明，速度一样快，问哪个机器人会先拿到金币。我刚开始想从机器人开始BFS，这样要做两次BFS。转念一想从金币开始只用做一次。和面试官沟通后很快写完code。
+
 ## Sparse Vector
 
 Suppose we have very large sparse vectors \(most of the elements in vector are zeros\)
@@ -180,4 +184,91 @@ followup3: 如果有很多人，但是他们身高都差不多，怎么处理。
 题目是一个complete binary tree， 所有的node从上到下，从左到右都做了编号，求某个编号是否存在在这个树里
 
 > > 因为左子树的index是parent index的两倍， 右子树的index是两倍加一， 用这个可以逐级推算出每个level的parent的index， 然后验证是否存在
+
+## Random Stream
+
+Stream: backiuwcatbeforewerehpqojf Input: \["back", "before", "cat", fore", "were", "for"\] Output: \[0, 10, 7, 12, 16, 12\] Generator: char getNextChar\(\);
+
+给一个random stream，只能用getNextChar\(\);获取下一个char，给一个list of input words，找每个word在stream中出现的位置（出现位置） 假设stream够长，即使是random，也一定会出现每个word
+
+## Confusing number
+
+输出1-650中upside down 以后合法的数。 upside down： 6-》9; 61-》 16
+
+如果upside down以后和原来的一样，不输出， 比如11-》11 不输出 1，0，8 upside down以后和原来一样 6-》9 9-》6 有其他字符就是invalid 注意corner case 10-》01 not valid
+
+{% page-ref page="../array/1056-1088-confusing-number.md" %}
+
+## get product
+
+設計一個Class 返回 k 個數的乘積 k為定值 這個class 有兩個功能 一個為insert 另一個為 getproduct
+
+假設k = 3 數列為 \[1,2,3\] getproduct 返回6 再insert一個新的數4 最先加入的數 1會被踢除 數列變為 \[2,3,4\] 此時 getproudct 返回 24
+
+followup: 所有操作為O\(1\) queue: 存所有元素； num\_zero: 0的数量； product: 所有非零的数的乘积
+
+如果pop出去的数是0， num\_zero--, 否则product /= queue.popleft\(\);   
+如果push进来的数是0， num\_zero++, 否则product \*= queue\[-1\];  
+if\(num\_zero &gt;0\) return 0; else return product;
+
+## 二叉树最长等差数列
+
+给一个二叉树，找出其所包含的最长的等差数列\(common diff可以&gt;0 / =0 / &lt;0\)的长度（注意只能从上往下找），我用了dfs。
+
+```text
+比如：
+            2
+        4       5
+      6   3   2   1
+  8  7 9 8 6 1 6  7
+输出 4(2->4->6->8).
+再比如：
+          2
+        4 5
+      6 3 2 1
+  7 7 9 8 6 1 6 7
+输出 3(2->4->6).
+```
+
+Follow up: 如果也可以bottom up，怎么做。  
+recursion：当前node看左右子树的diff 算length， 返回两个子树的长度，两个diff
+
+```text
+比如：
+  4
+2  6
+输出3（2->4->6）
+```
+
+```python
+def commonDifference(root):
+    maxlen = 0
+    stack = []
+    if root.left:
+        stack.append((root.left,root.left.val-root.val,2))
+    if root.right:
+        stack.append((root.right,root.right.val-root.val,2))
+
+    while stack:
+        node,comm,cur_len = stack.pop()
+        if node.left:
+            if node.left.val - node.val == comm:
+                stack.append((node.left,comm,cur_len+1))
+            else:
+                maxlen = max(maxlen,cur_len)
+                stack.append((node.left,node.left.val-node.val,2))
+        if node.right:
+            if node.right.val - node.val == comm:
+                stack.append((node.right,comm,cur_len+1))
+            else:
+                maxlen = max(maxlen,cur_len)
+                stack.append((node.right,node.right.val-node.val,2))
+
+    return maxlen
+```
+
+## 2个string palindrome
+
+给两个string，相同长度，问能不能在同一个地方切一刀，然后两个string的各半边组成一个palindrome。 比如aabac和xyzaa，可以在aab\|ac和xyz\|aa这里切，然后aab和aa可以组成palindrome。要求是必须切在相同的位置，而且要第一个左边和第二个右边，或者第二个左边和第一个右边组成palindrome。  
+followup是给出所有位置。我上来有点懵，小哥给了提示才用了two pointer做的
 

@@ -128,7 +128,10 @@ class Solution:
             
         self.maps = {"0":"0","1":"1","6":"9","8":"8","9":"6"}
     
-        # Use DFS to obtain all possible numbers (1) constructed by "01689"; (2) less than N; (3) has the same number of digits with N
+        # Use DFS to obtain all possible numbers 
+        #(1) constructed by "01689"; 
+        #(2) less than N; 
+        #(3) has the same number of digits with N
         def dfs(string):
             nonlocal l, count, S
             if len(string) == l:

@@ -335,13 +335,13 @@ Explanation: The palindromes are ["battab","tabbat"]
 
 ### Sol: time=O\(n \* w^2\), n being length of the list, w being the average word length\)
 
-The basic idea is to check each word for prefixes \(and suffixes\) that are themselves palindromes. If you find a prefix that is a valid palindrome, then the suffix reversed can be paired with the word in order to make a palindrome. It's better explained with an example.
+**The basic idea is to check each word for prefixes \(and suffixes\) that are themselves palindromes. If you find a prefix that is a valid palindrome, then the suffix reversed can be paired with the word in order to make a palindrome**. It's better explained with an example.
 
 ```text
 words = ["bot", "t", "to"]
 ```
 
-Starting with the string "bot". We start checking all prefixes. If `"", "b", "bo", "bot"` are themselves palindromes. The empty string and "b" are palindromes. We work with the corresponding suffixes \("bot", "ot"\) and check to see if their reverses \("tob", "to"\) are present in our initial word list. If so \(like the word to"to"\), we have found a valid pairing where the reversed suffix can be **prepended** to the current word in order to form "to" + "bot" = "tobot".
+Starting with the string "bot". We **start checking all prefixes**. If `"", "b", "bo", "bot"` are themselves **palindromes**. The empty string and "b" are palindromes. We work with the corresponding **suffixes \("bot", "ot"\) and check to see if their reverses \("tob", "to"\) are present in our initial word list**. If so \(like the word to"to"\), we have found a valid pairing where the reversed suffix can be **prepended** to the current word in order to form "to" + "bot" = "tobot".
 
 You can do the same thing by checking all suffixes to see if they are palindromes. If so, then finding all reversed prefixes will give you the words that can be **appended** to the current word to form a palindrome.
 
