@@ -18,5 +18,31 @@ such that you would get maximum out of the minimum sweetness level. So, you shou
 Your other two friends will take the sweetest chunk, so they will take 12 and 10. The maximum sweetness level you could get is 9.
 ```
 
+```python
+def chocolateSweetness(A, K):
+    def isValid(x):
+        cnt = cur = 0
+        for a in A:
+            cur += a
+            if cur >= x:
+                cnt += 1
+                cur = 0
+        return cnt >= K
+    
+    l, h = min(A), sum(A)
+    while l < h:
+        m = (l + h + 1) // 2
+        if isValid(m):
+            l = m
+        else:
+            h = m - 1
+    return l
+
+
+A = [6, 3, 2, 8, 7, 5]
+K = 3
+print(chocolateSweetness(A, K), 9)
+```
+
 {% page-ref page="../binary-search/410.-split-array-largest-sum.md" %}
 
