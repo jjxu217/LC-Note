@@ -1,7 +1,5 @@
 # idea
 
-
-
 ## 仓库
 
 给定一堆不同高度的objects和一堆仓库storage的空间。东西只能从左向右推进仓库，如果有个位置太低了，那么后面的位置都会被前面的位置局限住。例如仓库是\[1,5\], 那么第二个位置最多也只能放1。 问最多能把多少objects放进仓库。
@@ -29,48 +27,6 @@ def NumOfObj(obj, storage):
         else:
             j -= 1
     return res
-```
-
-## O-1 matrix，
-
-找出0 1 matrix中是否存在从第一行到最后一行的路径，1才能通过。
-
-follow up1:输出任意路径: DFS
-
-follow up2: 输出最短路径: BFS
-
-follow up3：matrix中的的非零元素代表difficulty， 找出difficulty总和最小的路径。Dijkstra
-
-## 机器人抢金币
-
-在一个矩形房间里，有障碍和通道用1和0表示。有两个机器人和一个金币。如果机器人足够聪明，速度一样快，问哪个机器人会先拿到金币。我刚开始想从机器人开始BFS，这样要做两次BFS。转念一想从金币开始只用做一次。和面试官沟通后很快写完code。
-
-## Sparse Vector
-
-Suppose we have very large sparse vectors \(most of the elements in vector are zeros\)
-
-1. Find a data structure to store them
-2. Compute the Dot Product.
-
-**Follow-up:**  
-What if one of the vectors is very small?
-
-```python
-a = [(1,2),(2,3),(100,5)]
-b = [(0,5),(1,1),(100,6)]
-
-i = 0; j = 0
-result = 0
-while i < len(a) and j < len(b):
-    if a[i][0] == b[j][0]:
-        result += a[i][1] * b[j][1]
-        i += 1
-        j += 1
-    elif a[i][0] < b[j][0]:
-        i += 1
-    else:
-        j += 1
-print(result)
 ```
 
 ## Non-overlap Interval
@@ -120,34 +76,39 @@ class Solution(object):
                 return -1 if res==float('inf') else res
 ```
 
-## max path in grid 二维矩阵最大路径和
 
-给一个二维矩阵，每个元素都是非负整数。找到所有可能路径的最大的和。 在一条路径中，不能包含0，路径可以向上下左右延伸，每个元素只能访问一次。假设矩阵中正整数的路径不可能形成环。
+
+## Sparse Vector
+
+Suppose we have very large sparse vectors \(most of the elements in vector are zeros\)
+
+1. Find a data structure to store them
+2. Compute the Dot Product.
+
+**Follow-up:**  
+What if one of the vectors is very small?
 
 ```python
-def maxPath(matrix) -> int:
-    #dfs with memo
-    def dfs(i, j):   
-        nonlocal res
-        nei = [0, 0, 0, 0]
-        seen[i][j] = 1
-        for idx, (I, J) in enumerate([(i+1,j),(i-1, j),(i,j+1),(i, j-1)]):
-            if 0 <= I < M and 0 <= J < N and matrix[I][J] and seen[I][J] == 0:
-                nei[idx] = dfs(I, J)
-        nei.sort()
-        res = max(res, matrix[i][j] + sum(nei[2:]))
-        return matrix[i][j] + nei[-1]
+a = [(1,2),(2,3),(100,5)]
+b = [(0,5),(1,1),(100,6)]
 
-    res = 0
-    if not matrix or not matrix[0]: return 0
-    M, N = len(matrix), len(matrix[0])
-    seen = [[0] * N for _ in range(M)]
-    for i in range(M):
-        for j in range(N):
-            if matrix[i][j] and seen[i][j] == 0:
-                dfs(i, j)
-    return res
+i = 0; j = 0
+result = 0
+while i < len(a) and j < len(b):
+    if a[i][0] == b[j][0]:
+        result += a[i][1] * b[j][1]
+        i += 1
+        j += 1
+    elif a[i][0] < b[j][0]:
+        i += 1
+    else:
+        j += 1
+print(result)
 ```
+
+## 
+
+## 
 
 ## Excel 操作
 
@@ -324,153 +285,11 @@ Output:
         return res
 ```
 
-## 
 
-## **继承皇位 Monarchy**
-
-Given an the following interface, implement its methods
-
-```text
-interface Monarchy {
-  void birth(String child, String parent);
-  void death(String name);
-  List<String> getOrderOfSuccession();
-}
-```
-
-```text
-             king
-          /         \
-       a1            a2
-      /  \          /  \
-    b1   b2       c1    c2
-   / \     \
-d1    d2    d3
-```
-
-Order of Succession: king -&gt; a1 -&gt; b1 -&gt; d1 -&gt; d2 -&gt; b2 -&gt; d3 -&gt; a2 -&gt; c1 -&gt; c2
-
-**Example:**
-
-```text
-Input: King(the first monarch) has 3 children Andy, Bob, Catherine. Andy has one child Matthew. Bob has two children Alex and Asha. Catherine has no children. 
-Output: [King, Andy, Matthew, Bob, Alex, Asha, Catherine]
-```
-
-```python
-class Monarch(object):
-    def __init__(self):
-        self.name = None
-        self.childern = []
-        self.isAlive = True
-        
-class Monarchy(object):
-    def __init__(self):
-        self.firstMonarch = None
-        self.monarchs = {}
-        
-    def birth(self, child, parent):
-        # create monarch
-        monarch = Monarch()
-        monarch.name = child
-        # If it's the first monarch
-        if(parent == None and self.firstMonarch == None):
-            self.firstMonarch = monarch
-        else:
-            # find parent and add child
-            if not (parent in self.monarchs):
-                print "Parent not found"
-                return
-            self.monarchs[parent].childern.append(monarch)
-        # Add the monarch to hash table
-        self.monarchs[child] = monarch
-
-    def death(self, name):
-        self.monarchs[name].isAlive = False
-
-    def preOrder(self, node):
-        if(node):
-            if(node.isAlive == True):
-                # don't print dead people :'(
-                print node.name
-            for child in node.childern:
-                self.preOrder(child)
-
-    def getOrderOfSuccession(self):
-        self.preOrder(self.firstMonarch)
-
-# Main
-m = Monarchy()
-m.birth("king", None)
-m.birth("Andy", "king")
-m.birth("Bob", "king")
-m.birth("Catherine", "king")
-m.birth("Matthew" , "Andy")
-m.birth("Alex " , "Bob")
-m.birth("Asha " , "Bob")
-m.getOrderOfSuccession()
-```
-
-## 720. Longest Word in Dictionary
-
-Given a list of strings `words` representing an English Dictionary, find the longest word in `words` that can **be built one character at a time by other words** in `words`. If there is more than one possible answer, return the longest word with the smallest lexicographical order.If there is no answer, return the empty string.
-
-**Example 2:**
-
-```text
-Input: 
-words = ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-Output: "apple"
-Explanation: 
-Both "apply" and "apple" can be built from other words in the dictionary. However, "apple" is lexicographically smaller than "apply".
-```
-
-### sort words; then iterate word, check word\[-1\] in set, add to set. time=O\(n logn\)
-
-```python
-class Solution:
-    def longestWord(self, words: List[str]) -> str:
-        words.sort()
-        words_set, res = set(['']), ''
-        for word in words:
-            if word[:-1] in words_set:
-                words_set.add(word)
-                if len(word) > len(res):
-                    res = word
-        return res
-```
-
-### 变种：任何地方都能加上char
-
-跟原題一樣的是，必須從字串長度為1的string 開始構建，構建出來的string 也必須在dictionary中，然後找能夠構建出的最長string。 最後輸出是要輸出list of string, 就是整個構建的過程。原題是構建的時候是在string 的最後加上一個character，面試題是加在string的任何一個位置都可以。
-
-\["o","or","ord","word", "world", "p", "ap", "apl", "appe", "apple", "zapple"\] -&gt; 輸出最長的就是 \["p", "ap", "apl", "appe", "apple", "zapple"\] 
-
-**BFS:**  
-先把words 按长度从小到大sort。   
-从左往右扫words，hashtable记录parent， 初始化 `{‘’: None}`；所有word找小一号的孩子check hashtable，存在的话就把自己放进,key是自己，value是小一号的string。最后hashtable里都是合格string。 用一个global max记录最长长度和word。   
-`Time = O(nlogn + n * m) m是单词的最长长度，是len(words)`
-
-```python
-def path(words):
-    words.sort()
-    parent = {'': None}
-    max_word = ''
-    for w in words:
-        for j in range(len(w)):
-            if w[:i] + w[i+1:] in parent:
-                parent[w] = w[:i] + w[i+1:]
-                if len(w) > len(max_word):
-                    max_word = w
-                break
-    res = []
-    while max_word:
-        res.append(max_word)
-        max_word = parent[max_word]
-    return res[::-1]
-```
 
 ## 
+
+
 
 ## Max square
 

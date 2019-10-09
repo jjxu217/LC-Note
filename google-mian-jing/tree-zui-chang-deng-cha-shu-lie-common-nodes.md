@@ -1,4 +1,89 @@
-# Tree 最长等差数列/Common Nodes
+# Tree 皇位/等差数列/Common Nodes
+
+## **继承皇位 Monarchy**
+
+Given an the following interface, implement its methods
+
+```text
+interface Monarchy {
+  void birth(String child, String parent);
+  void death(String name);
+  List<String> getOrderOfSuccession();
+}
+```
+
+```text
+             king
+          /         \
+       a1            a2
+      /  \          /  \
+    b1   b2       c1    c2
+   / \     \
+d1    d2    d3
+```
+
+Order of Succession: king -&gt; a1 -&gt; b1 -&gt; d1 -&gt; d2 -&gt; b2 -&gt; d3 -&gt; a2 -&gt; c1 -&gt; c2
+
+**Example:**
+
+```text
+Input: King(the first monarch) has 3 children Andy, Bob, Catherine. Andy has one child Matthew. Bob has two children Alex and Asha. Catherine has no children. 
+Output: [King, Andy, Matthew, Bob, Alex, Asha, Catherine]
+```
+
+```python
+class Monarch(object):
+    def __init__(self):
+        self.name = None
+        self.childern = []
+        self.isAlive = True
+        
+class Monarchy(object):
+    def __init__(self):
+        self.firstMonarch = None
+        self.monarchs = {}
+        
+    def birth(self, child, parent):
+        # create monarch
+        monarch = Monarch()
+        monarch.name = child
+        # If it's the first monarch
+        if(parent == None and self.firstMonarch == None):
+            self.firstMonarch = monarch
+        else:
+            # find parent and add child
+            if not (parent in self.monarchs):
+                print "Parent not found"
+                return
+            self.monarchs[parent].childern.append(monarch)
+        # Add the monarch to hash table
+        self.monarchs[child] = monarch
+
+    def death(self, name):
+        self.monarchs[name].isAlive = False
+
+    def preOrder(self, node):
+        if(node):
+            if(node.isAlive == True):
+                # don't print dead people :'(
+                print node.name
+            for child in node.childern:
+                self.preOrder(child)
+
+    def getOrderOfSuccession(self):
+        self.preOrder(self.firstMonarch)
+
+# Main
+m = Monarchy()
+m.birth("king", None)
+m.birth("Andy", "king")
+m.birth("Bob", "king")
+m.birth("Catherine", "king")
+m.birth("Matthew" , "Andy")
+m.birth("Alex " , "Bob")
+m.birth("Asha " , "Bob")
+m.getOrderOfSuccession()
+```
 
 ## 二叉树最长等差数列
 
