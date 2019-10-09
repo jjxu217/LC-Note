@@ -118,35 +118,6 @@ class Solution(object):
                 return -1 if res==float('inf') else res
 ```
 
-## Diagonal traverse
-
-1. 一个二维矩阵， 按up-right顺序输出
-
-```python
-ex：mat=[[1,2,3]
-         [4,5,6]
-         [7,8,9]], output: 1,4,2,7,5,3,8,6,9
-```
-
-followup: what if the vectors in mat is not uniformly sized, namely not a rectangular matrix?
-
-My answer: find the longest vector in mat, and we can do it as a rectangular matrix
-
-```python
-class printupright:
-    def upright(matrix):
-        res = []
-        sum1 = 0
-        m, n = len(matrix), len(matrix[0])
-        while sum1 < m + n -1:
-            for i in range(m-1, -1, -1):
-                j = sum1 - i
-                if 0<= j < n:
-                    res.append(matrix[j])
-            sum1 += 1
-        return res
-```
-
 ## max path in grid 二维矩阵最大路径和
 
 给一个二维矩阵，每个元素都是非负整数。找到所有可能路径的最大的和。 在一条路径中，不能包含0，路径可以向上下左右延伸，每个元素只能访问一次。假设矩阵中正整数的路径不可能形成环。
