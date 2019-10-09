@@ -12,6 +12,7 @@
   * [Remove Extra Edge](google-mian-jing/remove-extra-edge.md)
   * [Chocolate Sweetness](google-mian-jing/chocolate-sweetness.md)
   * [498. Diagonal Traverse](google-mian-jing/498.-diagonal-traverse.md)
+  * [792. Number of Matching Subsequences 1055. Shortest Way to Form String](google-mian-jing/792.-number-of-matching-subsequences-1055.-shortest-way-to-form-string.md)
   * [idea](google-mian-jing/idea.md)
 * [Sort](sort/README.md)
   * [K Largest/Smallest](sort/973.-k-closest-points-to-origin.md)
