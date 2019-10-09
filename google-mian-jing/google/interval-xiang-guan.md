@@ -1,4 +1,4 @@
-# Interval相关
+# 程序执行/Missing Ranges
 
 ## 163. Missing Ranges
 
@@ -31,8 +31,8 @@ class Solution:
 输入一个list，每个元素包含是一个进程的id和起止时间。 要求输出所有进程的standalone时间（如果有的话）
 
 ```text
- input: proc {100, 200, id1}, {150, 300, id2}
- return: {id1, 50} {id2, 100}
+ input: [[100, 200, 'id1'], [150, 300, 'id2'], [160, 250, 'id3'], [180, 400, 'id4']]
+ return: [('id1', 50), ('id4', 100)]
 ```
 
 先按其实时间sort proc；  
@@ -46,18 +46,24 @@ def CPUStandAlone(CPURunTime):
     if len(CPURunTime) < 1: return []
     res = []
     CPURunTime.sort()
-    cur = [cpuRunTime[0][0], cpuRunTime[0][1], cpuRunTime[0][2], 0]
+    cur = [CPURunTime[0][0], CPURunTime[0][1], CPURunTime[0][2], 0]
     
     for beg, end, idx in CPURunTime[1:]:
         if cur[1] <= beg:
             res.append((cur[2], cur[1] - cur[0] + cur[3]))
             cur = [beg, end, idx, 0]
         elif cur[1] <= end:
-            res.append((cur[2], beg - cur[0]))
+            if cur[0] < beg:
+                res.append((cur[2], beg - cur[0]))
             cur = [cur[1], end, idx, 0]
         elif cur[0] <= end:
-            cur = [end, cur[1], cur[2], cur[3] + beg - cur[0]]
+            cur = [end, cur[1], cur[2], cur[3] + max(beg - cur[0], 0)]
+            
     res.append((cur[2], cur[3] + cur[1] - cur[0]))        
     return res    
 ```
+
+>
+
+{% page-ref page="../../stack/636.-exclusive-time-of-functions.md" %}
 
