@@ -509,11 +509,9 @@ class Solution:
 
 ### 变种：任何地方都能加上char
 
-跟原題一樣的是，必須從字串長度為1的string 開始構建，構建出來的string 也必須在dictionary中，然後找能夠構建出的最長string。 跟原題不一樣的部分在於，最後輸出是要輸出list of string, 就是整個構建的過程。還有，原題是構建的時候是在string 的最後加上一個character，面試題是加在string的任何一個位置都可以。
+跟原題一樣的是，必須從字串長度為1的string 開始構建，構建出來的string 也必須在dictionary中，然後找能夠構建出的最長string。 最後輸出是要輸出list of string, 就是整個構建的過程。原題是構建的時候是在string 的最後加上一個character，面試題是加在string的任何一個位置都可以。
 
-力寇原題example: words = \["w","wo","wor","worl", "world"\] Output: "world"
-
-面試題example: words = \["o","or","ord","word", "world"\] Output: \["o","or","ord","word", "world"\] 注意words 可以有很多string，\["o","or","ord","word", "world", "p", "ap", "apl", "appe", "apple", "zapple"\] -&gt; 輸出最長的就是 \["p", "ap", "apl", "appe", "apple", "zapple"\] 這題我寫了一個時間 O\(N\*M\) 的解，N是number of string, M是這些string中最大character數。不知道能夠用字典樹解嗎?
+\["o","or","ord","word", "world", "p", "ap", "apl", "appe", "apple", "zapple"\] -&gt; 輸出最長的就是 \["p", "ap", "apl", "appe", "apple", "zapple"\] 
 
 **BFS:**  
 先把words 按长度从小到大sort。   
@@ -522,21 +520,21 @@ class Solution:
 
 ```python
 def path(words):
-    words.sort(key=len)
-    parent = {'':None}
-    max_len, max_word = 0, ''
+    words.sort()
+    parent = {'': None}
+    max_word = ''
     for w in words:
-        if len(w) > max_len:
-            max_word = w
         for j in range(len(w)):
             if w[:i] + w[i+1:] in parent:
                 parent[w] = w[:i] + w[i+1:]
+                if len(w) > len(max_word):
+                    max_word = w
                 break
     res = []
     while max_word:
         res.append(max_word)
         max_word = parent[max_word]
-    return res
+    return res[::-1]
 ```
 
 {% page-ref page="idea.md" %}
