@@ -38,7 +38,7 @@ class Solution:
 先按其实时间sort proc；  
 Iterate all process， 分类  
 1. nxt beginning &gt; cur ending: 记录cur, nxt变cur  
-2. nxt ending &gt; cur ending: cur时间=nxt beginning - cur beginning,   
+2. nxt ending &gt; cur ending: cur时间=nxt beginning - cur beginning, 注意nxt\_begin time可能早于cur\_begin time  
 3. nxt ending &gt; cur beginning: 
 
 ```python
@@ -46,6 +46,7 @@ def CPUStandAlone(CPURunTime):
     if len(CPURunTime) < 1: return []
     res = []
     CPURunTime.sort()
+    #beg time, end time, id, cumulative time
     cur = [CPURunTime[0][0], CPURunTime[0][1], CPURunTime[0][2], 0]
     
     for beg, end, idx in CPURunTime[1:]:
