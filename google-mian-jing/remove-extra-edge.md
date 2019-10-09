@@ -1,4 +1,26 @@
-# Remove Extra Edge
+# 删边
+
+## **二叉树删除边** LC684，685
+
+**684. Redundant Connection: undirected graph**  
+union-find  
+iterate through the edges  
+if not same root, connect  
+if the same root already, redundant
+
+**685. Redundant Connection: directed graph**  
+1. 2 parents, no circle  
+2. 2 parents, with a circle   
+3. 1 parent, with a circle
+
+```text
+Check whether there is a node that has multiple parents.
+  If yes, store 2 edges: edge 1, edge 2
+    union-find on all edges except that 2 edges
+          if edge 1 creates a circle, remove it
+          else edge 2
+If no, union-find and remove the edge that creating a circle
+```
 
 Given a binary tree, where an arbitary node has 2 parents i.e two nodes in the tree have the same child. Identify the defective node and remove an extra edge to fix the tree.
 

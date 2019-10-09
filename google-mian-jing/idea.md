@@ -1,8 +1,6 @@
 # idea
 
-LC 1088/853/815/341/987/173/841/818/139、1143/943/315/465/743/163/43/1087/1055/253/911/340、1047、750/1011/139 word break/path sum binary tree/7/ 实现tik tac tok/340、659、41 720
 
-LC 123 强制 2 buys 2 sells 求 maximum profit.
 
 ## 仓库
 
@@ -173,11 +171,7 @@ followup3: 如果有很多人，但是他们身高都差不多，怎么处理。
 
 #### 单调递减栈，前后给扫一遍，算两边的高的
 
-## Complete binary tree
-
-题目是一个complete binary tree， 所有的node从上到下，从左到右都做了编号，求某个编号是否存在在这个树里
-
-> > 因为左子树的index是parent index的两倍， 右子树的index是两倍加一， 用这个可以逐级推算出每个level的parent的index， 然后验证是否存在
+## 
 
 ## Random Stream
 
@@ -248,65 +242,38 @@ class StreamIndex:
 
 followup: 所有操作為O\(1\) queue: 存所有元素； num\_zero: 0的数量； product: 所有非零的数的乘积
 
-如果pop出去的数是0， num\_zero--, 否则product /= queue.popleft\(\);   
 如果push进来的数是0， num\_zero++, 否则product \*= queue\[-1\];  
+如果pop出去的数是0， num\_zero--, 否则product /= queue.popleft\(\) 或者1 如果不够k个;   
 if\(num\_zero &gt;0\) return 0; else return product;
 
-## 二叉树最长等差数列
-
-给一个二叉树，找出其所包含的最长的等差数列\(common diff可以&gt;0 / =0 / &lt;0\)的长度（注意只能从上往下找），我用了dfs。
-
-```text
-比如：
-            2
-        4       5
-      6   3   2   1
-  8  7 9 8 6 1 6  7
-输出 4(2->4->6->8).
-再比如：
-          2
-        4 5
-      6 3 2 1
-  7 7 9 8 6 1 6 7
-输出 3(2->4->6).
-```
-
-Follow up: 如果也可以bottom up，怎么做。  
-recursion：当前node看左右子树的diff 算length， 返回两个子树的长度，两个diff
-
-```text
-比如：
-  4
-2  6
-输出3（2->4->6）
-```
-
 ```python
-def commonDifference(root):
-    maxlen = 0
-    stack = []
-    if root.left:
-        stack.append((root.left,root.left.val-root.val,2))
-    if root.right:
-        stack.append((root.right,root.right.val-root.val,2))
-
-    while stack:
-        node,comm,cur_len = stack.pop()
-        if node.left:
-            if node.left.val - node.val == comm:
-                stack.append((node.left,comm,cur_len+1))
-            else:
-                maxlen = max(maxlen,cur_len)
-                stack.append((node.left,node.left.val-node.val,2))
-        if node.right:
-            if node.right.val - node.val == comm:
-                stack.append((node.right,comm,cur_len+1))
-            else:
-                maxlen = max(maxlen,cur_len)
-                stack.append((node.right,node.right.val-node.val,2))
-
-    return maxlen
+class Solution:
+	def __init__(self, K):
+		self.zeros = 0
+		self.product = 1
+		self.queue = collections.deque()
+		self.K = K
+	
+	def insert(self, n):
+		self.queue.append(n)
+		pre = 1	
+		if len(self.queue) > self.K:
+			pre = self.queue.popleft()	
+					
+		if n == 0:
+			self.zeros += 1
+		else:
+			self.product *= n
+		
+		if pre == 0:
+			self.zeros -= 1
+		else:
+			self.product /= pre		
+		
+		return 0 if self.zeros else self.product
 ```
+
+
 
 ## 2个string palindrome
 
@@ -537,87 +504,7 @@ def path(words):
     return res[::-1]
 ```
 
-{% page-ref page="idea.md" %}
-
-## 取硬币： DP
-
-有很多堆硬币，每堆里混着各种数值，你只能从上面取，一次取几个都行。现在你一共可以取n个，问最多可以取多少钱。” 
-
-`dp[i][j]`代表从前i个堆里拿j个硬币，最多可拿到的总额。  
-算`dp[i][j]`时，在第i堆取k个时，要看在前i-1堆里取j-k个最多能得到多少钱，尝试所有k后，最大‍‌‍‍‍‌‍‌‍‌‌‍‍‍‍‌‍‌‍的那个填到dp\[i\]\[j\]。写code时应该还有很多要check,比如k的取值范围。  
-`dp[i][j] = max(dp[i-1][j-k] + sum(money[i][:k]) for k in min(len(money[i], j)`
-
-```python
-def getcoin(money, n):
-    m = len(money)#一共m堆硬币
-    dp = [[0] * (n + 1) for _ in range(m + 1)]
-    for i in range(1, n + 1):
-        for j in range(1, m + 1):
-            for k in range(min(len(money[i]), j)):
-                dp[i][j] = max(dp[i][j], dp[i-1][j-k] + sum(money[i][:k])
-    return dp[-1][-1]
-```
-
-
-
-## Common Nodes in Two Binary Search Trees
-
-Given two Binary Search Trees, find common nodes in them. In other words, find intersection of two BSTs.
-
-**Example:**  
-[![tree](https://media.geeksforgeeks.org/wp-content/cdn-uploads/tree5.png)](https://media.geeksforgeeks.org/wp-content/cdn-uploads/tree5.png)
-
- **\(Linear Time and limited Extra Space\)** We can find common elements in O\(n\) time and O\(h1 + h2\) extra space where h1 and h2 are heights of first and second BSTs respectively.  
-The idea is to use [iterative inorder traversal](https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/). We use two auxiliary stacks for two BSTs. Since we need to find common elements, whenever we get same element, we print it.
-
-```python
-def Common(root1, root2):      
-    # Create two stacks for two inorder traversals  
-    s1 = [] 
-    s2 = [] 
-    res = []
-  
-    while True:         
-        # append the Nodes of first tree in stack s1  
-        if root1: 
-            s1.append(root1) 
-            root1 = root1.left  
-        # append the Nodes of second tree in stack s2  
-        elif root2: 
-            s2.append(root2) 
-            root2 = root2.left 
-  
-        # Both root1 and root2 are NULL here  
-        elif s1 and s2: 
-            root1, root2 = s1[-1], s2[-1]  
-  
-            # If current keys in two trees are same  
-            if root1.key == root2.key: 
-                res.appemd(root1.key)
-                s1.pop(); s2.pop()           
-                # move to the inorder successor  
-                root1 = root1.right  
-                root2 = root2.right 
-  
-            elif root1.key < root2.key:                
-                # If Node of first tree is smaller, than  
-                # that of second tree, then its obvious  
-                # that the inorder successors of current  
-                # Node can have same value as that of the  
-                # second tree Node. Thus, we pop from s2  
-                s1.pop() 
-                root1 = root1.right  
-  
-                # root2 is set to NULL, avoid append node to s2 twice  
-                root2 = None
-            elif root1.key > root2.key: 
-                s2.pop(-1) 
-                root2 = root2.right  
-                root1 = None
-        # Both roots and both stacks are empty  
-        else: 
-            return res 
-```
+## 
 
 ## Max square
 
