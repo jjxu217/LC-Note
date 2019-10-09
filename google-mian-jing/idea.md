@@ -592,6 +592,25 @@ Given a matrix of size m x n, there exists a square of all 1s in the matrix \(al
 
 #### check `(sqrt(n)*i， sqrt(n)*j)` points in the 2D array to see whether there is 1 in it。  Then binary search to find top-left, and bottom-right. Total complexity is O\(\(N/sqrt\(N\)\)^2 + 4\*log\(N\)\) which is simply O\(N\).
 
+## **Delete every alternative node in a circular linked list.**
+
+**Example:**
+
+```text
+Input: head -> n1 -> n2 -> n3 -> head
+Output: head -> n2 -> head
+```
+
+code to delete even positioned nodes
+
+```python
+def delete_circular(head):
+		head.next = head.next.next
+	    temp = head.next
+	    while temp!=head and temp.next!=head:
+	        temp.next = temp.next.next
+```
+
 ## char加密
 
 题目是说有一个给字符加密的算法，26个字母都有对应唯一且不同的加密后的字符，比如字母a被加密成y, b被加密成n，等等。 给了两个例子，就是加密前和加密后的句子。我不记得具体的句子是什么了， 但是我有当时记录下的每个字母的对应关系。要求就是写一个程序，输入是一个句子，输出就是按照例子里的加密方式加密后的句子。  
