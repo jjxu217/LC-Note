@@ -273,5 +273,5 @@ F('aabc')
 >>[0, 0, 1, 2]
 ```
 
-{% page-ref page="../hashtable-and-string/205.-isomorphic-strings.md" %}
+{% page-ref page="../../hashtable-and-string/205.-isomorphic-strings.md" %}
 

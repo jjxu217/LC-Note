@@ -1,4 +1,4 @@
-# idea
+# 扫两遍+数学
 
 ## 仓库
 
@@ -29,54 +29,15 @@ def NumOfObj(obj, storage):
     return res
 ```
 
-## Non-overlap Interval
+## N人排队
 
-给一个数组（只有正整数），给一个数K，找出两段不overlap的interval使得每一段interval里数的和为K，求两段interval长度之和的最小值。 题目有点绕，e.g. A=\[1,2,2,3,1,4\], K=5, 能找到的interval是 \[1,2,2\] & \[1,4\] \[2,3\] & \[1,4\] 返回 4 因为\[2,3\], \[1,4\]是和最小的两段，而不是\[1,2,2\]，\[1,4\]
+N个人站一列，每个人是一个int代表高度。A代表任意一个人，B在A前面。如果AB之间没有比B高的，那么定义A能看到B。让输出列最后那个人能看到的人数。 public int count\(int\[\] people\)
 
-#### 求前缀和， 先从前往后一遍求前i个数中最短的interval A\[i\]， 再从后往前一遍算后n-i中最短的interval B\[\] 然后对每个i算左右总数最小的
+followup1: 定义A能够看到B为，AB之间没有比A高也没有比B高的。输出全部人各能看到几个人。public int\[\] count\(int\[\] people\)   
+followup2: 如果列中每个人的高度都不同，怎么处理。   
+followup3: 如果有很多人，但是他们身高都差不多，怎么处理。
 
-```python
-class Solution(object):
-        def minSubarray(self, arr, K):
-                n=len(arr)
-                preSum=0
-                A={0:-1}
-                B={0:0}
-
-                minlenA=[float('inf')]*n
-                localmin=float('inf')
-                for i in range(n):
-                        preSum+=arr[i]
-                        if preSum-K in A:
-                                if i-A[preSum-K]<localmin:
-                                        minlenA[i]=i-A[preSum-K]
-                                        localmin=i-A[preSum-K]
-                        A[preSum]=i
-
-                preSum=0
-                minlenB=[float('inf')]*n
-                localmin=float('inf')
-                for j in range(n)[::-1]:
-                        preSum+=arr[j]
-                        if preSum-K in B:
-                                if n-j-B[preSum-K]<localmin:
-                                        minlenB[j]=n-j-B[preSum-K]
-                                        localmin=n-j-B[preSum-K]
-                        B[preSum]=n-j
-
-                res=float('inf')
-                for k in range(n):
-                        if k==0:
-                                cur=minlenB[0]
-                        else:
-                                cur=minlenA[k-1]+minlenB[k]
-                        if cur<res:
-                                res=cur
-
-                return -1 if res==float('inf') else res
-```
-
-
+#### 单调递减栈，前后给扫一遍，算两边的高的
 
 ## Sparse Vector
 
@@ -104,87 +65,6 @@ while i < len(a) and j < len(b):
     else:
         j += 1
 print(result)
-```
-
-## 
-
-## 
-
-## Excel 操作
-
-求get\_reference\_list\("=A10_5_A77\*\(B2+3/C3\)"\) ⇒ \["A10", "A77", "B2", "C3"\] input是一个 Formula string ，返回是一个列表，列表的元素是公式中引用到的Spreadsheet column。 直接从左往右暴力字符串解析就可以搞定了。 
-
-follow up是如果给定spreadsheet的cell和其公式，检查引用关系中是否有circle。 比如 has\_circle\({  
-"A1": "=D1+B1+1",  
-"B1": "=D1+C1+2",  
-"C1": "=D1+ A1+3"  
-}\) ⇒ True // circular references between A1, B1, and C
-
-BFS：用每个node 只generate一次，加入set。
-
-## N人排队
-
-N个人站一列，每个人是一个int代表高度。A代表任意一个人，B在A前面。如果AB之间没有比B高的，那么定义A能看到B。让输出列最后那个人能看到的人数。 public int count\(int\[\] people\)
-
-followup1: 定义A能够看到B为，AB之间没有比A高也没有比B高的。输出全部人各能看到几个人。public int\[\] count\(int\[\] people\)   
-followup2: 如果列中每个人的高度都不同，怎么处理。   
-followup3: 如果有很多人，但是他们身高都差不多，怎么处理。
-
-#### 单调递减栈，前后给扫一遍，算两边的高的
-
-## 
-
-## Random Stream
-
-Stream: backiuwcatbeforewerehpqojf Input: \["back", "before", "cat", fore", "were", "for"\] Output: \[0, 10, 7, 12, 16, 12\] Generator: char getNextChar\(\);
-
-给一个random stream，只能用getNextChar\(\);获取下一个char，给一个list of input words，找每个word在stream中出现的位置（出现位置） 假设stream够长，即使是random，也一定会出现每个word
-
-My idea would be to build a trie from the input words. Keep a list of trie nodes as candidates, and for each new character read, try to extend each candidate node. If a word is reached by a node, we immediately know its length.
-
-```python
-class TrieNode():
-    def __init__(self):
-        self.children = collections.defaultdict(TrieNode)
-        self.pos = -1
-        self.length = -1
-        
-class Trie():
-    def __init__(self):
-        self.root = TrieNode()
-
-    def addWord(self, word, i, length):
-        node = self.root
-        for w in word:
-            node = node.children[w]
-        node.pos = i
-        node.length = length
-        
-class StreamIndex:
-    def __init__(self, words: List[str]):
-        self.t = Trie()
-        self.cand = [self.t.root]
-        for i, word in enumerate(words):
-            self.t.addWord(word, i, len(word))
-            
-        n = len(word)
-        res = [0] * n
-        cnt = idx = 0 #已经找到的word数，stream中的idx
-        while cnt < n:
-            char = getNextChar()      
-            nxt_cand = [] #contain the trie node of next candidate
-            for c in self.cand:
-                if char in c.children:
-                    node = c.children[char]
-                    nxt_cand.append(node)
-                    #如果找到一个词, 相应结果记录其实的index
-                    if node.pos >= 0:
-                        cnt += 1
-                        res[node.pos] = idx - node.length + 1
-                        node.pos = -1  
-            idx += 1       
-            self.cand = nxt_cand + [self.t.root]
-        return res
 ```
 
 ## Confusing number
@@ -233,63 +113,6 @@ class Solution:
 		
 		return 0 if self.zeros else self.product
 ```
-
-
-
-## 2个string palindrome
-
-给两个string，相同长度，问能不能在同一个地方切一刀，然后两个string的各半边组成一个palindrome。 比如aabac和xyzaa，可以在aab\|ac和xyz\|aa这里切，然后aab和aa可以组成palindrome。要求是必须切在相同的位置，而且要第一个左边和第二个右边，或者第二个左边和第一个右边组成palindrome。  
-followup是给出所有位置，小哥给了提示才用了two pointer做的
-
-```python
-def cut2string(s1, s2):
-    n = len(s1)
-    p1, p2 = 0, n - 1
-    while p1 <= p2:
-        if s1[p1] == s2[p2]:
-            p1 += 1
-            p2 -= 1
-```
-
-## 131. Palindrome Partitioning
-
-Given a string _s_, partition _s_ such that every substring of the partition is a palindrome.  
-Return all possible palindrome partitioning of _s_.
-
-**Example:**
-
-```text
-Input: "aab"
-Output:
-[
-  ["aa","b"],
-  ["a","a","b"]
-]
-```
-
-### DFS:
-
-```python
-    def partition(self, s):
-        def dfs(s, path, res):
-            if not s:
-                res.append(path[:])
-                return
-            for i in range(1, len(s)+1):
-                if s[:i] == s[i-1::-1]:
-                    path.append(s[:i])
-                    dfs(s[i:], path, res)
-                    path.pop()        
-        res = []
-        dfs(s, [], res)
-        return res
-```
-
-
-
-## 
-
-
 
 ## Max square
 

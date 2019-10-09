@@ -96,5 +96,5 @@ def removeEdgeNT(root):
 
 ## See also Redundant connection
 
-{% page-ref page="../graph/dfs-and-union-find.md" %}
+{% page-ref page="../../graph/dfs-and-union-find.md" %}
 
