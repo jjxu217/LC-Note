@@ -21,7 +21,7 @@ Explanation: As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" 
 return its length 5.
 ```
 
-### Solution: BFS, use deque
+### Solution: BFS, use deque，记录下一个word和已经跳的次数
 
 ```python
 class Solution:
@@ -73,7 +73,7 @@ Output: []
 Explanation: The endWord "cog" is not in wordList, therefore no possible transformation.
 ```
 
-### Sol: BFS, traverse layer by layer
+### Sol: BFS, traverse layer by layer，dic={word, list of list=all path}
 
 since we need to record all the possible paths。路径先分开再重合，必须layer by layer处理，删除visited的node；不可像上题那样，一旦有一个node visited ，直接删除。
 
@@ -96,7 +96,8 @@ class Solution:
                         for c in 'abcdefghijklmnopqrstuvwxyz':
                             new_word = w[:i] + c + w[i+1:]
                             if new_word in wordList:
-                                new_layer[new_word] += [j + [new_word] for j in layer[w]] # add new word to all sequences and form new layer element
+                            # add new word to all sequences and form new layer element
+                                new_layer[new_word] += [j + [new_word] for j in layer[w]] 
             wordList -= set(new_layer.keys()) # remove from dictionary to prevent loops
             layer = new_layer
         return []

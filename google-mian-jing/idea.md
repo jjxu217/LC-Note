@@ -12,6 +12,23 @@ follow up1 是如果storage的空间远远小于object的数量。 **用heap来�
 
 follow up2 是如果storage左右都能推进去。 我说是维护一个从左到右的min height和从右往左的min height,然后能放的高度是两个min height中大的那个，他说应该可以
 
+```python
+def NumOfObj(obj, storage):
+    for i in range(1, len(storage)):
+        storage[i] = min(storage[i], storage[i - 1])
+    obj.sort()
+    i, j = 0, len(storage) - 1
+    res = 0
+    while i < len(obj) and j >= 0:
+        if obj[i] < storage[j]:
+            res += 1
+            i += 1
+            j -= 1
+        else:
+            j -= 1
+    return res
+```
+
 ## O-1 matrix，
 
 找出0 1 matrix中是否存在从第一行到最后一行的路径，1才能通过。
@@ -130,7 +147,7 @@ class printupright:
         return res
 ```
 
-## 二维矩阵最大路径和
+## max path in grid 二维矩阵最大路径和
 
 给一个二维矩阵，每个元素都是非负整数。找到所有可能路径的最大的和。 在一条路径中，不能包含0，路径可以向上下左右延伸，每个元素只能访问一次。假设矩阵中正整数的路径不可能形成环。
 
@@ -179,6 +196,8 @@ followup1: 定义A能够看到B为，AB之间没有比A高也没有比B高的。
 followup2: 如果列中每个人的高度都不同，怎么处理。   
 followup3: 如果有很多人，但是他们身高都差不多，怎么处理。
 
+#### 单调递减栈，前后给扫一遍，算两边的高的
+
 ## Complete binary tree
 
 题目是一个complete binary tree， 所有的node从上到下，从左到右都做了编号，求某个编号是否存在在这个树里
@@ -190,6 +209,8 @@ followup3: 如果有很多人，但是他们身高都差不多，怎么处理。
 Stream: backiuwcatbeforewerehpqojf Input: \["back", "before", "cat", fore", "were", "for"\] Output: \[0, 10, 7, 12, 16, 12\] Generator: char getNextChar\(\);
 
 给一个random stream，只能用getNextChar\(\);获取下一个char，给一个list of input words，找每个word在stream中出现的位置（出现位置） 假设stream够长，即使是random，也一定会出现每个word
+
+My idea would be to build a trie from the input words. Keep a list of trie nodes as candidates, and for each new character read, try to extend each candidate node. If a word is reached by a node, we immediately know its length.
 
 ## Confusing number
 
@@ -350,5 +371,232 @@ def CPUStandAlone(CPURunTime):
             cur = [end, cur[1], cur[2], cur[3] + beg - cur[0]]
     res.append((cur[2], cur[3] + cur[1] - cur[0]))        
     return res    
+```
+
+## **Monarchy**
+
+Given an the following interface, implement its methods
+
+```text
+interface Monarchy {
+  void birth(String child, String parent);
+  void death(String name);
+  List<String> getOrderOfSuccession();
+}
+```
+
+```text
+             king
+          /         \
+       a1            a2
+      /  \          /  \
+    b1   b2       c1    c2
+   / \     \
+d1    d2    d3
+```
+
+Order of Succession: king -&gt; a1 -&gt; b1 -&gt; d1 -&gt; d2 -&gt; b2 -&gt; d3 -&gt; a2 -&gt; c1 -&gt; c2
+
+**Example:**
+
+```text
+Input: King(the first monarch) has 3 children Andy, Bob, Catherine. Andy has one child Matthew. Bob has two children Alex and Asha. Catherine has no children. 
+Output: [King, Andy, Matthew, Bob, Alex, Asha, Catherine]
+```
+
+```python
+class Monarch(object):
+    def __init__(self):
+        self.name = None
+        self.childern = []
+        self.isAlive = True
+        
+class Monarchy(object):
+    def __init__(self):
+        self.firstMonarch = None
+        self.monarchs = {}
+        
+    def birth(self, child, parent):
+        # create monarch
+        monarch = Monarch()
+        monarch.name = child
+        # If it's the first monarch
+        if(parent == None and self.firstMonarch == None):
+            self.firstMonarch = monarch
+        else:
+            # find parent and add child
+            if not (parent in self.monarchs):
+                print "Parent not found"
+                return
+            self.monarchs[parent].childern.append(monarch)
+        # Add the monarch to hash table
+        self.monarchs[child] = monarch
+
+    def death(self, name):
+        self.monarchs[name].isAlive = False
+
+    def preOrder(self, node):
+        if(node):
+            if(node.isAlive == True):
+                # don't print dead people :'(
+                print node.name
+            for child in node.childern:
+                self.preOrder(child)
+
+    def getOrderOfSuccession(self):
+        self.preOrder(self.firstMonarch)
+
+# Main
+m = Monarchy()
+m.birth("king", None)
+m.birth("Andy", "king")
+m.birth("Bob", "king")
+m.birth("Catherine", "king")
+m.birth("Matthew" , "Andy")
+m.birth("Alex " , "Bob")
+m.birth("Asha " , "Bob")
+m.getOrderOfSuccession()
+```
+
+## Q1. 力寇 七二零 變種
+
+跟原題一樣的是，必須從字串長度為1的string 開始構建，構建出來的string 也必須在dictionary中，然後找能夠構建出的最長string。 跟原題不一樣的部分在於，最後輸出是要輸出list of string, 就是整個構建的過程。還有，原題是構建的時候是在string 的最後加上一個character，面試題是加在string的任何一個位置都可以。
+
+力寇原題example: words = \["w","wo","wor","worl", "world"\] Output: "world"
+
+面試題example: words = \["o","or","ord","word", "world"\] Output: \["o","or","ord","word", "world"\] 注意words 可以有很多string，\["o","or","ord","word", "world", "p", "ap", "apl", "appe", "apple", "zapple"\] -&gt; 輸出最長的就是 \["p", "ap", "apl", "appe", "apple", "zapple"\] 這題我寫了一個時間 O\(N\*M\) 的解，N是number of string, M是這些string中最大character數。不知道能夠用字典樹解嗎?
+
+**BFS:**  
+先把words 按长度从小到大sort。   
+从左往右扫words，hashtable记录parent， 初始化 `{‘’: None}`；所有word找小一号的孩子挨着check hashtable，存在的话就把自己放进,key是自己，value是小一号的string。最后hashtable里都是合格string。 用一个global max记录最长长度和word。   
+`Time = O(nlogn + n * m) m是单词的最长长度，是len(words)`
+
+```python
+def path(words):
+    words.sort(key=len)
+    parent = {'':None}
+    max_len, max_word = 0, ''
+    for w in words:
+        if len(w) > max_len:
+            max_word = w
+        for j in range(len(w)):
+            if w[:i] + w[i+1:] in parent:
+                parent[w] = w[:i] + w[i+1:]
+                break
+    res = []
+    while max_word:
+        res.append(max_word)
+        max_word = parent[max_word]
+    return res
+```
+
+## 取硬币： DP
+
+有很多堆硬币，每堆里混着各种数值，你只能从上面取，一次取几个都行。现在你一共可以取n个，问最多可以取多少钱。” 
+
+`dp[i][j]`代表从前i个堆里拿j个硬币，最多可拿到的总额。  
+算`dp[i][j]`时，在第i堆取k个时，要看在前i-1堆里取j-k个最多能得到多少钱，尝试所有k后，最大‍‌‍‍‍‌‍‌‍‌‌‍‍‍‍‌‍‌‍的那个填到dp\[i\]\[j\]。写code时应该还有很多要check,比如k的取值范围。  
+`dp[i][j] = max(dp[i-1][j-k] + sum(money[i][:k]) for k in min(len(money[i], j)`
+
+```python
+def getcoin(money, n):
+    m = len(money)#一共m堆硬币
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            for k in range(min(len(money[i]), j)):
+                dp[i][j] = max(dp[i][j], dp[i-1][j-k] + sum(money[i][:k])
+    return dp[-1][-1]
+```
+
+
+
+## Common Nodes in Two Binary Search Trees
+
+Given two Binary Search Trees, find common nodes in them. In other words, find intersection of two BSTs.
+
+**Example:**  
+[![tree](https://media.geeksforgeeks.org/wp-content/cdn-uploads/tree5.png)](https://media.geeksforgeeks.org/wp-content/cdn-uploads/tree5.png)
+
+ **\(Linear Time and limited Extra Space\)** We can find common elements in O\(n\) time and O\(h1 + h2\) extra space where h1 and h2 are heights of first and second BSTs respectively.  
+The idea is to use [iterative inorder traversal](https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/). We use two auxiliary stacks for two BSTs. Since we need to find common elements, whenever we get same element, we print it.
+
+```python
+def Common(root1, root2):      
+    # Create two stacks for two inorder traversals  
+    s1 = [] 
+    s2 = [] 
+    res = []
+  
+    while True:         
+        # append the Nodes of first tree in stack s1  
+        if root1: 
+            s1.append(root1) 
+            root1 = root1.left  
+        # append the Nodes of second tree in stack s2  
+        elif root2: 
+            s2.append(root2) 
+            root2 = root2.left 
+  
+        # Both root1 and root2 are NULL here  
+        elif s1 and s2: 
+            root1, root2 = s1[-1], s2[-1]  
+  
+            # If current keys in two trees are same  
+            if root1.key == root2.key: 
+                res.appemd(root1.key)
+                s1.pop(); s2.pop()           
+                # move to the inorder successor  
+                root1 = root1.right  
+                root2 = root2.right 
+  
+            elif root1.key < root2.key:                
+                # If Node of first tree is smaller, than  
+                # that of second tree, then its obvious  
+                # that the inorder successors of current  
+                # Node can have same value as that of the  
+                # second tree Node. Thus, we pop from s2  
+                s1.pop() 
+                root1 = root1.right  
+  
+                # root2 is set to NULL, avoid append node to s2 twice  
+                root2 = None
+            elif root1.key > root2.key: 
+                s2.pop(-1) 
+                root2 = root2.right  
+                root1 = None
+        # Both roots and both stacks are empty  
+        else: 
+            return res 
+```
+
+## Max square
+
+Given a matrix of size m x n, there exists a square of all 1s in the matrix \(all other entries in the matrix are 0s\). The square of 1s is `sqrt(n)` or greater in size. Find the top left corner of the square and return the size of the square as well.
+
+#### check `(sqrt(n)*i， sqrt(n)*j)` points in the 2D array to see whether there is 1 in it。  Then binary search to find top-left, and bottom-right. Total complexity is O\(\(N/sqrt\(N\)\)^2 + 4\*log\(N\)\) which is simply O\(N\).
+
+## char加密
+
+题目是说有一个给字符加密的算法，26个字母都有对应唯一且不同的加密后的字符，比如字母a被加密成y, b被加密成n，等等。 给了两个例子，就是加密前和加密后的句子。我不记得具体的句子是什么了， 但是我有当时记录下的每个字母的对应关系。要求就是写一个程序，输入是一个句子，输出就是按照例子里的加密方式加密后的句子。  
+例子里的句子里有4个字母d, n, v, x没有出现过，所以我并不知道他们的具体对应关系，所以也没有办法hard code, 不过剩下没有出现过的字母就是g,h,i,s， 所以肯定是分别对应其中的一个。  
+感觉应该是有某种规律，但是我死活想不出来。请问大家有没有什么思路？谢谢！  
+‍‌‍‍‍‌‍‌‍‌‌‍‍‍‍‌‍‌‍
+
+| 原 | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 加密后 | y | n | f | ? | c | w | l | b | k | u | o | m | x | ? | e | v | z | p | d | r | j | ? | t | ? | a | q |
+
+```text
+同学，我看有些字符是一个循环的样子，
+a -> y.    y -> a
+j   -> u,  u -> j
+q -> z,  z-> u
+所以我猜猜是不是行程一个换就行了？？
+i->k->o->e->c->f->w->t->r->p->v->?
+g->l->m->x->?                                                       
+h->b->n->?               
+s->d->?       
+所以v对应i， x对应g， n对应h, d对应s。
 ```
 

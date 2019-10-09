@@ -67,5 +67,9 @@ Return a copy of the string with the leading and trailing characters removed. Th
 'example'
 ```
 
+### str.find\(\)
 
+The find\(\) method returns the lowest index of the substring if it is found in given string. If its is not found then it returns -1.
+
+Syntax : `str.find(sub,start,end)`
 
