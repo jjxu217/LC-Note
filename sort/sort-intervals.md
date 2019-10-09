@@ -60,7 +60,7 @@ step2:  maintain a MinHeap, according to end time
 ```python
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        intervals.sort(key=lambda x: x[0])
+        intervals.sort()
         #inuse: min-heap:正在进行会议的ending time
         inuse = []
         res = 0

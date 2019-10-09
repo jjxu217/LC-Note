@@ -28,6 +28,8 @@ Output: false
 Explanation: We can't enter the room with number 2.
 ```
 
+### undirected graph: iterative DFS travese all node
+
 ```python
 class Solution:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
@@ -119,10 +121,9 @@ Note that no other cars meet these fleets before the destination, so the answer 
 
 **Sort** cars by the start positions `pos`  
 Loop on each car from end to beginning  
-Calculate its `time` to arrive the `target；cur` records the current biggest time \(the slowest\)
-
-If another car needs  `>cur`, it will be the new slowest car, and becomes the new lead of a car fleet.   
-Else, it can catch up this car fleet.
+Calculate its `time` to arrive the `target；cur` records the current biggest time \(the slowest\)  
+   If another car needs  `>cur`, it will be the new slowest car, and becomes the new lead of a car fleet.   
+   Else, it can catch up this car fleet.
 
 ```python
 def carFleet(self, target, pos, speed):

@@ -1,6 +1,6 @@
 # 1087/1096 Brace Expansion
 
-## Itertools.product
+## Itertools.product：cartesian product
 
 ```python
 def product(*args, repeat=1):
