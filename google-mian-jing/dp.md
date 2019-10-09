@@ -259,5 +259,9 @@ class Solution:
         return dp[m % 2][-1]
 ```
 
+## Balanced string 只能有0 和 1组成，不能连续有3个位置上数字相同的string
 
+给定长度n，生成所有给定长度的balanced string
+
+给定长度n，算出一共有多少种balanced string，dp
 

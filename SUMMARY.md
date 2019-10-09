@@ -14,6 +14,7 @@
     * [498. Diagonal Traverse](google-mian-jing/google/498.-diagonal-traverse.md)
     * [Smallest/non-overlap subarrays with sum equals K](google-mian-jing/google/smallest-subarrays-with-sum-equals-k.md)
     * [程序执行/Missing Ranges](google-mian-jing/google/interval-xiang-guan.md)
+    * [857. Minimum Cost to Hire K Workers](google-mian-jing/google/857.-minimum-cost-to-hire-k-workers.md)
   * [Trie](google-mian-jing/trie.md)
   * [DP](google-mian-jing/dp.md)
   * [DFS/BFS/Dijkstra](google-mian-jing/dfs-bfs-dijkstra/README.md)
