@@ -212,6 +212,53 @@ Stream: backiuwcatbeforewerehpqojf Input: \["back", "before", "cat", fore", "wer
 
 My idea would be to build a trie from the input words. Keep a list of trie nodes as candidates, and for each new character read, try to extend each candidate node. If a word is reached by a node, we immediately know its length.
 
+```python
+class TrieNode():
+    def __init__(self):
+        self.children = collections.defaultdict(TrieNode)
+        self.pos = -1
+        self.length = -1
+        
+class Trie():
+    def __init__(self):
+        self.root = TrieNode()
+
+    def addWord(self, word, i, length):
+        node = self.root
+        for w in word:
+            node = node.children[w]
+        node.pos = i
+        node.length = length
+        
+class StreamIndex:
+    def __init__(self, words: List[str]):
+        self.t = Trie()
+        self.cand = [self.t.root]
+        for i, word in enumerate(words):
+            self.t.addWord(word, i, len(word))
+            
+        n = len(word)
+        res = [0] * n
+        cnt = idx = 0
+        while cnt < n:
+            char = getNextChar()      
+            nxt_cand = [] #contain the trie node of next candidate
+            for c in self.cand:
+                if char in c.children:
+                    node = c.children[char]
+                    nxt_cand.append(node)
+                    #如果找到一个词, 相应结果记录其实的index
+                    if node.pos >= 0:
+                        cnt += 1
+                        res[node.pos] = idx - node.length + 1
+                        node.pos = -1  
+            idx += 1       
+            self.cand = nxt_cand + [self.t.root]
+        return res
+```
+
+>
+
 ## Confusing number
 
 输出1-650中upside down 以后合法的数。 upside down： 6-》9; 61-》 16
