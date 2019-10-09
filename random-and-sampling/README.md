@@ -138,6 +138,53 @@ class Solution:
         return self.m.get(u, u)
 ```
 
+## 528.  Random Pick with Weight
+
+Given an array `w` of positive integers, where `w[i]` describes the weight of index `i`, write a function `pickIndex` which randomly picks an index in proportion to its weight.
+
+**Example 1:**
+
+```text
+Input: 
+["Solution","pickIndex"]
+[[[1]],[]]
+Output: [null,0]
+```
+
+**Example 2:**
+
+```text
+Input: 
+["Solution","pickIndex","pickIndex","pickIndex","pickIndex","pickIndex"]
+[[[1,3]],[],[],[],[],[]]
+Output: [null,0,1,1,1,0]
+```
+
+### Solution: **Prefix Sum and Binary Search**
+
+**Note:** when find the index of the first element that is greater than idx, the special case is when the element has only one element, where **left == right at the beginning**, avoid infinite loop.
+
+```python
+class Solution:
+    class Solution:
+    def __init__(self, w: List[int]):
+        self.cumw = w[:]
+        for i in range(1, len(w)):
+            self.cumw[i] += self.cumw[i - 1]
+            
+    def pickIndex(self) -> int:
+        idx = random.randrange(self.cumw[-1])
+        l, r = 0, len(self.cumw) - 1
+        #find the index of the first element that is greater than idx
+        while l < r:
+            mid = l + (r - l) // 2
+            if self.cumw[mid] > idx:
+                r = mid
+            else:
+                l = mid + 1
+        return l
+```
+
 ## 497. Random Point in Non-overlapping Rectangles
 
 Given a list of **non-overlapping** axis-aligned rectangles `rects`, write a function `pick` which randomly and uniformily picks an **integer point** in the space covered by the rectangles.
