@@ -239,7 +239,7 @@ class StreamIndex:
             
         n = len(word)
         res = [0] * n
-        cnt = idx = 0
+        cnt = idx = 0 #已经找到的word数，stream中的idx
         while cnt < n:
             char = getNextChar()      
             nxt_cand = [] #contain the trie node of next candidate
@@ -256,8 +256,6 @@ class StreamIndex:
             self.cand = nxt_cand + [self.t.root]
         return res
 ```
-
->
 
 ## Confusing number
 
