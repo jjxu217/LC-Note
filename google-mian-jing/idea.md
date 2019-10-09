@@ -75,45 +75,6 @@ print(result)
 
 {% page-ref page="../array/1056-1088-confusing-number.md" %}
 
-## get product
-
-設計一個Class 返回 k 個數的乘積 k為定值 這個class 有兩個功能 一個為insert 另一個為 getproduct
-
-假設k = 3 數列為 \[1,2,3\] getproduct 返回6 再insert一個新的數4 最先加入的數 1會被踢除 數列變為 \[2,3,4\] 此時 getproudct 返回 24
-
-followup: 所有操作為O\(1\) queue: 存所有元素； num\_zero: 0的数量； product: 所有非零的数的乘积
-
-如果push进来的数是0， num\_zero++, 否则product \*= queue\[-1\];  
-如果pop出去的数是0， num\_zero--, 否则product /= queue.popleft\(\) 或者1 如果不够k个;   
-if\(num\_zero &gt;0\) return 0; else return product;
-
-```python
-class Solution:
-	def __init__(self, K):
-		self.zeros = 0
-		self.product = 1
-		self.queue = collections.deque()
-		self.K = K
-	
-	def insert(self, n):
-		self.queue.append(n)
-		pre = 1	
-		if len(self.queue) > self.K:
-			pre = self.queue.popleft()	
-					
-		if n == 0:
-			self.zeros += 1
-		else:
-			self.product *= n
-		
-		if pre == 0:
-			self.zeros -= 1
-		else:
-			self.product /= pre		
-		
-		return 0 if self.zeros else self.product
-```
-
 ## Max square
 
 Given a matrix of size m x n, there exists a square of all 1s in the matrix \(all other entries in the matrix are 0s\). The square of 1s is `sqrt(n)` or greater in size. Find the top left corner of the square and return the size of the square as well.

@@ -3,6 +3,7 @@
 * [Plan](README.md)
 * [Google 面经](google-mian-jing/README.md)
   * [扫两遍+数学](google-mian-jing/idea.md)
+  * [设计Get product/Exam Room](google-mian-jing/she-ji-get-productexam-room.md)
   * [Tree 皇位/等差数列/Common Nodes](google-mian-jing/tree-zui-chang-deng-cha-shu-lie-common-nodes/README.md)
     * [删边](google-mian-jing/tree-zui-chang-deng-cha-shu-lie-common-nodes/remove-extra-edge.md)
     * [743. Network Delay Time](google-mian-jing/tree-zui-chang-deng-cha-shu-lie-common-nodes/743.-network-delay-time.md)
