@@ -2,6 +2,7 @@
 
 * [Plan](README.md)
 * [Google 面经](google-mian-jing/README.md)
+  * [idea](google-mian-jing/idea.md)
   * [DP array](google-mian-jing/google.md)
   * [String 482/1170/844/359](google-mian-jing/string-482-1170-844-359.md)
   * [1047/1209. Remove All Adjacent Duplicates In String](google-mian-jing/1047-1209.-remove-all-adjacent-duplicates-in-string.md)
@@ -14,7 +15,6 @@
   * [498. Diagonal Traverse](google-mian-jing/498.-diagonal-traverse.md)
   * [Smallest subarrays with sum equals K](google-mian-jing/smallest-subarrays-with-sum-equals-k.md)
   * [792. Number of Matching Subsequences 1055. Shortest Way to Form String](google-mian-jing/792.-number-of-matching-subsequences-1055.-shortest-way-to-form-string.md)
-  * [idea](google-mian-jing/idea.md)
 * [Sort](sort/README.md)
   * [K Largest/Smallest](sort/973.-k-closest-points-to-origin.md)
   * [Sort Intervals](sort/sort-intervals.md)

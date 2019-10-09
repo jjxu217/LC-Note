@@ -1,5 +1,9 @@
 # idea
 
+LC 1088/853/815/341/987/173/841/818/139、1143/943/315/465/743/163/43/1087/1055/253/911/340、1047、750/1011/139 word break/path sum binary tree/7/ 实现tik tac tok/340、659、41 720
+
+LC 123 强制 2 buys 2 sells 求 maximum profit.
+
 ## 仓库
 
 给定一堆不同高度的objects和一堆仓库storage的空间。东西只能从左向右推进仓库，如果有个位置太低了，那么后面的位置都会被前面的位置局限住。例如仓库是\[1,5\], 那么第二个位置最多也只能放1。 问最多能把多少objects放进仓库。
@@ -389,7 +393,7 @@ def CPUStandAlone(CPURunTime):
     return res    
 ```
 
-## **Monarchy**
+## **继承皇位 Monarchy**
 
 Given an the following interface, implement its methods
 
@@ -474,7 +478,36 @@ m.birth("Asha " , "Bob")
 m.getOrderOfSuccession()
 ```
 
-## Q1. 力寇 七二零 變種
+## 720. Longest Word in Dictionary
+
+Given a list of strings `words` representing an English Dictionary, find the longest word in `words` that can **be built one character at a time by other words** in `words`. If there is more than one possible answer, return the longest word with the smallest lexicographical order.If there is no answer, return the empty string.
+
+**Example 2:**
+
+```text
+Input: 
+words = ["a", "banana", "app", "appl", "ap", "apply", "apple"]
+Output: "apple"
+Explanation: 
+Both "apply" and "apple" can be built from other words in the dictionary. However, "apple" is lexicographically smaller than "apply".
+```
+
+### sort words; then iterate word, check word\[-1\] in set, add to set. time=O\(n logn\)
+
+```python
+class Solution:
+    def longestWord(self, words: List[str]) -> str:
+        words.sort()
+        words_set, res = set(['']), ''
+        for word in words:
+            if word[:-1] in words_set:
+                words_set.add(word)
+                if len(word) > len(res):
+                    res = word
+        return res
+```
+
+### 变种：任何地方都能加上char
 
 跟原題一樣的是，必須從字串長度為1的string 開始構建，構建出來的string 也必須在dictionary中，然後找能夠構建出的最長string。 跟原題不一樣的部分在於，最後輸出是要輸出list of string, 就是整個構建的過程。還有，原題是構建的時候是在string 的最後加上一個character，面試題是加在string的任何一個位置都可以。
 
@@ -484,7 +517,7 @@ m.getOrderOfSuccession()
 
 **BFS:**  
 先把words 按长度从小到大sort。   
-从左往右扫words，hashtable记录parent， 初始化 `{‘’: None}`；所有word找小一号的孩子挨着check hashtable，存在的话就把自己放进,key是自己，value是小一号的string。最后hashtable里都是合格string。 用一个global max记录最长长度和word。   
+从左往右扫words，hashtable记录parent， 初始化 `{‘’: None}`；所有word找小一号的孩子check hashtable，存在的话就把自己放进,key是自己，value是小一号的string。最后hashtable里都是合格string。 用一个global max记录最长长度和word。   
 `Time = O(nlogn + n * m) m是单词的最长长度，是len(words)`
 
 ```python
@@ -505,6 +538,8 @@ def path(words):
         max_word = parent[max_word]
     return res
 ```
+
+{% page-ref page="idea.md" %}
 
 ## 取硬币： DP
 
