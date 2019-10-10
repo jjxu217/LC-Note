@@ -67,59 +67,6 @@ class Solution:
         return [len(f) - bisect.bisect(f, q.count(min(q))) for q in queries]
 ```
 
-## 848. Backspace String Compare
-
-Given two strings `S` and `T`, return if they are equal when both are typed into empty text editors. `#` means a backspace character.
-
-**Example 1:**
-
-```text
-Input: S = "ab#c", T = "ad#c"
-Output: true
-Explanation: Both S and T become "ac".
-```
-
-**Example 2:**
-
-```text
-Input: S = "ab##", T = "c#d#"
-Output: true
-Explanation: Both S and T become "".
-```
-
-**Example 3:**
-
-```text
-Input: S = "a##c", T = "#a#c"
-Output: true
-Explanation: Both S and T become "c".
-```
-
-**Example 4:**
-
-```text
-Input: S = "a#c", T = "b"
-Output: false
-Explanation: S becomes "c" while T becomes "b".
-```
-
-```python
-class Solution:
-    def backspaceCompare(self, S: str, T: str) -> bool:
-        l1 = self.stack(S, [])
-        l2 = self.stack(T, [])
-        return l1 == l2        
-    
-    def stack(self, S, stack):
-        for char in S:
-            if char is not "#":
-                stack.append(char)
-            else:
-                if stack:
-                    stack.pop()
-        return stack
-```
-
 ## 844. Backspace String Compare
 
 Given two strings `S` and `T`, return if they are equal when both are typed into empty text editors. `#` means a backspace character.
@@ -224,8 +171,8 @@ logger.shouldPrintMessage(11,"foo"); returns true;
 
 ```python
 class Logger:
-
     def __init__(self):
+    #{message: timestamp}
         self.d = {}
 
     def shouldPrintMessage(self, timestamp, message):

@@ -13,6 +13,11 @@ def cut2string(s1, s2):
         if s1[p1] == s2[p2]:
             p1 += 1
             p2 -= 1
+        elif isPalindrome(s1[p1+1:p2]):
+            res.append(p2)
+        elif isPalindrome(s2[p1+1:p2]):
+            res.append(p1)
+    反过来再跑一遍
 ```
 
 ## 131. Palindrome Partitioning
