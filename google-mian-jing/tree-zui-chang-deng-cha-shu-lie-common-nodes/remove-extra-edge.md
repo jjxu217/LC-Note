@@ -22,7 +22,7 @@ Check whether there is a node that has multiple parents.
 If no, union-find and remove the edge that creating a circle
 ```
 
-Given a binary tree, where an arbitary node has 2 parents i.e two nodes in the tree have the same child. Identify the defective node and remove an extra edge to fix the tree.
+Given a binary tree, where an arbitrary node has 2 parents i.e two nodes in the tree have the same child. Identify the defective node and remove an extra edge to fix the tree.
 
 **Example:**
 
@@ -78,7 +78,7 @@ What if the tree is an N-ary tree?
 ```python
 def removeEdgeNT(root):
 	def dfs(root):
-		if not root or root in seen: return None
+		if not root: return None
 		seen.add(root)
 		idx = None
 		for i, kid in enumerate(root.children):

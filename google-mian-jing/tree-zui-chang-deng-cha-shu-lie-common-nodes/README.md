@@ -63,10 +63,10 @@ class Monarchy(object):
         self.monarchs[name].isAlive = False
 
     def preOrder(self, node):
-        if(node):
-            if(node.isAlive == True):
-                # don't print dead people :'(
-                print node.name
+        if node:
+            if node.isAlive:
+                # don't print dead people 
+                print(node.name)
             for child in node.childern:
                 self.preOrder(child)
 
@@ -148,7 +148,7 @@ Given two Binary Search Trees, find common nodes in them. In other words, find i
 **Example:**  
 [![tree](https://media.geeksforgeeks.org/wp-content/cdn-uploads/tree5.png)](https://media.geeksforgeeks.org/wp-content/cdn-uploads/tree5.png)
 
- **\(Linear Time and limited Extra Space\)** We can find common elements in O\(n\) time and O\(h1 + h2\) extra space where h1 and h2 are heights of first and second BSTs respectively.  
+ **\(Linear Time and O\(h\) Space\)** We can find common elements in O\(n\) time and O\(h1 + h2\) extra space where h1 and h2 are heights of first and second BSTs respectively.  
 The idea is to use [iterative inorder traversal](https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/). We use two auxiliary stacks for two BSTs. Since we need to find common elements, whenever we get same element, we print it.
 
 ```python
@@ -160,16 +160,16 @@ def Common(root1, root2):
   
     while True:         
         # append the Nodes of first tree in stack s1  
-        if root1: 
+        while root1: 
             s1.append(root1) 
             root1 = root1.left  
         # append the Nodes of second tree in stack s2  
-        elif root2: 
+        while root2: 
             s2.append(root2) 
             root2 = root2.left 
   
         # Both root1 and root2 are NULL here  
-        elif s1 and s2: 
+        if s1 and s2: 
             root1, root2 = s1[-1], s2[-1]  
   
             # If current keys in two trees are same  
@@ -181,18 +181,15 @@ def Common(root1, root2):
                 root2 = root2.right 
   
             elif root1.key < root2.key:                
-                # If Node of first tree is smaller, than  
-                # that of second tree, then its obvious  
-                # that the inorder successors of current  
-                # Node can have same value as that of the  
-                # second tree Node. Thus, we pop from s2  
+                # if root1.key < root2.key  
+                # then consider s1 inorder successors 
+                # root2 set to None, avoid append node to s2 twice
                 s1.pop() 
-                root1 = root1.right  
-  
-                # root2 is set to NULL, avoid append node to s2 twice  
+                root1 = root1.right 
                 root2 = None
+                
             elif root1.key > root2.key: 
-                s2.pop(-1) 
+                s2.pop() 
                 root2 = root2.right  
                 root1 = None
         # Both roots and both stacks are empty  

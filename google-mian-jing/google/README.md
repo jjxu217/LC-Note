@@ -28,7 +28,7 @@ Output: false
 Explanation: We can't enter the room with number 2.
 ```
 
-### undirected graph: iterative DFS travese all node
+### undirected graph: iterative DFS traverse all node
 
 ```python
 class Solution:
