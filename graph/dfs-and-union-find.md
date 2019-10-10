@@ -29,8 +29,6 @@ class DSU():
         return self.p[x]
     
     def union(self, x, y):
-        self.p.setdefault(x, x)
-        self.p.setdefault(y, y)
         xr, yr = self.find(x), self.find(y)
         self.p[xr] = yr
 
