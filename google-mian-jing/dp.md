@@ -12,9 +12,11 @@
 def getcoin(money, n):
     m = len(money)#一共m堆硬币
     dp = [[0] * (n + 1) for _ in range(m + 1)]
-    for i in range(1, n + 1):
-        for j in range(1, m + 1):
-
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            for k in range(min(len(money[i], j)):
+                dp[i][j] = max(dp[i][j], dp[i-1][j-k] + sum(money[i][:k])
+    return dp[-1][-1]
 ```
 
 ## **机器人从左上方到右下方**
