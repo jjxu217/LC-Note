@@ -584,9 +584,14 @@ class Solution:
             for j in range(i + 1, n):
                 if self.similar(a[i], a[j]):
                     dsu.union(i, j)
-        return sum([1 for i in range(n) if i == dsu.p[i]])
+        return len({dsu.find(i) for i in range(n)})
     
     def similar(self, a, b):
-        return len(list(filter(lambda i: a[i] != b[i], range(len(a))))) in (0, 2)
+        cnt = 0
+        for i, j in zip(a, b):
+            if i != j:
+                cnt += 1
+                if cnt > 2: return False
+        return cnt in (0, 2)
 ```
 
