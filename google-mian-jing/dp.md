@@ -147,7 +147,6 @@ Output: 0.73278
 The same problems as "Climbing Stairs".
 
 **Explanation**:  
-In a word,  
 `dp[i]`: probability of get points `i`  
 `dp[i] = sum(last W dp values) / W`    
 To get `Wsum = sum(last W dp values)`, we can maintain a sliding window with size at most `W`.
@@ -200,7 +199,8 @@ class Solution:
         for i in range(1, N + 1):
             dp[i] = Wsum / W
             if i < K: Wsum += dp[i] #we cannot reach i from point larger than K
-            if i - W >= 0: Wsum -= dp[i - W] #keep the window size of W
+            if i >= W: #当i >= W后，windows要减去最之前的，windows size at most W
+                Wsum -= dp[i - W] 
         return sum(dp[K:]) 
 ```
 
@@ -237,6 +237,8 @@ Explanation: There is no such common subsequence, so the result is 0.
 ```
 
 ### 2D-DP
+
+`dp[i][j] = text1[:i], text2[:j]`的Longest Common Subsequence
 
 ```python
 class Solution:
