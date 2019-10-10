@@ -29,27 +29,27 @@ class Trie():
 class StreamIndex:
     def __init__(self, words: List[str]):
         self.t = Trie()
-        self.cand = [self.t.root]
+        self.cands = [self.t.root]
         for i, word in enumerate(words):
             self.t.addWord(word, i, len(word))
             
-        n = len(word)
+        n = len(words)
         res = [0] * n
         cnt = idx = 0 #已经找到的word数，stream中的idx
         while cnt < n:
             char = getNextChar()      
-            nxt_cand = [] #contain the trie node of next candidate
-            for c in self.cand:
-                if char in c.children:
-                    node = c.children[char]
-                    nxt_cand.append(node)
+            nxt_cands = [] #contain the trie node of next candidate
+            for cur in self.cands:
+                if char in cur.children:
+                    nxt = cur.children[char]
+                    nxt_cands.append(nxt)
                     #如果找到一个词, 相应结果记录其实的index
-                    if node.pos >= 0:
+                    if nxt.pos >= 0:
                         cnt += 1
-                        res[node.pos] = idx - node.length + 1
-                        node.pos = -1  
+                        res[nxt.pos] = idx - nxt.length + 1
+                        nxt.pos = nxt.length = -1                        
             idx += 1       
-            self.cand = nxt_cand + [self.t.root]
+            self.cands = nxt_cands + [self.t.root]
         return res
 ```
 
@@ -88,10 +88,10 @@ We will make `Q` queries, the overall time complexity is `O(QW)`
 ```python
 class Trie():
     def __init__(self):
-        self.trie = {}
+        self.root = {}
 
     def addWord(self, word: str) -> None:
-        node = self.trie
+        node = self.root
         for w in word:
             node = node.setdefault(w, {})
         node[None] = None
@@ -99,17 +99,17 @@ class Trie():
 class StreamChecker:
     def __init__(self, words: List[str]):
         self.t = Trie()
-        self.cand = [self.t.trie]
+        self.cands = [self.t.root]
         for word in words:
             self.t.addWord(word)
 
     def query(self, letter: str) -> bool:
-        temp = []
-        for c in self.cand:
-            if letter in c:
-                temp.append(c[letter])
+        nxt_cands = []
+        for cur in self.cands:
+            if letter in cur:
+                nxt_cands.append(cur[letter])
                 
-        self.cand = temp + [self.t.trie]
-        return any(None in i for i in temp)
+        self.cands = nxt_cands + [self.t.root]
+        return any(None in i for i in nxt_cands)
 ```
 
