@@ -23,13 +23,15 @@ def min_intervals_length_sum(nums, K):
     n = len(nums)
     d = {0 : -1} # {prefix sum: index}
     cur_sum = 0
-    l1 = l2 = float('inf')
+    l1 = l2 = float('inf') #two shortest subarray length
     for i, num in enumerate(nums):
         cur_sum += num
         if cur_sum - K in d:
+            #更新最小
             if l1 > i - d[cur_sum - K]:
                 l2 = l1
                 l1 = i - d[cur_sum - K]       
+            #更新第二小
             elif l2 > i - d[cur_sum - K]:
                 l2 = i - d[cur_sum - K]
         d[cur_sum] = i
@@ -47,47 +49,35 @@ What if the array has negative numbers?
 
 给一个数组（只有正整数），给一个数K，找出两段不overlap的subarray使得每一段interval里数的和为K，求两段interval长度之和的最小值。 题目有点绕，e.g. A=\[1,2,2,3,1,4\], K=5, 能找到的interval是 \[1,2,2\] & \[1,4\] \[2,3\] & \[1,4\] 返回 4 因为\[2,3\], \[1,4\]是和最小的两段，而不是\[1,2,2\]，\[1,4\]
 
-#### 求前缀和， 先从前往后一遍求前i个数中最短的interval A\[i\]， 再从后往前一遍算后n-i中最短的interval B\[\] 然后对每个i算左右总数最小的
+**求前缀和， 先从前往后一遍求i \(include\)左边最短的subarray sum to K的长度`left[i];`   
+再求后缀和，从后往前一遍求i \(include\)右边最短的subarray sum to K的长度`right[i],` 翻转再翻转；  
+最后对每个i算左右总数最小的**
 
 ```python
 class Solution(object):
-        def minSubarray(self, arr, K):
-                n=len(arr)
-                preSum=0
-                A={0:-1}
-                B={0:0}
-
-                minlenA=[float('inf')]*n
-                localmin=float('inf')
-                for i in range(n):
-                        preSum+=arr[i]
-                        if preSum-K in A:
-                                if i-A[preSum-K]<localmin:
-                                        minlenA[i]=i-A[preSum-K]
-                                        localmin=i-A[preSum-K]
-                        A[preSum]=i
-
-                preSum=0
-                minlenB=[float('inf')]*n
-                localmin=float('inf')
-                for j in range(n)[::-1]:
-                        preSum+=arr[j]
-                        if preSum-K in B:
-                                if n-j-B[preSum-K]<localmin:
-                                        minlenB[j]=n-j-B[preSum-K]
-                                        localmin=n-j-B[preSum-K]
-                        B[preSum]=n-j
-
-                res=float('inf')
-                for k in range(n):
-                        if k==0:
-                                cur=minlenB[0]
-                        else:
-                                cur=minlenA[k-1]+minlenB[k]
-                        if cur<res:
-                                res=cur
-
-                return -1 if res==float('inf') else res
+    def minLeftSub(self, arr, K):
+        n = len(arr)
+        preSum = 0
+        dic = {0, -1}
+        
+        minleft = []
+        cur_min = float('inf')
+        for i in range(n):
+            preSum += arr[i]
+            if preSum - K in dic:
+                cur_min = min(cur_min, i - dic[preSum - K])
+            minleft.append(cur_min)               
+            dic[preSum] = i
+        return minleft
+    
+    def minSubarray(self, arr, K):
+        #left[i] 表示i(include)左边的 valid subarray 的最小length
+        #right[i] 表示i(include)右边的 valid subarray的最小length
+        left = minLeftSub(arr, K)
+        right = minLeftSub(arr[::-1], K)[::-1]
+        
+        res = min(left[i] + right[i + 1] for i in range(n - 1))         
+        return res if res != float('inf') else -1
 ```
 
 

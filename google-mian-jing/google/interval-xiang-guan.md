@@ -50,13 +50,16 @@ def CPUStandAlone(CPURunTime):
     cur = [CPURunTime[0][0], CPURunTime[0][1], CPURunTime[0][2], 0]
     
     for beg, end, idx in CPURunTime[1:]:
+        #下个程序在当前程序结束后开始
         if cur[1] <= beg:
             res.append((cur[2], cur[1] - cur[0] + cur[3]))
             cur = [beg, end, idx, 0]
+        #下个程序在当前程序结束后结束
         elif cur[1] <= end:
-            if cur[0] < beg:
+            if cur[0] < beg: #判读beg - cur[0]是否>0
                 res.append((cur[2], beg - cur[0]))
             cur = [cur[1], end, idx, 0]
+        #下个程序在当前程序结束前结束
         elif cur[0] <= end:
             cur = [end, cur[1], cur[2], cur[3] + max(beg - cur[0], 0)]
             
