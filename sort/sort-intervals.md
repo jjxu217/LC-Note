@@ -91,6 +91,64 @@ class Solution:
         return len(inuse)
 ```
 
+## 1094. Car Pooling
+
+You are driving a vehicle that has `capacity` empty seats initially available for passengers.  The vehicle **only** drives east \(ie. it **cannot** turn around and drive west.\)
+
+Given a list of `trips`, `trip[i] = [num_passengers, start_location, end_location]` contains information about the `i`-th trip: the number of passengers that must be picked up, and the locations to pick them up and drop them off.  The locations are given as the number of kilometers due east from your vehicle's initial location.
+
+Return `true` if and only if it is possible to pick up and drop off all passengers for all the given trips. 
+
+**Example 1:**
+
+```text
+Input: trips = [[2,1,5],[3,3,7]], capacity = 4
+Output: false
+```
+
+**Example 2:**
+
+```text
+Input: trips = [[2,1,5],[3,3,7]], capacity = 5
+Output: true
+```
+
+**Example 3:**
+
+```text
+Input: trips = [[2,1,5],[3,5,7]], capacity = 3
+Output: true
+```
+
+**Example 4:**
+
+```text
+Input: trips = [[3,2,7],[3,7,9],[8,3,9]], capacity = 11
+Output: true
+```
+
+
+
+### **Explanation**
+
+Track the change of capacity in time order.
+
+1. Save all time points and the change on current `capacity`
+2. Sort all the changes on the key of time points.
+3. Track the current `capacity` and return `false` if negative
+
+Time `O(NlogN)`**；**Space `O(N)`
+
+```python
+class Solution:
+    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
+        for i, v in sorted(x for n, i, j in trips for x in [[i, n], [j, - n]]):
+            capacity -= v
+            if capacity < 0:
+                return False
+        return True
+```
+
 ## 56. Merge Intervals
 
 Given a collection of intervals, merge all overlapping intervals.
