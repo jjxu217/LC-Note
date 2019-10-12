@@ -12,7 +12,12 @@
 
 \*\*\*\*
 
-**609.** Find Duplicate File in System  
+**609.** Find Duplicate File in System
+
+**166.** Fraction to Recurring Decimal  
+358. Rearrange String k Distance Apart  
+767. Reorganize String  
+1054. Distant Barcodes  
 ****
 
 \*\*\*\*

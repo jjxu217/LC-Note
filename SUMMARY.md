@@ -8,6 +8,8 @@
   * [Balance Parentheses](facebook/balance-parentheses.md)
   * [Point in max overlapping intervals](facebook/point-in-max-overlapping-intervals.md)
   * [498. Diagonal Traverse](facebook/498.-diagonal-traverse.md)
+  * [Enumerate All Unique Paths](facebook/enumerate-all-unique-paths.md)
+  * [Locker Room](facebook/locker-room.md)
   * [Tree](facebook/tree.md)
   * [String](facebook/string.md)
   * [DP](facebook/dp.md)

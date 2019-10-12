@@ -33,8 +33,7 @@ The idea is to use [iterative inorder traversal](https://www.geeksforgeeks.org/i
 ```python
 def Common(root1, root2):      
     # Create two stacks for two inorder traversals  
-    s1 = [] 
-    s2 = [] 
+    s1, s2 = [], []
     res = []
   
     while True:         
@@ -74,5 +73,98 @@ def Common(root1, root2):
         # Both roots and both stacks are empty  
         else: 
             return res 
+```
+
+##  **Find first pair of mismatching nodes**
+
+Return first pair of mismatching nodes \(first pair as in **in-order**\) given two pre-order traversal arrays of BSTs.
+
+**Example 1:**
+
+```text
+Input: pre1 = [5, 4, 2, 4, 8, 6, 9], pre2 = [5, 3, 2, 4, 8, 7, 9]
+Output: [4, 3]
+Explanation:
+Tree 1:
+	 5
+  4     8
+2  4   6  9
+
+Tree 2:
+	 5
+  3     8
+2  4   7  9
+
+inorder1 = [2, 4, 4, 5, 6, 8, 9]
+inorder2 = [2, 3, 4, 5, 7, 8, 9] 
+```
+
+**Example 2:**
+
+```text
+Input: pre1 = [2, 1, 3], pre2 = [1, 2]
+Output: [3, null]
+Explanation:
+Tree 1:
+  2
+1   3
+
+Tree 2:
+	1
+	   2
+
+inorder1 = [1, 2, 3]
+inorder2 = [1, 2]
+```
+
+**Example 3:**
+
+```text
+Input: pre1 = [2, 1, 3], pre2 = [1, 2, 3]
+Output: []
+Explanation:
+Tree 1:
+	2
+  1   3
+
+Tree 2:
+	1
+	   2
+		  3
+
+inorder1 = [1, 2, 3]
+inorder2 = [1, 2, 3]
+There is no mismatch because the in-order sequence for both is exactly the SAME, despite the trees are structurally different.
+```
+
+```python
+def find_mismatch(root1, root2):      
+    # Create two stacks for two inorder traversals  
+    s1, s2 = [], []
+  
+    while True:         
+        # append the Nodes of first tree in stack s1  
+        while root1: 
+            s1.append(root1) 
+            root1 = root1.left  
+        # append the Nodes of second tree in stack s2  
+        while root2: 
+            s2.append(root2) 
+            root2 = root2.left 
+  
+        # get teh in-order element        
+        root1 = s1.pop() if s1 else None
+        root2 = s2.pop() if s2 else None
+  
+      #如果两个栈都是空，说明一样，返回[]
+        if not root1 and not root2:
+            return []
+      #如果有一个栈为空，或者两个in-order 元素不一样，返回
+        elif not root1 or not root2 or root1.val != root2.val:
+            return [root1.val if root1 else None, root2.val if root2 else None]
+      #如果root都不为空，而且值一样，看下一个
+        else:
+            root1 = root1.right
+            root2 = root2.right
 ```
 
