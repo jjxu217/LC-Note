@@ -1,7 +1,6 @@
 # Table of contents
 
 * [Plan](README.md)
-* [Prefix evaluate](prefix.md)
 * [Facebook 面经](facebook/README.md)
   * [Untitled](facebook/untitled.md)
   * [Sort](facebook/sort.md)

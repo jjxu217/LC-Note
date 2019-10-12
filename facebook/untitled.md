@@ -45,7 +45,7 @@ print(group_ceasar(["abc", "bcd", "acd", "dfg", "ace", "bdf", "random"]))
 
 Q2: Set + Double Linked List
 
-```text
+```python
 
 class Node(object):
     def __init__(self, val):
