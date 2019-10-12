@@ -107,9 +107,9 @@ class Solution:
             mapping[cur].val = cur.val #set value
             for nei in cur.neighbors:
                 #generate nei, add to stack
-                if nei not in mapping:
-                    stack.append(nei)
-                mapping[cur].neighbors.append(mapping[nei])  #set nei              
+                if nb not in mapping:
+                    stack.append(nb)
+                mapping[cur].neighbors.append(mapping[nb])  #set nei              
         return mapping[node]
         
     #bfs
@@ -117,14 +117,14 @@ class Solution:
         copy = collections.defaultdict(lambda: Node(0, []))
         queue = collections.deque([node])
         while queue:
-            m = queue.popleft() #expand node
-            copy[m].val = m.val #set expanded node val        
-            for nb in m.neighbors: 
+            cur = queue.popleft() #expand node
+            copy[cur].val = cur.val #set expanded node val        
+            for nb in cur.neighbors: 
                 #add the not-yet-generated node to queue
                 if nb not in copy:
                     queue.append(nb) #generate node
                 #set nei
-                copy[m].neighbors.append(copy[nb])
+                copy[cur].neighbors.append(copy[nb])
         return copy[node]
         
     #dfs recursion
