@@ -117,16 +117,15 @@ def solve(M, intervals):
 
     for s, e in intervals:
         s_idx = s + M         # -10 -> 0, -9 -> 1, 10 -> 20
-        event[s_dx] += 1
+        event[s_idx] += 1
 
         e_idx = e + M + 1
-        if eidx < 2*M+1:
-            event[eidx] -= 1
+        if e_idx < 2*M+1:
+            event[e_idx] -= 1
 
-    total, predix = 0, []
-    for i, num in enumerate(diff):
-        total += num
-        prefix.append(total)
+    predix = event
+    for i in range(1, 2 * M + 1):
+        prefix[i] += prefix[i - 1]
 
     max_value = max(prefix)
     max_idx = prefix.index(max_value)
