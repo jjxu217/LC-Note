@@ -168,3 +168,51 @@ def find_mismatch(root1, root2):
             root2 = root2.right
 ```
 
+{% page-ref page="../stack/173.-binary-search-tree-iterator.md" %}
+
+\*\*\*\*[**https://leetcode.com/discuss/interview-question/371618/Facebook-or-Onsite-or-Tree-Iterator**](https://leetcode.com/discuss/interview-question/371618/Facebook-or-Onsite-or-Tree-Iterator)\*\*\*\*
+
+**Follow-up 1:**  
+Assume `BSTIterator` is a **library** class. You need to extend the functionality of this class by implementing 2 methods:
+
+```text
+public boolean hasPrev() {
+}
+
+/** Can only take 1 step back */
+public Integer prev() {
+}
+```
+
+**Example:**
+
+```text
+       7
+     /   \
+    3    15
+        /  \
+       9    20
+
+ExtendedBSTIterator it = new ExtendedBSTIterator(root);
+it.hasNext(); // true
+it.next(); // 3
+it.next(); // 7
+it.next(); // 9
+it.next(); // 15
+it.hasPrev(); // true
+it.prev(); // 9
+it.hasPrev(); // false bacause we can only move 1 step back
+it.next(); // 15
+it.next(); // 20
+it.hasNext(); // false
+it.hasPrev(); // true
+it.prev(); // 15
+it.hasNext(); // true
+it.next(); // 20
+```
+
+Hint
+
+**Follow-up 2:**  
+What if you can move `k` steps back?
+

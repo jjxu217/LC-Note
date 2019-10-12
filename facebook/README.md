@@ -20,5 +20,9 @@
 1054. Distant Barcodes  
 ****
 
+{% embed url="https://leetcode.com/discuss/interview-question/354854/Facebook-or-Phone-Screen-or-Cut-Wood" %}
+
+\*\*\*\*[**https://leetcode.com/discuss/interview-question/298483/Facebook-or-Phone-screen-or-Design-HashMap**](https://leetcode.com/discuss/interview-question/298483/Facebook-or-Phone-screen-or-Design-HashMap)\*\*\*\*
+
 \*\*\*\*
 

@@ -1,6 +1,6 @@
 # Smallest/non-overlap subarrays with sum equals K
 
-{% page-ref page="../../array/560.-subarray-sum-equals-k.md" %}
+{% page-ref page="../array/560.-subarray-sum-equals-k.md" %}
 
 Given an array `arr` of positive integers only and an integer `k`. Find the minimum length sum of the two shortest subarrays whose sum equals `k`.
 
@@ -82,5 +82,5 @@ class Solution(object):
 
 
 
-{% page-ref page="../../array/560.-subarray-sum-equals-k.md" %}
+{% page-ref page="../array/560.-subarray-sum-equals-k.md" %}
 
