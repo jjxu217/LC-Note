@@ -90,7 +90,7 @@ Output: true
 
 ### Solution: BucketSort\(\)， 
 
-Maintain at most k buckets with width of \(t+1\). bucket = {idx, num}  
+Maintain at most k buckets with width of \(t+1\). bucket = {idx: num}  
 If there are two item with difference &lt;= t, either the two in the same bucket or the two in neighbor buckets
 
 ```python
