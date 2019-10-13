@@ -18,15 +18,16 @@ Your function should return length = 5, with the first five elements of nums bei
 It doesn't matter what values are set beyond the returned length.
 ```
 
-### idea: slow 左边是处理好的，fast右边是没处理的
+### idea: slow\(exclusive\) 左边是处理好的，fast右边是没处理的
 
 ```python
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
+        if len(nums) < 2: return len(nums)
         slow = 1
-        for i in range(1, len(nums)):
-            if nums[i] != nums[slow - 1]:
-                nums[slow] = nums[i]
+        for fast in range(1, len(nums)):
+            if nums[fast] != nums[slow - 1]:
+                nums[slow] = nums[fast]
                 slow += 1
         return slow
 ```

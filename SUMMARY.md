@@ -176,7 +176,6 @@
   * [659. Split Array into Consecutive Subsequences](hashtable-and-string/659.-split-array-into-consecutive-subsequences.md)
   * [771. Jewels and Stones](hashtable-and-string/771.-jewels-and-stones.md)
   * [Reverse String 344/541/151/186/557/345](hashtable-and-string/reverse-string-344-541-151-186-557-345.md)
-  * [325. Maximum Size Subarray Sum Equals k](hashtable-and-string/325.-maximum-size-subarray-sum-equals-k.md)
   * [49. Group Anagrams](hashtable-and-string/49.-group-anagrams.md)
   * [1002. Find Common Characters](hashtable-and-string/1002.-find-common-characters.md)
   * [621. Task Scheduler](hashtable-and-string/621.-task-scheduler.md)

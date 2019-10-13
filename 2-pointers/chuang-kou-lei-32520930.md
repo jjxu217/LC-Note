@@ -79,17 +79,17 @@ Can you do it in O\(n\) time?
 ### Sol： prefix sum, look up with HashTable
 
 ```python
-class Solution:
+class Solution:      
     def maxSubArrayLen(self, nums: List[int], k: int) -> int:
-        dic = {0: -1}      #key=acc_sum value, and value=index
         res = 0
-        for i in range(len(nums)):
-            if i > 0:
-                nums[i] += nums[i - 1]
-            if nums[i] not in dic: #if current acc not in dic, add it
-                dic[nums[i]] = i
-            if nums[i] - k in dic: #if find the subarray, find the length
-                res = max(res, i - dic[nums[i] - k])
+        dic = {0: -1}
+        prefix = 0
+        for i, n in enumerate(nums):
+            prefix += n
+            if prefix not in dic:#if current acc not in dic, add it;旧的不用更新
+                dic[prefix] = i
+            if prefix - k in dic: #if find the subarray, find the length
+                res = max(res, i - dic[prefix - k])
         return res
 ```
 

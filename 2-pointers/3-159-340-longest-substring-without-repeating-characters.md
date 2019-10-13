@@ -118,7 +118,7 @@ def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
                 del dic[char]
             dic[char] = i
             if len(dic) == k + 1:
-                _, del_idx = dic.popitem(last = False)
+                _, del_idx = dic.popitem(last=False)#把oldest(最左的idx)删掉
                 l = del_idx + 1
             res = max(res, i - l + 1)
         return res

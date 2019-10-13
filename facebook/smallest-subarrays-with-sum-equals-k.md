@@ -82,5 +82,3 @@ class Solution(object):
 
 
 
-{% page-ref page="../array/560.-subarray-sum-equals-k.md" %}
-

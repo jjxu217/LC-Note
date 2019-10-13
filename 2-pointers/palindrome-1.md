@@ -171,6 +171,8 @@ Output: 6
 Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
 ```
 
+### 中心开花
+
 ```python
 class Solution:
     def countSubstrings(self, s: str) -> int:
