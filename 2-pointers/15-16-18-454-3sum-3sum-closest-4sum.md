@@ -190,14 +190,14 @@ Recursively reduce N sum until 2 sum
 
 ```python
 def fourSum(self, nums, target):
-    def findNsum(l, r, target, N, result, results):
+    def findNsum(l, r, target, N, result):
         if r-l+1 < N or N < 2 or target < nums[l]*N or target > nums[r]*N:  # early termination
             return
         if N == 2: # two pointers solve sorted 2-sum problem
             while l < r:
                 s = nums[l] + nums[r]
                 if s == target:
-                    results.append(result + [nums[l], nums[r]])
+                    self.results.append(result + [nums[l], nums[r]])
                     while l < r and nums[l] == nums[l + 1]:
                         l += 1
                     while l < r and nums[r] == nums[r - 1]:
@@ -210,13 +210,14 @@ def fourSum(self, nums, target):
                     r -= 1
         else: # recursively reduce N
             for i in range(l, r+1):
-                if i == l or (i > l and nums[i-1] != nums[i]):
-                    findNsum(i+1, r, target-nums[i], N-1, result+[nums[i]], results)
+                if i > l and nums[i] == nums[i-1]:
+                    continue
+                findNsum(i + 1, r, target - nums[i], N - 1, result + [nums[i]])
 
     nums.sort()
-    results = []
-    findNsum(0, len(nums)-1, target, N, [], results)
-    return results
+    self.results = []
+    findNsum(0, len(nums)-1, target, N, [])
+    return self.results
 ```
 
 ## 454. 4Sum II
