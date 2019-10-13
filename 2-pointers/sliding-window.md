@@ -71,15 +71,12 @@ Could you solve it in linear time?
 
 ### Solution: use a descending deque, record the idx
 
-The algorithm is quite straightforward :
-
 * Iterate over the array. At each step :
   * Clean the deque :
     * Keep only the indexes of elements from the current sliding window.
     * Remove indexes of all elements smaller than the current one, since they will not be the maximum ones.
   * Append the current element to the deque.
   * If i &gt;= k - 1, append `deque[0]` to the output.
-* Return the output array.
 
 ```python
 class Solution:   
@@ -296,6 +293,8 @@ Explanation: s2 contains one permutation of s1 ("ba").
 Input:s1= "ab" s2 = "eidboaoo"
 Output: False
 ```
+
+### 使用counter来记录s1里的char，s2中维持个长度为len\(s1\)的substring 记录counter
 
 ```python
 class Solution:

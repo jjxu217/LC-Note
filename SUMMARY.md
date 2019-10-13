@@ -137,7 +137,6 @@
   * [311. Sparse Matrix Multiplication](array/311.-sparse-matrix-multiplication.md)
   * [977. Squares of a Sorted Array](array/977.-squares-of-a-sorted-array.md)
   * [243/244/245 Shortest Word Distance](array/243-244-245-shortest-word-distance.md)
-  * [Google 482/1170/844/359](array/google-482-1170-844-359.md)
   * [238. Product of Array Except Self](array/238.-product-of-array-except-self.md)
   * [152. Maximum Product Subarray](array/152.-maximum-product-subarray.md)
   * [128. Longest Consecutive Sequence](array/128.-longest-consecutive-sequence.md)
