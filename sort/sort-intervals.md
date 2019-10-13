@@ -169,9 +169,7 @@ Input: trips = [[3,2,7],[3,7,9],[8,3,9]], capacity = 11
 Output: true
 ```
 
-
-
-### **Explanation**
+### **Explanation: line sweep**
 
 Track the change of capacity in time order.
 
@@ -184,7 +182,7 @@ Time `O(NlogN)`**；**Space `O(N)`
 ```python
 class Solution:
     def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
-        for i, v in sorted(x for n, i, j in trips for x in [[i, n], [j, - n]]):
+        for t, v in sorted(x for n, s, e in trips for x in [[s, n], [e, -n]]):
             capacity -= v
             if capacity < 0:
                 return False
