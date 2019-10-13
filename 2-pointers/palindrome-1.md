@@ -206,10 +206,12 @@ Output:
 
 One possible longest palindromic subsequence is "bbbb".
 
-### **Sol1: DP**
+### **Sol1: DP,** `dp[i][j]` represent longest palindrome subsequence of `s[i to j]`
+
+**Base case**: `dp[i][i] = 1`, 左下三角、右上三角初始化为0 。目标是填满右上三角。  
+**Recursion rule**: 先从左往右，再从下往上填矩阵
 
 ```python
-dp[i][j] represent longest palindrome subsequence of s[i to j].
 dp[i][j] = 2 + dp[i + 1][j - 1] if s[i] == s[j] else max(dp[i + 1][j], dp[i][j - 1])
 ```
 
@@ -218,28 +220,30 @@ class Solution:
     #Time = O(n ^ 2), Space = O(n ^ 2)
     def longestPalindromeSubseq(self, s: str) -> int:
         n = len(s)
-        dp = [[1] * n for _ in range(n)]
+        dp = [[0] * n for _ in range(n)]
+        for i in range(n):
+            dp[i][i] = 1
         for j in range(1, n):
-            for i in reversed(range(0, j)):
+            for i in reversed(range(j)):
                 if s[i] == s[j]:
-                    dp[i][j] = 2 + dp[i + 1][j - 1]  if i + 1 <= j - 1 else 2
+                    dp[i][j] = 2 + dp[i + 1][j - 1] 
                 else:
                     dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])
         return dp[0][-1]
-    #滚动数组： Time = O(n ^ 2), Space = O(n)
+    #滚动数组： Time = O(n ^ 2), Space = O(n), dp表示上个解法中的列向量
     def longestPalindromeSubseq(self, s: str) -> int:
         n = len(s)
         dp = [1] * n
         for j in range(1, n):
-            pre = dp[j]
-            for i in reversed(range(0, j)):
+            pre = 0
+            for i in reversed(range(j)):
                 temp = dp[i]
                 if s[i] == s[j]:
-                    dp[i] = 2 + pre  if i + 1 <= j - 1 else 2
+                    dp[i] = 2 + pre  
                 else:
                     dp[i] = max(dp[i + 1], dp[i])
                 pre = temp
-        return dp[0][-1]
+        return dp[0] 
 ```
 
 ### Sol2: DFS with memo
@@ -282,7 +286,7 @@ Output: "dcbabcd"
 
 Create the reverse of the original string s  
 Iterate over the variable i from 0 to size\(s\)−1:   
-If s\[0:n-i\] == rev\[i:\] return rev\[:i\] + s   
+If `s[:n-i] == rev[i:] return rev[:i] + s`   
 time = O\(n^2\)
 
 ```python
@@ -298,7 +302,7 @@ time = O\(n^2\)
 
 ### sol: Two pointers and recursion
 
-use i to compare character from end of s and beginning of s. If it's equal, increment i by 1.   
+use i to compare character from end of s and beginning of s. If it's equal, `i+=1`.   
 The first part s\[i:\] might be Palindrome. The second part s\[i:\] is not Palindrome, we reverse s\[i:\] and insert to the beginning. do recursion.  
 Time = O\(n^2\), worst case T\(n\)=T\(n−2\)+O\(n\)
 
@@ -367,12 +371,11 @@ class Solution:
                     if back != word and back in dic:
                         res.append([dic[back], i])
                 #casae2: suf is pal, cur + back is pal
-                #when j == n, pref==cur, suf=='',which will be checked by case1 of other word
+                #when j == n, pref==cur, suf=='',which has be checked by case1  
                 if j != n and is_palindrome(suf):
                     back = pref[::-1]
                     if back != word and back in dic:
                         res.append([i, dic[back]])
-        return res
-            
+        return res  
 ```
 
