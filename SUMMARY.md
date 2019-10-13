@@ -36,7 +36,6 @@
     * [1047/1209. Remove All Adjacent Duplicates In String](google-mian-jing/string-482-1170-844-359/1047-1209.-remove-all-adjacent-duplicates-in-string.md)
     * [Palindrome](google-mian-jing/string-482-1170-844-359/palindrome.md)
     * [6. ZigZag Conversion](google-mian-jing/string-482-1170-844-359/6.-zigzag-conversion.md)
-  * [Chocolate Sweetness](google-mian-jing/chocolate-sweetness.md)
   * [792. Number of Matching Subsequences 1055. Shortest Way to Form String](google-mian-jing/792.-number-of-matching-subsequences-1055.-shortest-way-to-form-string.md)
 * [Sort](sort/README.md)
   * [K Largest/Smallest](sort/973.-k-closest-points-to-origin.md)

@@ -477,8 +477,7 @@ class Solution:
 
 Given a list of strings `words` representing an English Dictionary, find the longest word in `words` that can be built one character at a time by other words in `words`. If there is more than one possible answer, return the longest word with the smallest lexicographical order.If there is no answer, return the empty string.
 
-**Example 1:**  
-
+**Example 1:**
 
 ```text
 Input: 
@@ -488,8 +487,7 @@ Explanation:
 The word "world" can be built one character at a time by "w", "wo", "wor", and "worl".
 ```
 
-**Example 2:**  
-
+**Example 2:**
 
 ```text
 Input: 
@@ -503,11 +501,14 @@ Both "apply" and "apple" can be built from other words in the dictionary. Howeve
 
 ```python
 def longestWord(self, words):
-        valid = set([""])       
-        for word in sorted(words, key=lambda x: len(x)):
-           if word[:-1] in valid:
-                valid.add(word)								
-        return max(sorted(valid), key=lambda x: len(x))
+        words.sort()
+        words_set, res = set(['']), ''
+        for word in words:
+            if word[:-1] in words_set:
+                words_set.add(word)
+                if len(word) > len(res):
+                    res = word
+        return res
 ```
 
 ### Trie + DFS
@@ -543,5 +544,33 @@ class Solution:
         return t.dfs()          
 ```
 
-## 
+### 变种：任何地方都能加上char
+
+跟原題一樣的是，必須從字串長度為1的string 開始構建，構建出來的string 也必須在dictionary中，然後找能夠構建出的最長string。 最後輸出是要輸出list of string, 就是整個構建的過程。原題是構建的時候是在string 的最後加上一個character，面試題是加在string的任何一個位置都可以。
+
+\["o","or","ord","word", "world", "p", "ap", "apl", "appe", "apple", "zapple"\] -&gt; 輸出最長的就是 \["p", "ap", "apl", "appe", "apple", "zapple"\] 
+
+**BFS:**  
+先把words 按长度从小到大sort。   
+从左往右扫words，hashtable记录parent， 初始化 `{‘’: None}`；所有word找小一号的孩子check hashtable，存在的话就把自己放进,key是自己，value是小一号的string。最后hashtable里都是合格string。 用一个global max记录最长长度和word。   
+`Time = O(nlogn + n * m) m是单词的最长长度，是len(words)`
+
+```python
+def path(words):
+    words.sort()
+    parent = {'': None}
+    max_word = ''
+    for w in words:
+        for j in range(len(w)):
+            if w[:i] + w[i+1:] in parent:
+                parent[w] = w[:i] + w[i+1:]
+                if len(w) > len(max_word):
+                    max_word = w
+                break
+    res = []
+    while max_word:
+        res.append(max_word)
+        max_word = parent[max_word]
+    return res[::-1]
+```
 

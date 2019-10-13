@@ -96,15 +96,36 @@ Return 3. The paths that sum to 8 are:
 3. -3 -> 11
 ```
 
-### Idea: Construct a prefix sum, when pre-order traverse the tree, keep look back the previous prefix sum.
+### Idea: Construct a prefix sum, when pre-order traverse the tree, keep look back the previous prefix sum. Back-track
 
 If use list to record the prefix sum, we can find the path, but the time to look up is O\(n\)  
 If we use a dict to record the prefix, the time to look up is O\(1\)
 
 ```python
 class Solution:
-    def pathSum(self, root: TreeNode, summ: int) -> int:
+    #O(n), preorder traverse, use dict to record the prefix sum and frequency 
+    def pathSum(self, root: TreeNode,summ: int) -> int:
+        self.res = 0
         
+        def helper(root, summ, curPathSum, prefix):
+            if not root: return
+            # calculate currPathSum and required pastPathSum
+            curPathSum += root.val
+            pastPathSum = curPathSum - summ
+            # update result and prefix
+            self.res += prefix[pastPathSum]
+            
+            prefix[curPathSum] += 1            
+            helper(root.left, summ, curPathSum, prefix)
+            helper(root.right, summ, curPathSum, prefix)
+            # back-tracking: when move to a different branch, 
+            # the currPathSum is no longer available, hence remove one. 
+            prefix[curPathSum] -= 1
+            
+        helper(root, summ, 0, collections.Counter([0]))
+        return self.res
+            
+    def pathSum(self, root: TreeNode, summ: int) -> int:        
         def helper(root, prefix, summ):
             if not root:
                 return 0
@@ -117,29 +138,7 @@ class Solution:
             prefix.pop()
             return cnt + l + r 
         
-        return helper(root, [0], summ)
- 
-#preorder traverse, use dict to record the prefix sum and frequency, so the    
-    def pathSum(self, root: TreeNode,summ: int) -> int:
-        self.res = 0
-        
-        def helper(root, summ, curPathSum, prefix):
-            if not root:
-                return
-            # calculate currPathSum and required pastPathSum
-            curPathSum += root.val
-            pastPathSum = curPathSum - summ
-            # update result and prefix
-            self.res += prefix.get(pastPathSum, 0)
-            prefix[curPathSum] = prefix.get(curPathSum, 0) + 1
-            
-            helper(root.left, summ, curPathSum, prefix)
-            helper(root.right, summ, curPathSum, prefix)
-            # when move to a different branch, the currPathSum is no longer available, hence remove one. 
-            prefix[curPathSum] -= 1
-            
-        helper(root, summ, 0, {0: 1})
-        return self.res
+        return helper(root, [0], summ) 
 ```
 
 ## 666. Path Sum IV

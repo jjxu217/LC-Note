@@ -70,12 +70,11 @@ def postorder(self, root: 'Node') -> List[int]:
         while stack:
             root = stack.pop()    
             res.append(root.val)
-            stack.extend(root.children)           
-            
+            stack.extend(root.children)                       
         return res[::-1]
 ```
 
-## 429. N-ary Tree Level Order Traversalre
+## 429. N-ary Tree Level Order Traverse
 
 ```python
 class Solution:

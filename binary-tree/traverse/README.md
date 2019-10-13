@@ -23,15 +23,16 @@ class Solution(object):
 ```python
     def inorderTraversal(self, root):
         res, stack = [], []
-        while stack or root:
+        while True:
             if root:
                 stack.append(root)
                 root = root.left
-            else:
+            elif stack:
                 temp = stack.pop()
                 res.append(temp.val)
                 root = temp.right
-        return res
+            else:
+                return res
 ```
 
 ## 144. Preorder

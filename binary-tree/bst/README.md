@@ -198,11 +198,11 @@ class Solution:
 #time = O(H + k)       
     def kthSmallest(self, root: TreeNode, k: int) -> int:
         stack = []
-        while stack or root:
+        while True:
             if root:
                 stack.append(root)
                 root = root.left
-            else:
+            elif stack:
                 root = stack.pop()
                 k -= 1
                 if not k: return root.val
@@ -308,19 +308,19 @@ Output: The root of a Greater Tree like this:
           20     13
 ```
 
-### Idea: traverse reversed in-order, visit the node in descending order  self.prefix\_sum record the sum of all larger number
+### Idea: traverse reversed in-order, visit the node in descending order  self.suffix\_sum record the sum of all larger number
 
 ```python
 class Solution:
     def convertBST(self, root: TreeNode) -> TreeNode:
-        self.prefix_sum = 0
+        self.suffix_sum = 0
         
         def traverse(root):
             if not root:
                 return 
             traverse(root.right)
-            self.prefix_sum += root.val
-            root.val = self.prefix_sum
+            self.suffix_sum += root.val
+            root.val = self.suffix_sum
             traverse(root.left)            
          
         traverse(root)

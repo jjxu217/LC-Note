@@ -12,9 +12,7 @@ Suppose an array sorted in ascending order is rotated at some pivot unknown to y
 
 You are given a target value to search. If found in the array return its index, otherwise return `-1`.
 
-You may assume no duplicate exists in the array.
-
-Your algorithm's runtime complexity must be in the order of _O_\(log _n_\).
+You may assume no duplicate exists in the array. Your algorithm's runtime complexity must be in the order of _O_\(log _n_\).
 
 **Example 1:**
 
@@ -46,7 +44,7 @@ class Solution:
             mid = left + (right - left) // 2
             if nums[mid] < nums[right]:
                 right = mid
-            else:             #equivalent to nums[mid] >= nums[right], the equal is important
+            else:     #equivalent to nums[mid] >= nums[right], the equal is important
                 left = mid + 1  #this left=mid+1 is important, otherwise it might not stop
                       
         #find the target
@@ -127,10 +125,10 @@ class Solution:
         left, right = 0, len(nums) - 1
         while left < right:
             mid = left + (right - left) // 2
-            if nums[mid] > nums[right]:
-                left = mid + 1 
-            else:                   
-                 right = mid 
+            if nums[mid] < nums[right]:
+                right = mid 
+            else:                
+                left = mid + 1  
         return nums[left]
         
     def findMin(self, nums: List[int]) -> int:
