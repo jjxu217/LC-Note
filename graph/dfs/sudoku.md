@@ -20,21 +20,37 @@ A sudoku puzzle...
 
 ```python
 class Solution:
-    def solveSudoku(self, board: List[List[str]]) -> None:       
-        pos = [(i, j) for i in range(9) for j in range(9) if board[i][j] == "."]
+    def solveSudoku(self, board: List[List[str]]) -> None:  
+        #initialize: todo pos and set
+        todo = []
+        box, row, col = collections.defaultdict(set), collections.defaultdict(set), collections.defaultdict(set)
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] == '.':
+                    todo.append((i, j))
+                else:
+                    row[i].add(board[i][j])
+                    col[j].add(board[i][j])
+                    box[i//3, j//3].add(board[i][j])
         
         def dfs():
-            if not pos: return True
-            x, y = pos.pop()
-            box = set(board[x//3*3+i][y//3*3+j] for i in range(3) for j in range(3))
-            row = set(board[x][j] for j in range(9))
-            col = set(board[i][y] for i in range(9))    
+            if not todo: return True
+            x, y = todo.pop()   
             for i in '123456789':
-                if i not in box and i not in row and i not in col:
+                if i not in box[x//3, y//3] and i not in row[x] and i not in col[y]:
                     board[x][y] = i
+                    box[x//3, y//3].add(i)
+                    row[x].add(i)
+                    col[y].add(i)
                     if dfs(): return True
-            board[x][y] = '.'
-            pos.append((x,y))
+                    
+                    #back-track
+                    box[x//3, y//3].remove(i)
+                    row[x].remove(i)
+                    col[y].remove(i)
+            
+            board[x][y] = '.'          
+            todo.append((x,y))
             return False
         
         dfs()                  

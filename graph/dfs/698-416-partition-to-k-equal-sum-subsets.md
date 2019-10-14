@@ -39,6 +39,7 @@ class Solution:
             target = sum(nums) // 2
             cur = {0}
             for i in nums:
+            #all subsets
                 cur |= {i + x for x in cur}
                 if target in cur:
                     return True
@@ -70,6 +71,8 @@ Explanation: It's possible to divide it into 4 subsets (5), (1, 4), (2,3), (2,3)
 ```
 
 ### DFS: back-tracking
+
+`len(nums)` 层，每层k个叉。每层表示把第i个数，放入某一个bucket中
 
 ```python
 class Solution:
