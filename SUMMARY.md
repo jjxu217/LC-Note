@@ -97,6 +97,7 @@
   * [160. Intersection of Two Linked Lists](linkedlist/160.-intersection-of-two-linked-lists.md)
   * [一分为二](linkedlist/86.-partition-list.md)
   * [725. Split Linked List in Parts](linkedlist/725.-split-linked-list-in-parts.md)
+  * [708. Insert into a Cyclic Sorted List](linkedlist/708.-insert-into-a-cyclic-sorted-list.md)
   * [61. Rotate List](linkedlist/61.-rotate-list.md)
   * [\(FB\) 链表的递归与倒序打印](linkedlist/fb-lian-biao-de-di-gui-yu-dao-xu-da-yin.md)
 * [Design](design/README.md)
