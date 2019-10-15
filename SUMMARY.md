@@ -2,6 +2,7 @@
 
 * [Plan](README.md)
 * [Facebook 面经](facebook/README.md)
+  * [note](facebook/note.md)
   * [Untitled](facebook/untitled.md)
   * [Sort](facebook/sort.md)
   * [DFS](facebook/dfs.md)

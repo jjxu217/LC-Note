@@ -103,14 +103,12 @@ class Solution:
     def addStrings(self, num1: str, num2: str) -> str:
         res, carry = [], 0
         num1, num2 = list(num1), list(num2)
-        while num1 or num2:
+        while num1 or num2 or carry:
             n1 = n2 = 0
             if num1: n1 = int(num1.pop())
             if num2: n2 = int(num2.pop())
             carry, remain = divmod(n1+n2+carry, 10)
             res.append(remain)
-        if carry:
-            res.append(carry)
         return ''.join(map(str, res[::-1]))
 ```
 

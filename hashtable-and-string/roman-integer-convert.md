@@ -149,7 +149,7 @@ Input: 1234567891
 Output: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One"
 ```
 
-### Sol: 从小到大判断，用recursion处理千以上的
+### Sol: 从小到大判断，用recursion处理千以上的, 调用words函数
 
 In python, arr\[-1:0\] will return empty list; return list, `join` at the end
 
