@@ -91,13 +91,13 @@ class Solution:
             for w in layer:
                 if endWord == w:    
                     return layer[endWord] # return all found sequences
-                else:
-                    for i in range(len(w)): # change every possible letter and check if it's in dictionary
-                        for c in 'abcdefghijklmnopqrstuvwxyz':
-                            new_word = w[:i] + c + w[i+1:]
-                            if new_word in wordList:
-                            # add new word to all sequences and form new layer element
-                                new_layer[new_word] += [j + [new_word] for j in layer[w]] 
+               
+                for i in range(len(w)): # change every possible letter and check if it's in dictionary
+                    for c in 'abcdefghijklmnopqrstuvwxyz':
+                        new_word = w[:i] + c + w[i+1:]
+                        if new_word in wordList:
+                        # add new word to all sequences and form new layer element
+                            new_layer[new_word] += [j + [new_word] for j in layer[w]] 
             wordList -= set(new_layer.keys()) # remove from dictionary to prevent loops
             layer = new_layer
         return []

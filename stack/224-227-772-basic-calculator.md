@@ -31,12 +31,39 @@ Output: 23
 
 ```python
 class Solution:
+#recursion
     def calculate(self, s: str) -> int:
         def update(sign, num):
             if sign == '+':
                 stack.append(num)
             elif sign == '-':
-                stack.append(-num)         
+                stack.append(-num)      
+                
+        stack = []
+        num, sign = 0, "+"
+        i = 0
+        while i < len(s):
+            if s[i].isdigit():
+                num = num * 10 + int(s[i])
+            elif s[i] == '(':
+                num, skip = self.calculate(s[i+1:])
+                i += skip
+            elif s[i] in '+-*/':
+                update(sign, num)                
+                num, sign = 0, s[i]
+            elif s[i] == ')':
+                update(sign, num)
+                return sum(stack), i + 1
+            i += 1
+        update(sign, num)
+        return sum(stack) 
+
+  def calculate(self, s: str) -> int:
+        def update(sign, num):
+            if sign == '+':
+                stack.append(num)
+            elif sign == '-':
+                stack.append(-num)    
         
         stack = []
         num, sign = 0, '+'
@@ -56,7 +83,7 @@ class Solution:
                     num += stack.pop() 
                 sign = stack.pop()
                 update(sign, num)
-                num, sign = 0, '+'    
+                num, sign = 0, s[i]    
             
         update(sign, num)
         return sum(stack)
@@ -140,6 +167,38 @@ Some examples:
 
 ```python
 class Solution:
+#recursion, 每一层表示一个括号       
+    def calculate(self, s):
+        def update(sign, num):
+            if sign == '+':
+                stack.append(num)
+            elif sign == '-':
+                stack.append(-num)
+            elif sign == '*':
+                stack.append(stack.pop() * num)
+            elif sign == '/':
+                stack.append(int(stack.pop() / num))
+
+        stack = []
+        num, sign = 0, "+"
+        i = 0
+        while i < len(s):
+            if s[i].isdigit():
+                num = num * 10 + int(s[i])
+            elif s[i] == '(':
+                num, skip = self.calculate(s[i+1:])
+                i += skip
+            elif s[i] in '+-*/':
+                update(sign, num)                
+                num, sign = 0, s[i]
+            elif s[i] == ')':
+                update(sign, num)
+                return sum(stack), i + 1
+            i += 1
+        update(sign, num)
+        return sum(stack)
+        
+#stack, 每个sign表示新的一层
     def calculate(self, s: str) -> int:
         def update(sign, num):
             if sign == '+':
@@ -171,7 +230,8 @@ class Solution:
                     num += stack.pop() 
                 sign = stack.pop()
                 update(sign, num)
-                num, sign = 0, '+'          
+                #since next char must be sign, this sign=s[i] make sure 0 not be add to the stak
+                num, sign = 0, s[i]         
             
         update(sign, num)
         return sum(stack)
