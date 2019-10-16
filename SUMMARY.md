@@ -3,6 +3,7 @@
 * [Plan](README.md)
 * [Facebook 面经](facebook/README.md)
   * [note](facebook/note.md)
+  * [405 Convert a Number to Hexadecimal](facebook/405-convert-a-number-to-hexadecimal.md)
   * [Untitled](facebook/untitled.md)
   * [1004. Max Consecutive Ones III](facebook/1004.-max-consecutive-ones-iii.md)
   * [Sort](facebook/sort.md)

@@ -52,7 +52,7 @@ Explanation:
 We can't form the target "basicbasic" from cutting letters from the given stickers.
 ```
 
-### Back-tracking
+### Back-tracking：每层`len(stickers)`个叉，一共`len(target)`层， 第i层第j个叉表示用第j个stickers去填补第i个char
 
 ```python
 class Solution:
