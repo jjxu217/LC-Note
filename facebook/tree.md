@@ -52,7 +52,7 @@ def Common(root1, root2):
   
             # If current keys in two trees are same  
             if root1.key == root2.key: 
-                res.appemd(root1.key)
+                res.append(root1.key)
                 s1.pop(); s2.pop()           
                 # move to the inorder successor  
                 root1 = root1.right  

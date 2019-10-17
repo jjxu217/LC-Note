@@ -59,3 +59,17 @@ Explanation: The number "-91283472332" is out of the range of a 32-bit signed in
              Thefore INT_MIN (−231) is returned.
 ```
 
+```python
+class Solution(object):
+    def myAtoi(self, s):
+        ls = list(s.strip())
+        if not ls : return 0  
+        sign = -1 if ls[0] == '-' else 1
+        if ls[0] in ['-','+'] : del ls[0]
+        ret, i = 0, 0
+        while i < len(ls) and ls[i].isdigit() :
+            ret = ret*10 + int(ls[i]) 
+            i += 1
+        return max(-2**31, min(sign * ret,2**31-1))
+```
+
