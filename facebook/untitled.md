@@ -3,8 +3,8 @@
 ## **Caesar Cipher**
 
 **Question 1:**  
-Caesar Cipher Encrpytion  
-You are given a list of string, group them if they are same after using Ceaser Cipher Encrpytion.  
+Caesar Cipher Encryption  
+You are given a list of string, group them if they are same after using Caesar Cipher Encryption.  
 Definition of "same", "abc" can right shift 1, get "bcd", here you can shift as many time as you want, the string will be considered as same.
 
 **Example:**
@@ -23,7 +23,7 @@ Implement OrderedSet
 
 Q1: Convert string to position in alphabet string and minus minimum index from the rest \(reduction\)
 
-```text
+```python
 from collections import defaultdict
 
 alphabet = 'abcdefghijklmnopqrstuvwxyz'
@@ -46,7 +46,6 @@ print(group_ceasar(["abc", "bcd", "acd", "dfg", "ace", "bdf", "random"]))
 Q2: Set + Double Linked List
 
 ```python
-
 class Node(object):
     def __init__(self, val):
         self.val = val

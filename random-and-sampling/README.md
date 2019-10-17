@@ -166,7 +166,6 @@ Output: [null,0,1,1,1,0]
 
 ```python
 class Solution:
-    class Solution:
     def __init__(self, w: List[int]):
         self.cumw = w[:]
         for i in range(1, len(w)):

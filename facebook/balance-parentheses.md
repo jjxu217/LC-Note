@@ -60,7 +60,7 @@ def balanceParens(string):
             else: 
                 remove[i] = 1
                 
-    for i in range(n - 1, -1, -1):
+    for i in reversed(range(n)):
         if string[i] == ')':
             bal += 1
         elif string[i] == '(':

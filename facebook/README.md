@@ -14,7 +14,7 @@
 
 **609.** Find Duplicate File in System
 
-## **166.** Fraction to Recurring Decima
+## **166.** Fraction to Recurring Decimal
 
 ```python
 class Solution:
