@@ -14,7 +14,7 @@ Example:
 
 A correct answer would be either `0` ,`1` or `2` since those points are found where 2 intervals overlap and 2 is the maximum number of overlapping intervals.
 
-```text
+```python
 def solve(M, intervals):
 
     diff = [0] * (2*M+1)
@@ -23,16 +23,15 @@ def solve(M, intervals):
         idx = s + M         # -10 -> 0, -9 -> 1, 10 -> 20
         diff[idx] += 1
 
-        eidx = e + M + 1
-        if eidx < 2*M+1:
-            diff[eidx] += -1
+        e_idx = e + M + 1
+        if eidx < 2 * M + 1:
+            diff[eidx] -= 1
 
-    total, scores = 0, []
-    for i, num in enumerate(diff):
-        total += num
-        scores.append(total)
+    prefix = diff
+    for i in range(1, 2*M+1):
+        prefix[i] += prefix[i - 1]
 
-    max_value = max(scores)
+    max_value = max(prefix)
     max_idx = scores.index(max_value)
 
     return max_idx - M     # reverse of idx = s + M
