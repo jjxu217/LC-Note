@@ -43,9 +43,9 @@ class Solution:
         while idx < n:
             buf4 = [""] * 4
             cnt = read4(buf4) # Read file into buf4.
+            cnt = min(cnt, n - idx)
             if not cnt:
                 break
-            cnt = min(cnt, n - idx)
             buf[idx: idx+cnt] = buf4[:cnt] # Copy from buf4 to buf.
             idx += cnt
         return idx

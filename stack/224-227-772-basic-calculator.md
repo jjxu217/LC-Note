@@ -45,12 +45,13 @@ class Solution:
         while i < len(s):
             if s[i].isdigit():
                 num = num * 10 + int(s[i])
-            elif s[i] == '(':
-                num, skip = self.calculate(s[i+1:])
-                i += skip
             elif s[i] in '+-*/':
                 update(sign, num)                
                 num, sign = 0, s[i]
+            elif s[i] == '(':
+                num, skip = self.calculate(s[i+1:])
+                i += skip
+           
             elif s[i] == ')':
                 update(sign, num)
                 return sum(stack), i + 1
