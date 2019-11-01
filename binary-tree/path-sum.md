@@ -27,7 +27,7 @@ class Solution(object):
     def hasPathSum(self, root, summ):
         if not root: 
             return False
-        elif not root.left and not root.right:
+        elif not root.left and not root.right: #if leaf node
             return summ == root.val
         summ -= root.val
         return self.hasPathSum(root.left, summ) or self.hasPathSum(root.right, summ)
