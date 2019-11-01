@@ -24,13 +24,13 @@ return true, as there exist a root-to-leaf path `5->4->11->2` which sum is 22.
 
 ```python
 class Solution(object):
-    def hasPathSum(self, root, sum):
+    def hasPathSum(self, root, summ):
         if not root: 
             return False
         elif not root.left and not root.right:
-            return sum == root.val
-        sum -= root.val
-        return self.hasPathSum(root.left, sum) or self.hasPathSum(root.right, sum)
+            return summ == root.val
+        summ -= root.val
+        return self.hasPathSum(root.left, summ) or self.hasPathSum(root.right, summ)
 ```
 
 ## 113. Path Sum II
@@ -48,21 +48,21 @@ Return:
 
 ```python
 class Solution:
-    def pathSum(self, root: TreeNode, sum: int) -> List[List[int]]:
+    def pathSum(self, root: TreeNode, summ: int) -> List[List[int]]:
         res = []
         
-        def helper(root, path, sum):
+        def helper(root, path, summ):
             if not root:
                 return
             elif not root.left and not root.right:
-                if sum == root.val:
+                if summ == root.val:
                     res.append(path + [root.val])
                 return 
-            sum -= root.val
-            helper(root.left, path + [root.val], sum)
-            helper(root.right, path + [root.val], sum)
+            summ -= root.val
+            helper(root.left, path + [root.val], summ)
+            helper(root.right, path + [root.val], summ)
         
-        helper(root, [], sum)
+        helper(root, [], summ)
         return res
 ```
 
