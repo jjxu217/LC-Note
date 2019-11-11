@@ -4,11 +4,11 @@
 
 ```python
 class Solution(object):
-    def printReverse(self, head):
+    def printReverse(head):
         if not head.next:
-            print(str(head.val) + ',')
+            print(str(head.val) + ' ')
             return
         self.printReverse(head.next)
-        print(str(head.val) + ',')
+        print(str(head.val) + ' ')
 ```
 
