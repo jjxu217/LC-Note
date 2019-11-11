@@ -3,7 +3,6 @@
 * [Plan](README.md)
 * [Facebook 面经](facebook/README.md)
   * [477. Total Hamming Distance](facebook/477.-total-hamming-distance.md)
-  * [note](facebook/note.md)
   * [1146. Snapshot Array](facebook/1146.-snapshot-array.md)
   * [405 Convert a Number to Hexadecimal](facebook/405-convert-a-number-to-hexadecimal.md)
   * [Untitled](facebook/untitled.md)
