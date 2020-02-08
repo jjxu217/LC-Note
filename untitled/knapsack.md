@@ -11,7 +11,7 @@ Induction rule:
 
 ![](../.gitbook/assets/image%20%2813%29.png)
 
-![](../.gitbook/assets/image%20%2841%29.png)
+![](../.gitbook/assets/image%20%2842%29.png)
 
 ![](../.gitbook/assets/image%20%2810%29.png)
 
@@ -40,17 +40,17 @@ def getMAxTotalWeight(weights:[], W: int):
 
 Total number of unique ways to exactly fill the knapsack
 
-![](../.gitbook/assets/image%20%2830%29.png)
+![](../.gitbook/assets/image%20%2831%29.png)
 
 ### Q1b Naive 0/1 knapsack, get minimum number of item
 
-![](../.gitbook/assets/image%20%2843%29.png)
+![](../.gitbook/assets/image%20%2844%29.png)
 
 ## Q2 Classic 0/1 kanpscak problem:
 
 Each item has a weight weights\[i\] \(i=1,..,N\), and a value v\[i\] \(i=1,..,N\). What the **maximum total value** you can get?
 
-![](../.gitbook/assets/image%20%2826%29.png)
+![](../.gitbook/assets/image%20%2827%29.png)
 
 Time=O\(NW\)  
 Spcae = O\(NW\)=&gt; O\(W\)  
@@ -60,7 +60,7 @@ Trice: 对于不要求恰好装满背包的问题， M\[0,1\],...,M\[0,W\]可以
 
 Sol1:
 
-![](../.gitbook/assets/image%20%2825%29.png)
+![](../.gitbook/assets/image%20%2826%29.png)
 
 ![](../.gitbook/assets/image%20%2817%29.png)
 
@@ -72,19 +72,19 @@ Sol2:
 
 ![](../.gitbook/assets/image%20%2818%29.png)
 
-![](../.gitbook/assets/image%20%2829%29.png)
+![](../.gitbook/assets/image%20%2830%29.png)
 
 We can use a single 1-d array
 
 ## Q4 Group 0/1 knapsack problem: the items belong to K groups that you can pick at most one item for each group
 
-![](../.gitbook/assets/image%20%2816%29.png)
+![](../.gitbook/assets/image%20%2825%29.png)
 
-![](../.gitbook/assets/image%20%2812%29.png)
+4. Group knapsack: M\[k, w\]=max\(M\[k-1,w\], M\[k-1, w-weights\[i\]\] + v\[i\] item i in group k\)
 
-![](../.gitbook/assets/image%20%2834%29.png)
+![](../.gitbook/assets/image%20%2835%29.png)
 
 One special case:
 
-![](../.gitbook/assets/image%20%2842%29.png)
+![](../.gitbook/assets/image%20%2843%29.png)
 

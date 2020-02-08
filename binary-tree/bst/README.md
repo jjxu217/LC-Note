@@ -67,7 +67,7 @@ One valid answer is [5,4,6,2,null,null,7], shown in the following BST.
 Another valid answer is [5,2,6,null,4,null,7].
 ```
 
-![](../../.gitbook/assets/image%20%2840%29.png)
+![](../../.gitbook/assets/image%20%2841%29.png)
 
 ```python
 class Solution:
@@ -132,7 +132,7 @@ This tree is also valid:
           4
 ```
 
-![](../../.gitbook/assets/image%20%2835%29.png)
+![](../../.gitbook/assets/image%20%2836%29.png)
 
 ```python
 class Solution:
